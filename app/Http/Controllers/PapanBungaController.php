@@ -1,0 +1,214 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use App\Models\Toko;
+use App\Models\Product;
+use App\Models\Category;
+use App\Models\Subdistrict;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
+
+class PapanBungaController extends Controller
+{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function index(Request $request)
+    {
+        $search = $request->search;
+        $data = Product::where('category_id', 1)
+            ->where(function ($query) use ($search) {
+                $query->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('harga', 'like', '%' . $search . '%')
+                    ->orWhere('kota', 'like', '%' . $search . '%')
+                    ->orWhere('deskripsi', 'like', '%' . $search . '%');
+            });
+        if (isset($_GET['sort']) && !empty($_GET['sort'])) {
+            if ($_GET['sort'] == "LTH") {
+                $data->where('category_id', '1')->orderBy('harga', 'ASC');
+            } elseif ($_GET['sort'] == "HTL") {
+                $data->where('category_id', '1')->orderBy('harga', 'DESC');
+            }
+        } elseif (isset($_GET['sorts']) && !empty($_GET['sorts'])) {
+            if ($_GET['sorts'] == "AJB") {
+                $data->where('kota', 'Ajibata');
+            } elseif ($_GET['sorts'] == "BLG") {
+                $data->where('kota', 'Balige');
+            } elseif ($_GET['sorts'] == "BNL") {
+                $data->where('kota', 'Bonatua Lunasi');
+            } elseif ($_GET['sorts'] == "BBR") {
+                $data->where('kota', 'Borbor');
+            } elseif ($_GET['sorts'] == "HBS") {
+                $data->where('kota', 'Habinsaran');
+            } elseif ($_GET['sorts'] == "LGB") {
+                $data->where('kota', 'Laguboti');
+            } elseif ($_GET['sorts'] == "LMJ") {
+                $data->where('kota', 'Lumban Julu');
+            } elseif ($_GET['sorts'] == "NS") {
+                $data->where('kota', 'Nasau');
+            } elseif ($_GET['sorts'] == "PRM") {
+                $data->where('kota', 'Parmaksian');
+            } elseif ($_GET['sorts'] == "PPM") {
+                $data->where('kota', 'Pintu Pohan Meranti');
+            } elseif ($_GET['sorts'] == "PRS") {
+                $data->where('kota', 'Porsea');
+            } elseif ($_GET['sorts'] == "SAN") {
+                $data->where('kota', 'Siantar Narumonda');
+            } elseif ($_GET['sorts'] == "SGM") {
+                $data->where('kota', 'Sigumpar');
+            } elseif ($_GET['sorts'] == "SLN") {
+                $data->where('kota', 'Silaen');
+            } elseif ($_GET['sorts'] == "TMP") {
+                $data->where('kota', 'Tampahan');
+            }
+        }
+        $pabung = $data->paginate(8);
+        $pabung->appends($request->all());
+        return view('pages.web.papanbunga.main', compact('pabung'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $toko = Toko::get();
+        $category = Category::get();
+        $subdistricts = Subdistrict::get();
+        return view('pages.web.papanbunga.create', ['pabung' => new Product, 'toko' => $toko, 'category' => $category, 'subdistricts' => $subdistricts]);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
+    {
+        // $validator = Validator::make($request->all(), [
+        // ]);
+        $request->validate([
+            'name' => 'required',
+            'category_id' => 'required',
+            'toko_id' => 'required',
+            'harga' => 'required',
+            'kota' => 'required',
+            'deskripsi' => 'required',
+            'no_hp' => 'required',
+            'gambar' => 'required||mimes:jpg,jpeg,png',
+        ]);
+
+        $file = $request->file('gambar');
+        $namaFile = $file->getClientOriginalName();
+        $tujuanFile = public_path('/bungapapan');
+        $file->move($tujuanFile, $namaFile);
+
+
+        $pabung = new Product;
+        $pabung->user_id = Auth::user()->id;
+        $pabung->category_id = $request->category_id;
+        // check if user has toko
+        $user = User::find(Auth::user()->id)->load('toko');
+        $pabung->toko_id = $user->toko->id;
+        $pabung->name = $request->name;
+        $pabung->harga = $request->harga;
+        $pabung->kota = $request->kota;
+        $pabung->deskripsi = $request->deskripsi;
+        $pabung->no_hp = $request->no_hp;
+        $pabung->gambar = $namaFile;
+        // dd($request);
+
+        $pabung->save();
+        return redirect()->route('papanbunga.index')->with('success', 'Product Berhasil Ditambah');
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Product $bungapapan)
+    {
+        $toko = Toko::get();
+        $category = Category::get();
+        return view('pages.web.papanbunga.detail', ['bungapapan' => $bungapapan, 'toko' => $toko, 'category' => $category]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Product $bungapapan)
+    {
+        $toko = Toko::get();
+        $category = Category::get();
+        return view('pages.web.papanbunga.create', ['pabung' => $bungapapan, 'toko' => $toko, 'category' => $category]);
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, Product $bungapapan)
+    {
+        // dd($bungapapan);
+        $request->validate([
+            'name' => 'required',
+            'harga' => 'required',
+            'kota' => 'required',
+            'deskripsi' => 'required',
+            'no_hp' => 'required',
+            'gambar' => 'nullable||mimes:jpg,jpeg,png',
+        ]);
+
+
+        if ($request->hasFile('gambar')) {
+            $file = $request->file('gambar');
+            $namaFile = $file->getClientOriginalName();
+            $tujuanFile = public_path('/bungapapan');
+            $file->move($tujuanFile, $namaFile);
+            $bungapapan->gambar = $namaFile;
+        }
+
+        $bungapapan->category_id = $request->category_id;
+        $bungapapan->toko_id = $request->toko_id;
+        $bungapapan->name = $request->name;
+        $bungapapan->harga = $request->harga;
+        $bungapapan->kota = $request->kota;
+        $bungapapan->deskripsi = $request->deskripsi;
+        $bungapapan->no_hp = $request->no_hp;
+        $bungapapan->update();
+
+        return redirect()->route('papanbunga.index')->with('info', 'Product Berhasil Diubah');
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Product $bungapapan)
+    {
+        // $pabung = Product::find($id);
+        $file_path = public_path('bungapapan/' . $bungapapan->gambar);
+        unlink($file_path);
+        $bungapapan->delete();
+        return redirect()->route('papanbunga.index')->with('success', 'Berhasil Di hapus');
+    }
+}
