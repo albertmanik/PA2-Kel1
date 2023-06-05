@@ -137,11 +137,11 @@ class PapanBungaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $bungapapan)
+    public function show(Product $papanbunga)
     {
         $toko = Toko::get();
         $category = Category::get();
-        return view('pages.web.papanbunga.detail', ['bungapapan' => $bungapapan, 'toko' => $toko, 'category' => $category]);
+        return view('pages.web.papanbunga.detail', ['papanbunga' => $papanbunga, 'toko' => $toko, 'category' => $category]);
     }
 
     /**
@@ -150,11 +150,12 @@ class PapanBungaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $bungapapan)
+    public function edit(Product $papanbunga)
     {
         $toko = Toko::get();
         $category = Category::get();
-        return view('pages.web.papanbunga.create', ['pabung' => $bungapapan, 'toko' => $toko, 'category' => $category]);
+        $subdistricts = Subdistrict::get();
+        return view('pages.web.papanbunga.create', ['papanbunga' => $papanbunga, 'toko' => $toko, 'category' => $category, 'subdistricts' => $subdistricts]);
     }
 
     /**
@@ -164,7 +165,7 @@ class PapanBungaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $bungapapan)
+    public function update(Request $request, Product $papanbunga)
     {
         // dd($bungapapan);
         $request->validate([
@@ -173,26 +174,25 @@ class PapanBungaController extends Controller
             'kota' => 'required',
             'deskripsi' => 'required',
             'no_hp' => 'required',
-            'gambar' => 'nullable||mimes:jpg,jpeg,png',
+            'gambar' => 'nullable|mimes:jpg,jpeg,png',
         ]);
-
-
         if ($request->hasFile('gambar')) {
             $file = $request->file('gambar');
             $namaFile = $file->getClientOriginalName();
             $tujuanFile = public_path('/bungapapan');
             $file->move($tujuanFile, $namaFile);
-            $bungapapan->gambar = $namaFile;
+            $papanbunga->gambar = $namaFile;
         }
-
-        $bungapapan->category_id = $request->category_id;
-        $bungapapan->toko_id = $request->toko_id;
-        $bungapapan->name = $request->name;
-        $bungapapan->harga = $request->harga;
-        $bungapapan->kota = $request->kota;
-        $bungapapan->deskripsi = $request->deskripsi;
-        $bungapapan->no_hp = $request->no_hp;
-        $bungapapan->update();
+        $papanbunga->category_id = $request->category_id;
+        $user = User::find(Auth::user()->id)->load('toko');
+        $papanbunga->toko_id = $user->toko->id;
+        $papanbunga->name = $request->name;
+        $papanbunga->harga = $request->harga;
+        $papanbunga->kota = $request->kota;
+        $papanbunga->deskripsi = $request->deskripsi;
+        $papanbunga->no_hp = $request->no_hp;
+        // dd($papanbunga);
+        $papanbunga->save();
 
         return redirect()->route('papanbunga.index')->with('info', 'Product Berhasil Diubah');
     }

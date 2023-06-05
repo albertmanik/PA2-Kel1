@@ -30,8 +30,8 @@
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
                     <div class="account-login-inner">
-                        @if ($pabung->id)
-                            <form action="{{ route('papanbunga.update', $pabung->id) }}" method="POST"
+                        @if ($papanbunga->id)
+                            <form action="{{ route('papanbunga.update', $papanbunga->id) }}" method="POST"
                                 enctype="multipart/form-data" class="ltn__form-box contact-form-box" id="toko-form">
                                 @method('PATCH')
                             @else
@@ -40,7 +40,7 @@
                         @endif
                         @csrf
                         <input class="form-control @error('name') is-invalid @enderror" type="text" name="name"
-                            placeholder="Masukkan Nama Produk Anda" value="{{ $pabung->name }}" autofocus>
+                            placeholder="Masukkan Nama Produk Anda" value="{{ $papanbunga->name }}" autofocus>
                         @error('name')
                             <div class="invalid-feedback mb-4" style="margin-top: -4%">
                                 {{ $message }}
@@ -53,7 +53,7 @@
                                     <option selected disabled>Pilih Kategori Produk</option>
                                     @foreach ($category as $item)
                                         <option value="{{ $item->id }}"
-                                            {{ $pabung->category_id == $item->id ? 'selected' : '' }}>
+                                            {{ $papanbunga->category_id == $item->id ? 'selected' : '' }}>
                                             {{ $item->name }}</option>
                                     @endforeach
                                 </select>
@@ -70,7 +70,7 @@
                                     @foreach ($toko as $data)
                                         @if (Auth::user()->id == $data->user_id)
                                             <option value="{{ $data->id }}"
-                                                {{ $pabung->toko_id == $data->id ? 'selected' : '' }}>
+                                                {{ $papanbunga->toko_id == $data->id ? 'selected' : '' }}>
                                                 {{ $data->nama_toko }}</option>
                                         @endif
                                     @endforeach
@@ -94,7 +94,7 @@
                                     @foreach ($subdistricts as $subdistrict)
                                         @if (Auth::user()->id == $data->user_id)
                                             <option value="{{ $subdistrict->name }}"
-                                                {{ $pabung->kota == $subdistrict->id ? 'selected' : '' }}>
+                                                {{ $papanbunga->kota == $subdistrict->id ? 'selected' : '' }}>
                                                 {{ $subdistrict->name }}</option>
                                         @endif
                                     @endforeach
@@ -107,7 +107,7 @@
                             </div>
                         </div>
                         <input class="form-control @error('harga') is-invalid @enderror" type="text" name="harga"
-                            placeholder="Masukkan Harga Produk Anda" value="{{ $pabung->harga }}">
+                            placeholder="Masukkan Harga Produk Anda" value="{{ $papanbunga->harga }}">
                         @error('harga')
                             <div class="invalid-feedback mb-4" style="margin-top: -4%">
                                 {{ $message }}
@@ -115,7 +115,7 @@
                         @enderror
                         <input class="form-control @error('deskripsi') is-invalid @enderror" type="text"
                             name="deskripsi" placeholder="Masukkan Deskripsi Produk Anda"
-                            value="{{ $pabung->deskripsi }}">
+                            value="{{ $papanbunga->deskripsi }}">
                         @error('deskripsi')
                             <div class="invalid-feedback mb-4" style="margin-top: -4%">
                                 {{ $message }}
@@ -129,7 +129,7 @@
                             </div>
                         @enderror
                         <input type="file" name="gambar" class="form-control @error('gambar') is-invalid @enderror"
-                            placeholder="Masukkan Gambar Produk Anda">{{ $pabung->gambar }}
+                            placeholder="Masukkan Gambar Produk Anda">{{ $papanbunga->gambar }}
                         <br>
                         @error('gambar')
                             <div class="invalid-feedback mb-4" style="margin-top: -4%">

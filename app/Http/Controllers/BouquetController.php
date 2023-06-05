@@ -151,7 +151,8 @@ class BouquetController extends Controller
     {
         $toko = Toko::get();
         $category = Category::get();
-        return view('pages.web.bouquet.create', ['bouquet' => $bouquet, 'toko' => $toko, 'category' => $category]);
+        $subdistricts = Subdistrict::get();
+        return view('pages.web.bouquet.create', ['bouquet' => $bouquet, 'toko' => $toko, 'subdistricts' => $subdistricts, 'category' => $category]);
     }
 
     /**
@@ -171,8 +172,6 @@ class BouquetController extends Controller
             'no_hp' => 'required',
             'gambar' => 'nullable||mimes:jpg,jpeg,png',
         ]);
-
-
         if ($request->hasFile('gambar')) {
             $file = $request->file('gambar');
             $namaFile = $file->getClientOriginalName();
@@ -180,15 +179,16 @@ class BouquetController extends Controller
             $file->move($tujuanFile, $namaFile);
             $bouquet->gambar = $namaFile;
         }
-
         $bouquet->category_id = $request->category_id;
-        $bouquet->toko_id = $request->toko_id;
+        $user = User::find(Auth::user()->id)->load('toko');
+        $bouquet->toko_id = $user->toko->id;;
         $bouquet->name = $request->name;
         $bouquet->harga = $request->harga;
         $bouquet->kota = $request->kota;
         $bouquet->deskripsi = $request->deskripsi;
         $bouquet->no_hp = $request->no_hp;
-        $bouquet->update();
+        dd($bouquet);
+        $bouquet->save();
 
         return redirect()->route('bouquet.index')->with('info', 'Product Berhasil Diubah');
     }
