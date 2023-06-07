@@ -43,28 +43,31 @@
                                         <tbody>
                                             @foreach ($pesanan as $p)
                                                 @if (Auth::user()->id == $p->user_id)
-                                                    @if (Auth::user()->id == $p->user_id)
-                                                        <tr>
-                                                            <td>{{ $loop->iteration }}</td>
-                                                            <td>{{ $p->name }}</td>
-                                                            <td>{{ $p->order_number }}</td>
-                                                            <td>{{ $p->total }}</td>
-                                                            <td>
-                                                                <img src="{{ asset('payments/' . $p->image) }}"
-                                                                    style="width: 8rem">
+                                                    <tr>
+                                                        <td>{{ $loop->iteration }}</td>
+                                                        <td>{{ $p->name }}</td>
+                                                        <td>{{ $p->order_number }}</td>
+                                                        <td>{{ $p->total }}</td>
+                                                        <td>
+                                                            <img src="{{ asset('payments/' . $p->image) }}"
+                                                                style="width: 8rem">
+                                                        </td>
+                                                        <td>
+                                                            @if ($p->status == 'pending')
+                                                                <span>Menunggu</span>
+                                                            @elseif ($p->status == 'terima')
+                                                                <span>Diterima</span>
+                                                            @elseif ($p->status == 'tolak')
+                                                                <span>Ditolak</span>
+                                                            @endif
+                                                        </td>
+                                                        @if ($p->status == 'pending')
+                                                            <td><a href="{{ route('checkout.edit', $p->id) }}">Edit</a>
                                                             </td>
-                                                            <td>
-                                                                @if ($p->status == 'pending')
-                                                                    <span>Menunggu</span>
-                                                                @elseif ($p->status == 'terima')
-                                                                    <span>Diterima</span>
-                                                                @elseif ($p->status == 'tolak')
-                                                                    <span>Ditolak</span>
-                                                                @endif
-                                                            </td>
-                                                            <td><a href="cart.html">View</a></td>
-                                                        </tr>
-                                                    @endif
+                                                        @else
+                                                            <td>fsfs</td>
+                                                        @endif
+                                                    </tr>
                                                 @endif
                                             @endforeach
                                         </tbody>

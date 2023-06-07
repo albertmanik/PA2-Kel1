@@ -21,11 +21,16 @@ class PesananController extends Controller
         // $list = DB::table('order_details')->paginate(10);
         // $list = Checkout::paginate(10);
         $user = Auth::user();
-        $list = Checkout::whereHas('orderDetails', function ($query) use ($user) {
-            $query->whereHas('toko', function ($query) use ($user) {
-                $query->where('user_id', $user->id);
-            });
+        // $list = Checkout::whereHas('orderDetails', function ($query) use ($user) {
+        //     $query->whereHas('toko', function ($query) use ($user) {
+        //         $query->where('user_id', $user->id);
+        //     });
+        // })->get();
+        // $list = Checkout::all();
+        $list = Checkout::whereHas('orderDetails.toko', function ($query) use ($user) {
+            $query->where('user_id', $user->id);
         })->get();
+        // $list = Checkout::hydrate($list->toArray());
 
         return view('pages.web.pesanan.list', compact('list'));
     }

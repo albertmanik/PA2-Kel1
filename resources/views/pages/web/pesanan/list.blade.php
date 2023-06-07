@@ -66,19 +66,21 @@
                                                                 onclick="handle_confirm('Yakin?','Ya','Tidak','PATCH','{{ route('pesan.accept', $item->id) }}');">Terima</a> --}}
                                                             <a href="{{ route('pesan.accept', $item->id) }}"
                                                                 onclick="event.preventDefault(); document.getElementById('accept-form-{{ $item->id }}').submit();">
-                                                                Accept
+                                                                Terima
                                                             </a>
 
-                                                            <form id="accept-form-{{ $item->id }}"
+                                                            {{-- <form id="accept-form-{{ $item->id }}"
                                                                 action="{{ route('pesan.accept', $item->id) }}"
                                                                 method="POST" style="display: none;">
                                                                 @csrf
                                                                 @method('PATCH')
-                                                            </form>
+                                                            </form> --}}
+                                                            {{-- <button type="submit" class="theme-btn-1 btn btn-block"
+                                                                onclick="event.preventDefault(); document.getElementById('accept-form-{{ $item->id }}').submit();">Kirim</button> --}}
 
                                                             <a href="{{ route('pesan.reject', $item->id) }}"
                                                                 onclick="event.preventDefault(); document.getElementById('reject-form-{{ $item->id }}').submit();">
-                                                                Accept
+                                                                Tolak
                                                             </a>
 
                                                             <form id="reject-form-{{ $item->id }}"

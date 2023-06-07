@@ -83,7 +83,7 @@ class PapanBungaController extends Controller
         $toko = Toko::get();
         $category = Category::get();
         $subdistricts = Subdistrict::get();
-        return view('pages.web.papanbunga.create', ['pabung' => new Product, 'toko' => $toko, 'category' => $category, 'subdistricts' => $subdistricts]);
+        return view('pages.web.papanbunga.create', ['papanbunga' => new Product, 'toko' => $toko, 'category' => $category, 'subdistricts' => $subdistricts]);
     }
 
     /**
@@ -203,12 +203,12 @@ class PapanBungaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Product $bungapapan)
+    public function destroy(Product $papanbunga)
     {
         // $pabung = Product::find($id);
-        $file_path = public_path('bungapapan/' . $bungapapan->gambar);
+        $file_path = public_path('bungapapan/' . $papanbunga->gambar);
         unlink($file_path);
-        $bungapapan->delete();
+        $papanbunga->delete();
         return redirect()->route('papanbunga.index')->with('success', 'Berhasil Di hapus');
     }
 }

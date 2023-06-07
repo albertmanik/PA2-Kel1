@@ -30,8 +30,8 @@
             <div class="row">
                 <div class="col-lg-6 offset-lg-3">
                     <div class="account-login-inner">
-                        @if ($data->id)
-                            <form action="{{ route('toko.update', $data->id) }}" method="POST"
+                        @if ($toko->id)
+                            <form action="{{ route('toko.update', $toko->id) }}" method="POST"
                                 class="ltn__form-box contact-form-box" id="toko-form">
                                 @method('PATCH')
                             @else
@@ -40,7 +40,7 @@
                         @endif
                         @csrf
                         <input type="text" name="nama_toko" placeholder="Masukkan Nama Toko Anda"
-                            value="{{ $data->nama_toko }}" class="form-control @error('nama_toko') is-invalid @enderror"
+                            value="{{ $toko->nama_toko }}" class="form-control @error('nama_toko') is-invalid @enderror"
                             autofocus>
                         @error('nama_toko')
                             <div class="invalid-feedback mb-4" style="margin-top: -4%">
@@ -48,7 +48,7 @@
                             </div>
                         @enderror
                         <input type="text" name="alamat" placeholder="Masukkan Alamat Toko Anda"
-                            value="{{ $data->alamat }}" class="form-control @error('alamat') is-invalid @enderror">
+                            value="{{ $toko->alamat }}" class="form-control @error('alamat') is-invalid @enderror">
                         @error('alamat')
                             <div class="invalid-feedback mb-4" style="margin-top: -4%">
                                 {{ $message }}

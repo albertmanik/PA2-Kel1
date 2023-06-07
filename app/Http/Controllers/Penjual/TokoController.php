@@ -28,7 +28,7 @@ class TokoController extends Controller
      */
     public function create()
     {
-        return view('pages.web.toko.create', ['data' => new Toko]);
+        return view('pages.web.toko.create', ['toko' => new Toko]);
     }
 
     /**
@@ -103,7 +103,7 @@ class TokoController extends Controller
      */
     public function edit(Toko $toko)
     {
-        return view('pages.web.toko.create', ['data' => $toko]);
+        return view('pages.web.toko.create', ['toko' => $toko]);
     }
 
     /**
@@ -122,7 +122,7 @@ class TokoController extends Controller
         $request->validate([
             'nama_toko' => 'required',
             'alamat' => 'required',
-            'status' => 'required',
+            // 'status' => 'required',
         ]);
 
         // if ($validators->fails()) {
@@ -142,7 +142,8 @@ class TokoController extends Controller
 
         $toko->nama_toko = $request->nama_toko;
         $toko->alamat = $request->alamat;
-        $toko->status = $request->status;
+        // dd($toko);
+        // $toko->status = $request->status;
         $toko->save();
         return redirect()->route('toko.index')->with('info', 'Toko Berhasil Diubah');
     }

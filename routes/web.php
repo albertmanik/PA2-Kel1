@@ -82,6 +82,8 @@ Route::get('/testimoni', [TestimoniController::class, 'index']);
 Route::get('/galeri', [GaleriController::class, 'index']);
 Route::get('checkout', [CheckoutController::class, 'index'])->name('checkout');
 Route::post('checkout', [CheckoutController::class, 'checkout'])->name('checkout.create');
+Route::get('checkout/{checkout}/edit', [CheckoutController::class, 'edit'])->name('checkout.edit');
+Route::patch('checkout/{checkout}', [CheckoutController::class, 'update'])->name('checkout.update');
 Route::resource('pesanan', PesananController::class);
 Route::get('list', [PenjualPesananController::class, 'index'])->name('list-pesanan');
 Route::patch('pesan/accept/{checkout}', [PenjualPesananController::class, 'accept'])->name('pesan.accept');
