@@ -24,6 +24,7 @@ class CreateProductTable extends Migration
             $table->text('deskripsi');
             $table->string('no_hp');
             $table->string('gambar');
+            $table->float('total_rating')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->foreign('user_id')->references('id')->on('users');

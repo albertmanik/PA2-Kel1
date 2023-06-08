@@ -5,6 +5,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\GaleriController;
+use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\BouquetController;
 use App\Http\Controllers\PesananController;
 use App\Http\Controllers\ProductController;
@@ -14,9 +15,9 @@ use App\Http\Controllers\TestimoniController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\PapanBungaController;
 use App\Http\Controllers\Penjual\TokoController;
-use App\Http\Controllers\Penjual\PesananController as PenjualPesananController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\TokoController as AdminTokoController;
+use App\Http\Controllers\Penjual\PesananController as PenjualPesananController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,7 +32,7 @@ use App\Http\Controllers\Admin\TokoController as AdminTokoController;
 
 Route::middleware('role:admin')->prefix('admin')->group(function () {
     Route::get('/home', [AdminHomeController::class, 'index'])->name('home');
-    Route::get('store', [AdminTokoController::class, 'index'])->name('admin.toko');
+    Route::resource('/store', AdminTokoController::class);
 });
 
 Route::middleware('role:penjual')->prefix('penjual')->group(function () {
@@ -90,3 +91,4 @@ Route::patch('pesan/accept/{checkout}', [PenjualPesananController::class, 'accep
 Route::patch('pesan/reject/{checkout}', [PenjualPesananController::class, 'reject'])->name('pesan.reject');
 // Route::resource('pesanan', PenjualPesananController::class);
 // Route::post('order', [CheckoutController::class, 'order'])->name('order');
+Route::post('rating/{papanbunga}', [ReviewController::class, 'store'])->name('rating.store');

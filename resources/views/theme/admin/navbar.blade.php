@@ -34,14 +34,14 @@
             <ul class="navbar-nav" id="navbar-nav">
                 <li class="menu-title"><span data-key="t-menu">Menu</span></li>
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="{{ route('home') }}" role="button"
-                        aria-expanded="false" aria-controls="sidebarDashboards">
+                    <a class="nav-link menu-link" href="{{ route('home') }}" role="button" aria-expanded="false"
+                        aria-controls="sidebarDashboards">
                         <i class="ri-dashboard-2-line"></i> <span data-key="t-dashboards">Dashboards</span>
                     </a>
                 </li> <!-- end Dashboard Menu -->
                 <li class="nav-item">
-                    <a class="nav-link menu-link" href="{{ route('admin.toko') }}" role="button"
-                        aria-expanded="false" aria-controls="sidebarApps">
+                    <a class="nav-link menu-link" href="{{ route('store.index') }}" role="button" aria-expanded="false"
+                        aria-controls="sidebarApps">
                         <i class="ri-apps-2-line"></i> <span data-key="t-apps">Toko</span>
                     </a>
                 </li>

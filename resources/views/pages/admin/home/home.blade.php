@@ -80,7 +80,7 @@
                             <!--end row-->
 
                             <div class="row">
-                                <div class="col-xl-3 col-md-6">
+                                <div class="col-xl-4 col-md-6">
                                     <!-- card -->
                                     <div class="card card-animate">
                                         <div class="card-body">
@@ -114,7 +114,7 @@
                                     </div><!-- end card -->
                                 </div><!-- end col -->
 
-                                <div class="col-xl-3 col-md-6">
+                                <div class="col-xl-4 col-md-6">
                                     <!-- card -->
                                     <div class="card card-animate">
                                         <div class="card-body">
@@ -137,45 +137,16 @@
                                                             data-target="{{ $penjual }}"></span></h4>
                                                     {{-- <a href="" class="text-decoration-underline">View all orders</a> --}}
                                                 </div>
-                                                {{-- <div class="avatar-sm flex-shrink-0">
-                                                        <span class="avatar-title bg-soft-info rounded fs-3">
-                                                            <i class="bx bx-shopping-bag text-info"></i>
-                                                        </span>
-                                                    </div> --}}
+                                                <div class="avatar-sm flex-shrink-0">
+                                                    <span class="avatar-title bg-soft-warning rounded fs-3">
+                                                        <i class="bx bx-user-circle text-warning"></i>
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div><!-- end card body -->
                                     </div><!-- end card -->
                                 </div><!-- end col -->
-
-                                <div class="col-xl-3 col-md-6">
-                                    <!-- card -->
-                                    <div class="card card-animate">
-                                        <div class="card-body">
-                                            <div class="d-flex align-items-center">
-                                                <div class="flex-grow-1 overflow-hidden">
-                                                    <p class="text-uppercase fw-medium text-muted text-truncate mb-0">
-                                                        Total Agen</p>
-                                                </div>
-                                            </div>
-                                            <div class="d-flex align-items-end justify-content-between mt-4">
-                                                <div>
-                                                    <h4 class="fs-22 fw-semibold ff-secondary mb-4"><span
-                                                            class="counter-value"
-                                                            data-target="{{ $agen }}"></span>
-                                                    </h4>
-                                                    {{-- <a href="" class="text-decoration-underline">See details</a> --}}
-                                                </div>
-                                                {{-- <div class="avatar-sm flex-shrink-0">
-                                                        <span class="avatar-title bg-soft-warning rounded fs-3">
-                                                            <i class="bx bx-user-circle text-warning"></i>
-                                                        </span>
-                                                    </div> --}}
-                                            </div>
-                                        </div><!-- end card body -->
-                                    </div><!-- end card -->
-                                </div><!-- end col -->
-
-                                <div class="col-xl-3 col-md-6">
+                                <div class="col-xl-4 col-md-6">
                                     <!-- card -->
                                     <div class="card card-animate">
                                         <div class="card-body">
@@ -198,11 +169,11 @@
                                                     </h4>
                                                     {{-- <a href="" class="text-decoration-underline">Withdraw money</a> --}}
                                                 </div>
-                                                {{-- <div class="avatar-sm flex-shrink-0">
-                                                        <span class="avatar-title bg-soft-primary rounded fs-3">
-                                                            <i class="bx bx-wallet text-primary"></i>
-                                                        </span>
-                                                    </div> --}}
+                                                <div class="avatar-sm flex-shrink-0">
+                                                    <span class="avatar-title bg-soft-info rounded fs-3">
+                                                        <i class="bx bx-shopping-bag text-info"></i>
+                                                    </span>
+                                                </div>
                                             </div>
                                         </div><!-- end card body -->
                                     </div><!-- end card -->
@@ -541,9 +512,8 @@
 
                                             <div class="align-items-center mt-4 pt-2 justify-content-between d-flex">
                                                 <div class="flex-shrink-0">
-                                                    <div class="text-muted">Showing <span
-                                                            class="fw-semibold">5</span> of <span
-                                                            class="fw-semibold">25</span> Results
+                                                    <div class="text-muted">Showing <span class="fw-semibold">5</span>
+                                                        of <span class="fw-semibold">25</span> Results
                                                     </div>
                                                 </div>
                                                 <ul class="pagination pagination-separated pagination-sm mb-0">
@@ -762,9 +732,8 @@
 
                                             <div class="align-items-center mt-4 pt-2 justify-content-between d-flex">
                                                 <div class="flex-shrink-0">
-                                                    <div class="text-muted">Showing <span
-                                                            class="fw-semibold">5</span> of <span
-                                                            class="fw-semibold">25</span> Results
+                                                    <div class="text-muted">Showing <span class="fw-semibold">5</span>
+                                                        of <span class="fw-semibold">25</span> Results
                                                     </div>
                                                 </div>
                                                 <ul class="pagination pagination-separated pagination-sm mb-0">
@@ -1036,8 +1005,8 @@
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1 ms-3">
-                                                    <h6 class="mb-1 lh-base">Added new <span
-                                                            class="fw-semibold">style collection</span></h6>
+                                                    <h6 class="mb-1 lh-base">Added new <span class="fw-semibold">style
+                                                            collection</span></h6>
                                                     <p class="text-muted mb-1">By Nesta Technologies</p>
                                                     <div class="d-inline-flex gap-2 border border-dashed p-2 mb-2">
                                                         <a href="apps-ecommerce-product-details.html"
@@ -1489,8 +1458,7 @@
 
                                     <div class="card sidebar-alert bg-light border-0 text-center mx-4 mb-0 mt-3">
                                         <div class="card-body">
-                                            <img src="{{ asset('assets/admin/images/giftbox.png') }}"
-                                                alt="">
+                                            <img src="{{ asset('assets/admin/images/giftbox.png') }}" alt="">
                                             <div class="mt-4">
                                                 <h5>Invite New Seller</h5>
                                                 <p class="text-muted lh-base">Refer a new seller to us and earn $100
@@ -1547,8 +1515,8 @@
                     <div class="row">
                         <div class="col-4">
                             <div class="form-check card-radio">
-                                <input id="customizer-layout01" name="data-layout" type="radio"
-                                    value="vertical" class="form-check-input">
+                                <input id="customizer-layout01" name="data-layout" type="radio" value="vertical"
+                                    class="form-check-input">
                                 <label class="form-check-label p-0 avatar-md w-100" for="customizer-layout01">
                                     <span class="d-flex gap-1 h-100">
                                         <span class="flex-shrink-0">
@@ -1572,8 +1540,8 @@
                         </div>
                         <div class="col-4">
                             <div class="form-check card-radio">
-                                <input id="customizer-layout02" name="data-layout" type="radio"
-                                    value="horizontal" class="form-check-input">
+                                <input id="customizer-layout02" name="data-layout" type="radio" value="horizontal"
+                                    class="form-check-input">
                                 <label class="form-check-label p-0 avatar-md w-100" for="customizer-layout02">
                                     <span class="d-flex h-100 flex-column gap-1">
                                         <span class="bg-light d-flex p-1 gap-1 align-items-center">
@@ -1590,8 +1558,8 @@
                         </div>
                         <div class="col-4">
                             <div class="form-check card-radio">
-                                <input id="customizer-layout03" name="data-layout" type="radio"
-                                    value="twocolumn" class="form-check-input">
+                                <input id="customizer-layout03" name="data-layout" type="radio" value="twocolumn"
+                                    class="form-check-input">
                                 <label class="form-check-label p-0 avatar-md w-100" for="customizer-layout03">
                                     <span class="d-flex gap-1 h-100">
                                         <span class="flex-shrink-0">
@@ -1637,8 +1605,7 @@
                                         <span class="d-flex gap-1 h-100">
                                             <span class="flex-shrink-0">
                                                 <span class="bg-light d-flex h-100 flex-column gap-1 p-1">
-                                                    <span
-                                                        class="d-block p-1 px-2 bg-soft-primary rounded mb-2"></span>
+                                                    <span class="d-block p-1 px-2 bg-soft-primary rounded mb-2"></span>
                                                     <span class="d-block p-1 px-2 pb-0 bg-soft-primary"></span>
                                                     <span class="d-block p-1 px-2 pb-0 bg-soft-primary"></span>
                                                     <span class="d-block p-1 px-2 pb-0 bg-soft-primary"></span>

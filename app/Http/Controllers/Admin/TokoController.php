@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Toko;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TokoController extends Controller
 {
@@ -69,9 +70,15 @@ class TokoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Toko $toko)
     {
-        //
+        // $toko->user_id =  Auth::user()->id;
+        $toko->nama_toko = $request->nama_toko;
+        $toko->alamat = $request->alamat;
+        $toko->status = $request->status;
+        // dd($toko);
+        $toko->update();
+        return back()->with('info', 'Toko Berhasil Diubah');
     }
 
     /**

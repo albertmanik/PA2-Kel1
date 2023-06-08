@@ -24,4 +24,53 @@
     {{-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
     {{-- SweetAlert --}}
     <link rel="stylesheet" href="{{ asset('css/sweetalert.css') }}" type="text/css" />
+    @push('style')
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+
+            .rate {
+                float: left;
+                height: 46px;
+                padding: 0 10px;
+            }
+
+            .rate>input {
+                display: none;
+            }
+
+            .rate>label {
+                float: right;
+                width: 1em;
+                overflow: hidden;
+                white-space: nowrap;
+                cursor: pointer;
+                font-size: 30px;
+                color: #ccc;
+            }
+
+            .rate>label:before {
+                content: '★ ';
+            }
+
+            .rate>input:checked~label {
+                color: #ffc700;
+            }
+
+            .rate>label:hover,
+            .rate>label:hover~label {
+                color: #deb217;
+            }
+
+            .rate>input:checked+label:hover,
+            .rate>input:checked+label:hover~label,
+            .rate>input:checked~label:hover,
+            .rate>input:checked~label:hover~label,
+            .rate>label:hover~input:checked~label {
+                color: #c59b08;
+            }
+        </style>
+    @endpush
 </head>

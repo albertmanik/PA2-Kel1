@@ -9,7 +9,7 @@
                         <div class="ltn__breadcrumb-list">
                             <ul>
                                 <li><a href="{{ url('/') }}">Home</a></li>
-                                <li><a href="{{ route('bungapapan.index') }}">Papan Bunga</li></a>
+                                <li><a href="{{ route('papanbunga.index') }}">Papan Bunga</li></a>
                             </ul>
                         </div>
                     </div>
@@ -29,9 +29,9 @@
                                 <div class="ltn__shop-details-img-gallery ltn__shop-details-img-gallery-2">
                                     <div class="ltn__shop-details-large-img">
                                         <div class="single-large-img">
-                                            <a href="{{ asset('papanbunga/' . $bungapapan->gambar) }}"
+                                            <a href="{{ asset('bungapapan/' . $papanbunga->gambar) }}"
                                                 data-rel="lightcase:myCollection">
-                                                <img src="{{ asset('papanbunga/' . $bungapapan->gambar) }}"
+                                                <img src="{{ asset('bungapapan/' . $papanbunga->gambar) }}"
                                                     alt="Image">
                                             </a>
                                         </div>
@@ -40,12 +40,13 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="modal-product-info shop-details-info pl-0">
-                                    <h3>{{ $bungapapan->name }}</h3>
+                                    <h3>{{ $papanbunga->name }}</h3>
                                     <div class="product-price-ratting mb-20">
                                         <ul>
                                             <li>
                                                 <div class="product-price">
-                                                    <span>Rp. {{  number_format($bungapapan->harga,0,',','.') }}</span>
+                                                    <span>Rp.
+                                                        {{ number_format($papanbunga->harga, 0, ',', '.') }}</span>
                                                 </div>
                                             </li>
                                             <li>
@@ -80,9 +81,9 @@
                                                 </div>
                                             </li>
                                             <li>
-                                                <a href="#" class="theme-btn-1 btn btn-effect-1 d-add-to-cart">
+                                                <a href="{{ route('cart.store', $papanbunga->id) }}"
+                                                    class="theme-btn-1 btn btn-effect-1 d-add-to-cart">
                                                     <span>ADD TO CART</span>
-                                                    @method('POST')
                                                 </a>
                                             </li>
                                         </ul>
@@ -169,108 +170,80 @@
                                             <div class="ltn__comment-area mb-30">
                                                 <div class="ltn__comment-inner">
                                                     <ul>
-                                                        <li>
-                                                            <div class="ltn__comment-item clearfix">
-                                                                <div class="ltn__commenter-img">
-                                                                    <img src="img/testimonial/1.jpg" alt="Image">
-                                                                </div>
-                                                                <div class="ltn__commenter-comment">
-                                                                    <h6><a href="#">Adam Smit</a></h6>
-                                                                    <div class="product-ratting">
-                                                                        <ul>
-                                                                            <li><a href="#"><i
-                                                                                        class="fas fa-star"></i></a>
-                                                                            </li>
-                                                                            <li><a href="#"><i
-                                                                                        class="fas fa-star"></i></a>
-                                                                            </li>
-                                                                            <li><a href="#"><i
-                                                                                        class="fas fa-star"></i></a>
-                                                                            </li>
-                                                                            <li><a href="#"><i
-                                                                                        class="fas fa-star-half-alt"></i></a>
-                                                                            </li>
-                                                                            <li><a href="#"><i
-                                                                                        class="far fa-star"></i></a>
-                                                                            </li>
-                                                                        </ul>
+                                                        @foreach ($review as $item)
+                                                            <li>
+                                                                <div class="ltn__comment-item clearfix">
+                                                                    <div class="ltn__commenter-img">
+                                                                        <img src="img/testimonial/1.jpg"
+                                                                            alt="Image">
                                                                     </div>
-                                                                    <p>Lorem ipsum dolor sit amet, consectetur
-                                                                        adipisicing elit. Doloribus, omnis fugit
-                                                                        corporis iste magnam ratione.</p>
-                                                                    <span class="ltn__comment-reply-btn">September 3,
-                                                                        2020</span>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="ltn__comment-item clearfix">
-                                                                <div class="ltn__commenter-img">
-                                                                    <img src="img/testimonial/3.jpg" alt="Image">
-                                                                </div>
-                                                                <div class="ltn__commenter-comment">
-                                                                    <h6><a href="#">Adam Smit</a></h6>
-                                                                    <div class="product-ratting">
-                                                                        <ul>
-                                                                            <li><a href="#"><i
-                                                                                        class="fas fa-star"></i></a>
-                                                                            </li>
-                                                                            <li><a href="#"><i
-                                                                                        class="fas fa-star"></i></a>
-                                                                            </li>
-                                                                            <li><a href="#"><i
-                                                                                        class="fas fa-star"></i></a>
-                                                                            </li>
-                                                                            <li><a href="#"><i
-                                                                                        class="fas fa-star-half-alt"></i></a>
-                                                                            </li>
-                                                                            <li><a href="#"><i
-                                                                                        class="far fa-star"></i></a>
-                                                                            </li>
-                                                                        </ul>
+                                                                    <div class="ltn__commenter-comment">
+                                                                        <h6><a
+                                                                                href="#">{{ Auth::guard('web')->user()->username }}</a>
+                                                                        </h6>
+                                                                        <div class="product-ratting">
+                                                                            {{-- @if ($rating >= 0 && $rating <= 1)
+                                                                                <label for="star1"
+                                                                                    title="text">{{ number_format($rating, 1, ',', '.') }}</label>
+                                                                            @elseif ($rating < 2)
+                                                                                <label for="star1"
+                                                                                    title="text">{{ number_format($rating, 1, ',', '.') }}</label>
+                                                                                    @endif --}}
+                                                                            @if ($item->rating == 1)
+                                                                                <label>
+                                                                                    <span class="icon"
+                                                                                        style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                                </label>
+                                                                            @elseif($item->rating == 2)
+                                                                                <label>
+                                                                                    <span class="icon"
+                                                                                        style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                                    <span class="icon"
+                                                                                        style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                                </label>
+                                                                            @elseif($item->rating == 3)
+                                                                                <label>
+                                                                                    <span class="icon"
+                                                                                        style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                                    <span class="icon"
+                                                                                        style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                                    <span class="icon"
+                                                                                        style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                                </label>
+                                                                            @elseif($item->rating == 4)
+                                                                                <label>
+                                                                                    <span class="icon"
+                                                                                        style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                                    <span class="icon"
+                                                                                        style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                                    <span class="icon"
+                                                                                        style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                                    <span class="icon"
+                                                                                        style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                                </label>
+                                                                            @elseif($item->rating == 5)
+                                                                                <label>
+                                                                                    <span class="icon"
+                                                                                        style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                                    <span class="icon"
+                                                                                        style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                                    <span class="icon"
+                                                                                        style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                                    <span class="icon"
+                                                                                        style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                                    <span class="icon"
+                                                                                        style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                                </label>
+                                                                            @endif
+                                                                        </div>
+                                                                        <p>{{ $item->review }}</p>
+                                                                        <span class="ltn__comment-reply-btn">September
+                                                                            3,
+                                                                            2020</span>
                                                                     </div>
-                                                                    <p>Lorem ipsum dolor sit amet, consectetur
-                                                                        adipisicing elit. Doloribus, omnis fugit
-                                                                        corporis iste magnam ratione.</p>
-                                                                    <span class="ltn__comment-reply-btn">September 2,
-                                                                        2020</span>
                                                                 </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="ltn__comment-item clearfix">
-                                                                <div class="ltn__commenter-img">
-                                                                    <img src="img/testimonial/2.jpg" alt="Image">
-                                                                </div>
-                                                                <div class="ltn__commenter-comment">
-                                                                    <h6><a href="#">Adam Smit</a></h6>
-                                                                    <div class="product-ratting">
-                                                                        <ul>
-                                                                            <li><a href="#"><i
-                                                                                        class="fas fa-star"></i></a>
-                                                                            </li>
-                                                                            <li><a href="#"><i
-                                                                                        class="fas fa-star"></i></a>
-                                                                            </li>
-                                                                            <li><a href="#"><i
-                                                                                        class="fas fa-star"></i></a>
-                                                                            </li>
-                                                                            <li><a href="#"><i
-                                                                                        class="fas fa-star-half-alt"></i></a>
-                                                                            </li>
-                                                                            <li><a href="#"><i
-                                                                                        class="far fa-star"></i></a>
-                                                                            </li>
-                                                                        </ul>
-                                                                    </div>
-                                                                    <p>Lorem ipsum dolor sit amet, consectetur
-                                                                        adipisicing elit. Doloribus, omnis fugit
-                                                                        corporis iste magnam ratione.</p>
-                                                                    <span class="ltn__comment-reply-btn">September 2,
-                                                                        2020</span>
-                                                                </div>
-                                                            </div>
-                                                        </li>
+                                                            </li>
+                                                        @endforeach
                                                     </ul>
                                                 </div>
                                             </div>
@@ -278,44 +251,42 @@
                                         <div class="col-lg-5">
                                             <!-- comment-reply -->
                                             <div class="ltn__comment-reply-area ltn__form-box mb-60">
-                                                <form action="#">
+                                                <form action="{{ route('rating.store', $papanbunga->id) }}"
+                                                    method="post">
+                                                    @csrf
                                                     <h4 class="title-2">Add a Review</h4>
                                                     <div class="mb-30">
                                                         <div class="add-a-review">
                                                             <h6>Your Ratings:</h6>
                                                             <div class="product-ratting">
-                                                                <ul>
-                                                                    <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a></li>
-                                                                    <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a></li>
-                                                                    <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a></li>
-                                                                    <li><a href="#"><i
-                                                                                class="fas fa-star-half-alt"></i></a>
-                                                                    </li>
-                                                                    <li><a href="#"><i
-                                                                                class="far fa-star"></i></a></li>
-                                                                </ul>
+                                                                <div class="rate">
+                                                                    <input type="radio" id="star5"
+                                                                        name="rating" value="5" />
+                                                                    <label for="star5" title="text">5
+                                                                        stars</label>
+                                                                    <input type="radio" id="star4"
+                                                                        name="rating" value="4" />
+                                                                    <label for="star4" title="text">4
+                                                                        stars</label>
+                                                                    <input type="radio" id="star3"
+                                                                        name="rating" value="3" />
+                                                                    <label for="star3" title="text">3
+                                                                        stars</label>
+                                                                    <input type="radio" id="star2"
+                                                                        name="rating" value="2" />
+                                                                    <label for="star2" title="text">2
+                                                                        stars</label>
+                                                                    <input type="radio" id="star1"
+                                                                        name="rating" value="1" />
+                                                                    <label for="star1" title="text">1
+                                                                        star</label>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="input-item input-item-textarea ltn__custom-icon">
-                                                        <textarea placeholder="Type your comments...."></textarea>
+                                                        <textarea name="review" placeholder="Masukkan Review Anda...."></textarea>
                                                     </div>
-                                                    <div class="input-item input-item-name ltn__custom-icon">
-                                                        <input type="text" placeholder="Type your name....">
-                                                    </div>
-                                                    <div class="input-item input-item-email ltn__custom-icon">
-                                                        <input type="email" placeholder="Type your email....">
-                                                    </div>
-                                                    <div class="input-item input-item-website ltn__custom-icon">
-                                                        <input type="text" name="website"
-                                                            placeholder="Type your website....">
-                                                    </div>
-                                                    <label class="mb-0"><input type="checkbox" name="agree"> Save
-                                                        my name, email, and website in this browser for the next time I
-                                                        comment.</label>
                                                     <div class="btn-wrapper">
                                                         <button class="btn theme-btn-1 btn-effect-1 text-uppercase"
                                                             type="submit">Submit</button>

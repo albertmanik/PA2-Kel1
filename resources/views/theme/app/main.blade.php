@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 @include('theme.app.head')
+@stack('style')
+
 <body>
     <div class="body-wrapper">
         @include('theme.app.header')
@@ -14,4 +16,5 @@
     @include('theme.app.js')
     @yield('custom_js')
 </body>
+
 </html>

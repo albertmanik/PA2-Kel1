@@ -92,11 +92,9 @@
                                     name="kota">
                                     <option id="select" selected disabled>Pilih Kecamatan Anda</option>
                                     @foreach ($subdistricts as $subdistrict)
-                                        @if (Auth::user()->id == $data->user_id)
-                                            <option value="{{ $subdistrict->name }}"
-                                                {{ $papanbunga->kota == $subdistrict->id ? 'selected' : '' }}>
-                                                {{ $subdistrict->name }}</option>
-                                        @endif
+                                        <option value="{{ $subdistrict->id }}"
+                                            {{ $papanbunga->kota == $subdistrict->id ? 'selected' : '' }}>
+                                            {{ $subdistrict->name }}</option>
                                     @endforeach
                                 </select>
                                 @error('kota')

@@ -11,11 +11,11 @@ use App\Models\Product;
 
 class HomeController extends Controller
 {
-    public function index(){
-        $customer = DB::table('model_has_roles')->where('role_id','=',2)->count();
-        $agen = DB::table('model_has_roles')->where('role_id','=',3)->count();
-        $penjual = DB::table('model_has_roles')->where('role_id','=',4)->count();
+    public function index()
+    {
+        $customer = DB::table('model_has_roles')->where('role_id', '=', 2)->count();
+        $penjual = DB::table('model_has_roles')->where('role_id', '=', 3)->count();
         $products = Product::count();
-        return view('pages.admin.home.home', compact('customer','agen','penjual','products'));
+        return view('pages.admin.home.home', compact('customer', 'penjual', 'products'));
     }
 }

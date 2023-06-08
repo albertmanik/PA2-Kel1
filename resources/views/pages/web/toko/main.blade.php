@@ -18,10 +18,13 @@
         </div>
     </div>
     <!-- BREADCRUMB AREA END -->
-    <div class="btn-wrapper col-10">
-        <a href="{{ route('toko.create') }}" class="btn theme-btn-1 btn-effect-1 text-uppercase mb-4 mx-5">Tambah
-            Toko</a>
-    </div>
+    @if (empty($user->toko))
+        <div class="btn-wrapper col-10">
+            <a href="{{ route('toko.create') }}" class="btn theme-btn-1 btn-effect-1 text-uppercase mb-4 mx-5">Tambah
+                Toko</a>
+        </div>
+    @else
+    @endif
     <div class="table-responsive col-lg-11 text-center mx-5 mb-3">
         <table class="table">
             <thead>

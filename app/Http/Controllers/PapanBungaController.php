@@ -8,6 +8,7 @@ use App\Models\Category;
 use App\Models\Subdistrict;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Review;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -141,7 +142,8 @@ class PapanBungaController extends Controller
     {
         $toko = Toko::get();
         $category = Category::get();
-        return view('pages.web.papanbunga.detail', ['papanbunga' => $papanbunga, 'toko' => $toko, 'category' => $category]);
+        $review = Review::get();
+        return view('pages.web.papanbunga.detail', ['papanbunga' => $papanbunga, 'toko' => $toko, 'category' => $category, 'review' => $review]);
     }
 
     /**

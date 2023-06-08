@@ -269,8 +269,8 @@
                                                                 </a>
                                                             </li>
                                                             <li class="add-to-cart">
-                                                                <a href="{{ route('cart.store', $item->id) }}" title="Add to Cart"
-                                                                    >
+                                                                <a href="{{ route('cart.store', $item->id) }}"
+                                                                    title="Add to Cart">
                                                                     <span class="cart-text d-none d-xl-block">Add to
                                                                         Cart</span>
                                                                     <span class="d-block d-xl-none"><i
