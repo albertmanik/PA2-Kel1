@@ -171,78 +171,81 @@
                                                 <div class="ltn__comment-inner">
                                                     <ul>
                                                         @foreach ($review as $item)
-                                                            <li>
-                                                                <div class="ltn__comment-item clearfix">
-                                                                    <div class="ltn__commenter-img">
-                                                                        <img src="img/testimonial/1.jpg"
-                                                                            alt="Image">
-                                                                    </div>
-                                                                    <div class="ltn__commenter-comment">
-                                                                        <h6><a
-                                                                                href="#">{{ Auth::guard('web')->user()->username }}</a>
-                                                                        </h6>
-                                                                        <div class="product-ratting">
-                                                                            {{-- @if ($rating >= 0 && $rating <= 1)
+                                                            @if ($item->product_id == $papanbunga->id)
+                                                                <li>
+                                                                    <div class="ltn__comment-item clearfix">
+                                                                        <div class="ltn__commenter-img">
+                                                                            <img src="img/testimonial/1.jpg"
+                                                                                alt="Image">
+                                                                        </div>
+                                                                        <div class="ltn__commenter-comment">
+                                                                            <h6><a
+                                                                                    href="#">{{ Auth::guard('web')->user()->username }}</a>
+                                                                            </h6>
+                                                                            <div class="product-ratting">
+                                                                                {{-- @if ($rating >= 0 && $rating <= 1)
                                                                                 <label for="star1"
                                                                                     title="text">{{ number_format($rating, 1, ',', '.') }}</label>
                                                                             @elseif ($rating < 2)
                                                                                 <label for="star1"
                                                                                     title="text">{{ number_format($rating, 1, ',', '.') }}</label>
                                                                                     @endif --}}
-                                                                            @if ($item->rating == 1)
-                                                                                <label>
-                                                                                    <span class="icon"
-                                                                                        style="color: rgb(221, 221, 79) !important;">★</span>
-                                                                                </label>
-                                                                            @elseif($item->rating == 2)
-                                                                                <label>
-                                                                                    <span class="icon"
-                                                                                        style="color: rgb(221, 221, 79) !important;">★</span>
-                                                                                    <span class="icon"
-                                                                                        style="color: rgb(221, 221, 79) !important;">★</span>
-                                                                                </label>
-                                                                            @elseif($item->rating == 3)
-                                                                                <label>
-                                                                                    <span class="icon"
-                                                                                        style="color: rgb(221, 221, 79) !important;">★</span>
-                                                                                    <span class="icon"
-                                                                                        style="color: rgb(221, 221, 79) !important;">★</span>
-                                                                                    <span class="icon"
-                                                                                        style="color: rgb(221, 221, 79) !important;">★</span>
-                                                                                </label>
-                                                                            @elseif($item->rating == 4)
-                                                                                <label>
-                                                                                    <span class="icon"
-                                                                                        style="color: rgb(221, 221, 79) !important;">★</span>
-                                                                                    <span class="icon"
-                                                                                        style="color: rgb(221, 221, 79) !important;">★</span>
-                                                                                    <span class="icon"
-                                                                                        style="color: rgb(221, 221, 79) !important;">★</span>
-                                                                                    <span class="icon"
-                                                                                        style="color: rgb(221, 221, 79) !important;">★</span>
-                                                                                </label>
-                                                                            @elseif($item->rating == 5)
-                                                                                <label>
-                                                                                    <span class="icon"
-                                                                                        style="color: rgb(221, 221, 79) !important;">★</span>
-                                                                                    <span class="icon"
-                                                                                        style="color: rgb(221, 221, 79) !important;">★</span>
-                                                                                    <span class="icon"
-                                                                                        style="color: rgb(221, 221, 79) !important;">★</span>
-                                                                                    <span class="icon"
-                                                                                        style="color: rgb(221, 221, 79) !important;">★</span>
-                                                                                    <span class="icon"
-                                                                                        style="color: rgb(221, 221, 79) !important;">★</span>
-                                                                                </label>
-                                                                            @endif
+                                                                                @if ($item->rating == 1)
+                                                                                    <label>
+                                                                                        <span class="icon"
+                                                                                            style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                                    </label>
+                                                                                @elseif($item->rating == 2)
+                                                                                    <label>
+                                                                                        <span class="icon"
+                                                                                            style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                                        <span class="icon"
+                                                                                            style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                                    </label>
+                                                                                @elseif($item->rating == 3)
+                                                                                    <label>
+                                                                                        <span class="icon"
+                                                                                            style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                                        <span class="icon"
+                                                                                            style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                                        <span class="icon"
+                                                                                            style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                                    </label>
+                                                                                @elseif($item->rating == 4)
+                                                                                    <label>
+                                                                                        <span class="icon"
+                                                                                            style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                                        <span class="icon"
+                                                                                            style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                                        <span class="icon"
+                                                                                            style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                                        <span class="icon"
+                                                                                            style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                                    </label>
+                                                                                @elseif($item->rating == 5)
+                                                                                    <label>
+                                                                                        <span class="icon"
+                                                                                            style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                                        <span class="icon"
+                                                                                            style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                                        <span class="icon"
+                                                                                            style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                                        <span class="icon"
+                                                                                            style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                                        <span class="icon"
+                                                                                            style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                                    </label>
+                                                                                @endif
+                                                                            </div>
+                                                                            <p>{{ $item->review }}</p>
+                                                                            <span
+                                                                                class="ltn__comment-reply-btn">September
+                                                                                3,
+                                                                                2020</span>
                                                                         </div>
-                                                                        <p>{{ $item->review }}</p>
-                                                                        <span class="ltn__comment-reply-btn">September
-                                                                            3,
-                                                                            2020</span>
                                                                     </div>
-                                                                </div>
-                                                            </li>
+                                                                </li>
+                                                            @endif
                                                         @endforeach
                                                     </ul>
                                                 </div>

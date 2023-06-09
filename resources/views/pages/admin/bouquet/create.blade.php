@@ -6,12 +6,11 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0">Papan Bunga</h4>
+                            <h4 class="mb-sm-0">Bouquet</h4>
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="{{ route('admin.papanbunga') }}">Product</a>
-                                    </li>
-                                    <li class="breadcrumb-item active">Papan Bunga</li>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.bouquet') }}">Product</a></li>
+                                    <li class="breadcrumb-item active">Bouquet</li>
                                 </ol>
                             </div>
                         </div>
@@ -23,19 +22,19 @@
                             <div class="card-body">
                                 <p class="text-muted">Tambahkan Produk Anda</p>
                                 <div class="live-preview">
-                                    @if ($papanbunga->id)
-                                        <form action="{{ route('admin.papanbunga.update', $papanbunga->id) }}"
-                                            method="POST" enctype="multipart/form-data">
+                                    @if ($bouquet->id)
+                                        <form action="{{ route('admin.bouquet.update', $bouquet->id) }}" method="POST"
+                                            enctype="multipart/form-data">
                                             @method('PATCH')
                                         @else
-                                            <form action="{{ route('admin.papanbunga.store') }}" method="POST"
+                                            <form action="{{ route('admin.bouquet.store') }}" method="POST"
                                                 enctype="multipart/form-data">
                                     @endif
                                     @csrf
                                     <div class="mb-3">
                                         <label for="employeeName" class="form-label">Nama Produk</label>
                                         <input type="text" name="name" class="form-control" id="employeeName"
-                                            placeholder="Masukkan Nama Produk" value="{{ $papanbunga->name }}">
+                                            placeholder="Masukkan Nama Produk" value="{{ $bouquet->name }}">
                                     </div>
                                     <div class="col-sm-auto mb-3">
                                         <div>
@@ -44,7 +43,7 @@
                                                 <option selected disabled>Pilih Kategori Produk</option>
                                                 @foreach ($category as $item)
                                                     <option value="{{ $item->id }}"
-                                                        {{ $papanbunga->category_id == $item->id ? 'selected' : '' }}>
+                                                        {{ $bouquet->category_id == $item->id ? 'selected' : '' }}>
                                                         {{ $item->name }}</option>
                                                 @endforeach
                                             </select>
@@ -61,7 +60,7 @@
                                     <div class="mb-3">
                                         <label for="EndleaveDate" class="form-label">Harga</label>
                                         <input type="text" name="harga" class="form-control" id="EndleaveDate"
-                                            placeholder="Masukkan Harga" value="{{ $papanbunga->harga }}">
+                                            placeholder="Masukkan Harga" value="{{ $bouquet->harga }}">
                                     </div>
                                     <div class="col-sm-auto mb-3">
                                         <div>
@@ -70,7 +69,7 @@
                                                 <option selected disabled>Pilih Kecamatan Anda</option>
                                                 @foreach ($subdistricts as $subdistrict)
                                                     <option value="{{ $subdistrict->name }}"
-                                                        {{ $papanbunga->kota == $subdistrict->id ? 'selected' : '' }}>
+                                                        {{ $bouquet->kota == $subdistrict->id ? 'selected' : '' }}>
                                                         {{ $subdistrict->name }}</option>
                                                 @endforeach
                                             </select>
@@ -85,12 +84,12 @@
                                     <div class="mb-3">
                                         <label for="VertimeassageInput" class="form-label">Deskripsi</label>
                                         <textarea class="form-control" name="deskripsi" id="VertimeassageInput" rows="3"
-                                            placeholder="Masukkan Deskripsi Produk">{{ $papanbunga->deskripsi }}</textarea>
+                                            placeholder="Masukkan Deskripsi Produk">{{ $bouquet->deskripsi }}</textarea>
                                     </div>
                                     <div class="mb-3">
                                         <label for="formFile" class="form-label">Gambar</label>
                                         <input class="form-control" name="gambar" type="file"
-                                            id="formFile">{{ $papanbunga->gambar }}
+                                            id="formFile">{{ $bouquet->gambar }}
                                     </div>
                                     <div class="text-end">
                                         <button type="submit" class="btn btn-primary">Tambah</button>

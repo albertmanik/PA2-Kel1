@@ -46,6 +46,11 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
     Route::get('/papanbunga/{papanbunga}/edit', [AdminPapanBungaController::class, 'edit'])->name('admin.papanbunga.edit');
 
     Route::get('/bouquet', [AdminBouquetController::class, 'index'])->name('admin.bouquet');
+    Route::post('/bouquet', [AdminBouquetController::class, 'store'])->name('admin.bouquet.store');
+    Route::get('/bouquet/create', [AdminBouquetController::class, 'create'])->name('admin.bouquet.create');
+    Route::patch('/bouquet/{bouquet}', [AdminBouquetController::class, 'update'])->name('admin.bouquet.update');
+    Route::delete('/bouquet/{bouquet}', [AdminBouquetController::class, 'destroy'])->name('admin.bouquet.destroy');
+    Route::get('/bouquet/{bouquet}/edit', [AdminBouquetController::class, 'edit'])->name('admin.bouquet.edit');
 });
 
 Route::middleware('role:penjual')->prefix('penjual')->group(function () {

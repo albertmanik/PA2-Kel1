@@ -9,7 +9,8 @@
                             <h4 class="mb-sm-0">Papan Bunga</h4>
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Product</a></li>
+                                    <li class="breadcrumb-item"><a href="{{ route('admin.papanbunga') }}">Product</a>
+                                    </li>
                                     <li class="breadcrumb-item active">Papan Bunga</li>
                                 </ol>
                             </div>

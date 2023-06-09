@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Toko;
 use App\Models\User;
+use App\Models\Review;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Subdistrict;
@@ -143,7 +144,8 @@ class BouquetController extends Controller
     {
         $toko = Toko::get();
         $category = Category::get();
-        return view('pages.web.bouquet.detail', ['bouquet' => $bouquet, 'toko' => $toko, 'category' => $category]);
+        $review = Review::get();
+        return view('pages.web.bouquet.detail', ['bouquet' => $bouquet, 'toko' => $toko, 'category' => $category, 'review' => $review]);
     }
 
     /**

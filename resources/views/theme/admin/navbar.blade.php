@@ -58,7 +58,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="dashboard-crm.html" class="nav-link" data-key="t-crm"> Bouquet </a>
+                                <a href="{{ route('admin.bouquet') }}" class="nav-link" data-key="t-crm"> Bouquet </a>
                             </li>
                         </ul>
                     </div>
