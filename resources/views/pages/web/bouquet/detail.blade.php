@@ -31,8 +31,7 @@
                                         <div class="single-large-img">
                                             <a href="{{ asset('bouquets/' . $bouquet->gambar) }}"
                                                 data-rel="lightcase:myCollection">
-                                                <img src="{{ asset('bouquets/' . $bouquet->gambar) }}"
-                                                    alt="Image">
+                                                <img src="{{ asset('bouquets/' . $bouquet->gambar) }}" alt="Image">
                                             </a>
                                         </div>
                                     </div>
@@ -45,7 +44,7 @@
                                         <ul>
                                             <li>
                                                 <div class="product-price">
-                                                    <span>Rp. {{  number_format($bouquet->harga,2,',','.') }}</span>
+                                                    <span>Rp. {{ number_format($bouquet->harga, 2, ',', '.') }}</span>
                                                 </div>
                                             </li>
                                             <li>
@@ -278,44 +277,42 @@
                                         <div class="col-lg-5">
                                             <!-- comment-reply -->
                                             <div class="ltn__comment-reply-area ltn__form-box mb-60">
-                                                <form action="#">
+                                                <form action="{{ route('rating.store', $bouquet->id) }}"
+                                                    method="post">
+                                                    @csrf
                                                     <h4 class="title-2">Add a Review</h4>
                                                     <div class="mb-30">
                                                         <div class="add-a-review">
                                                             <h6>Your Ratings:</h6>
                                                             <div class="product-ratting">
-                                                                <ul>
-                                                                    <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a></li>
-                                                                    <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a></li>
-                                                                    <li><a href="#"><i
-                                                                                class="fas fa-star"></i></a></li>
-                                                                    <li><a href="#"><i
-                                                                                class="fas fa-star-half-alt"></i></a>
-                                                                    </li>
-                                                                    <li><a href="#"><i
-                                                                                class="far fa-star"></i></a></li>
-                                                                </ul>
+                                                                <div class="rate">
+                                                                    <input type="radio" id="star5"
+                                                                        name="rating" value="5" />
+                                                                    <label for="star5" title="text">5
+                                                                        stars</label>
+                                                                    <input type="radio" id="star4"
+                                                                        name="rating" value="4" />
+                                                                    <label for="star4" title="text">4
+                                                                        stars</label>
+                                                                    <input type="radio" id="star3"
+                                                                        name="rating" value="3" />
+                                                                    <label for="star3" title="text">3
+                                                                        stars</label>
+                                                                    <input type="radio" id="star2"
+                                                                        name="rating" value="2" />
+                                                                    <label for="star2" title="text">2
+                                                                        stars</label>
+                                                                    <input type="radio" id="star1"
+                                                                        name="rating" value="1" />
+                                                                    <label for="star1" title="text">1
+                                                                        star</label>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="input-item input-item-textarea ltn__custom-icon">
-                                                        <textarea placeholder="Type your comments...."></textarea>
+                                                        <textarea name="review" placeholder="Masukkan Review Anda...."></textarea>
                                                     </div>
-                                                    <div class="input-item input-item-name ltn__custom-icon">
-                                                        <input type="text" placeholder="Type your name....">
-                                                    </div>
-                                                    <div class="input-item input-item-email ltn__custom-icon">
-                                                        <input type="email" placeholder="Type your email....">
-                                                    </div>
-                                                    <div class="input-item input-item-website ltn__custom-icon">
-                                                        <input type="text" name="website"
-                                                            placeholder="Type your website....">
-                                                    </div>
-                                                    <label class="mb-0"><input type="checkbox" name="agree"> Save
-                                                        my name, email, and website in this browser for the next time I
-                                                        comment.</label>
                                                     <div class="btn-wrapper">
                                                         <button class="btn theme-btn-1 btn-effect-1 text-uppercase"
                                                             type="submit">Submit</button>

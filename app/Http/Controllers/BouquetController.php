@@ -23,11 +23,16 @@ class BouquetController extends Controller
     {
         $search = $request->search;
         $data = Product::where('category_id', 2)
+            ->whereHas('toko', function ($query) {
+                $query->where('status', 'aktif');
+            })
             ->where(function ($query) use ($search) {
                 $query->where('name', 'like', '%' . $search . '%')
                     ->orWhere('harga', 'like', '%' . $search . '%')
+                    ->orWhere('kota', 'like', '%' . $search . '%')
                     ->orWhere('deskripsi', 'like', '%' . $search . '%');
             });
+
         if (isset($_GET['sort']) && !empty($_GET['sort'])) {
             if ($_GET['sort'] == "LTH") {
                 $data->where('category_id', '2')->orderBy('harga', 'ASC');

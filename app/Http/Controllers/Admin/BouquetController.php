@@ -3,12 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Toko;
-use Illuminate\Contracts\Cache\Store;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
-class TokoController extends Controller
+class BouquetController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,8 +14,7 @@ class TokoController extends Controller
      */
     public function index()
     {
-        $toko = Toko::paginate(10);
-        return view('pages.admin.toko.main', compact('toko'));
+        //
     }
 
     /**
@@ -39,18 +35,7 @@ class TokoController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nama_toko' => 'required|min:8',
-            'alamat' => 'required|min:8',
-        ]);
-
-        $toko = new Toko;
-        $toko->user_id = Auth::user()->id;
-        $toko->nama_toko = $request->nama_toko;
-        $toko->alamat = $request->alamat;
-        $toko->status = $request->status;
-        $toko->save();
-        return back()->with('success', 'Toko Berhasil Ditambahkan');
+        //
     }
 
     /**
@@ -70,9 +55,9 @@ class TokoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Toko $toko)
+    public function edit($id)
     {
-        return view('pages.web.toko.create', ['data' => $toko]);
+        //
     }
 
     /**
@@ -82,16 +67,9 @@ class TokoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Toko $store)
+    public function update(Request $request, $id)
     {
-        // dd($store);
-        // $toko->user_id =  Auth::user()->id;
-        $store->nama_toko = $request->nama_toko;
-        $store->alamat = $request->alamat;
-        $store->status = $request->status;
-        // dd($toko);
-        $store->update();
-        return redirect()->route('store.index')->with('info', 'Toko Berhasil Diubah');
+        //
     }
 
     /**
@@ -100,9 +78,8 @@ class TokoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Toko $store)
+    public function destroy($id)
     {
-        $store->delete();
-        return back()->with('success', 'Berhasil Dihapus');
+        //
     }
 }

@@ -220,22 +220,21 @@
                                     <div class="short-by text-center">
                                         <select class="nice-select" name="sorts" id="sorts">
                                             <option value="">Pilih Kota</option>
-                                            {{-- <option>Sort by popularity</option>
-                                            <option>Sort by new arrivals</option> --}}
                                             <option value="AJB">Ajibata</option>
                                             <option value="BLG">Balige</option>
+                                            <option value="BNL">Bonatua Lunasi</option>
+                                            <option value="BBR">Borbor</option>
+                                            <option value="HBS">Habinsaran</option>
+                                            <option value="LGB">Laguboti</option>
+                                            <option value="LMJ">Lumban Julu</option>
+                                            <option value="NS">Nasau</option>
+                                            <option value="PRM">Parmaksian</option>
+                                            <option value="PPM">Pintu Pohan Meranti</option>
                                             <option value="PRS">Porsea</option>
-                                            <option value="PRS">Porsea</option>
-                                            <option value="PRS">Porsea</option>
-                                            <option value="PRS">Porsea</option>
-                                            <option value="PRS">Porsea</option>
-                                            <option value="PRS">Porsea</option>
-                                            <option value="PRS">Porsea</option>
-                                            <option value="PRS">Porsea</option>
-                                            <option value="PRS">Porsea</option>
-                                            <option value="PRS">Porsea</option>
-                                            <option value="PRS">Porsea</option>
-                                            <option value="PRS">Porsea</option>
+                                            <option value="SAN">Siantar Narumonda</option>
+                                            <option value="SGM">Sigumpar</option>
+                                            <option value="SLN">Silaen</option>
+                                            <option value="TMP">Tampahan</option>
                                         </select>
                                     </div>
                                 </form>

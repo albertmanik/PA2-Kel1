@@ -6,6 +6,14 @@
 <script src="{{ asset('assets/admin/js/pages/plugins/lord-icon-2.1.0.js') }}"></script>
 <script src="{{ asset('assets/admin/js/plugins.js') }}"></script>
 
+<!-- prismjs plugin -->
+<script src="{{ asset('assets/admin/libs/prismjs/prism.js') }}"></script>
+<script src="{{ asset('assets/admin/libs/list.js/list.min.js') }}"></script>
+<script src="{{ asset('assets/admin/libs/list.pagination.js/list.pagination.min.js') }}"></script>
+
+<!-- listjs init -->
+<script src="{{ asset('assets/admin/js/pages/listjs.init.js') }}"></script>
+
 <!-- apexcharts -->
 <script src="{{ asset('assets/admin/libs/apexcharts/apexcharts.min.js') }}"></script>
 

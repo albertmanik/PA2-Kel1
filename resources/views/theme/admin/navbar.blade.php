@@ -45,6 +45,30 @@
                         <i class="ri-apps-2-line"></i> <span data-key="t-apps">Toko</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link menu-link" href="#sidebarProducts" data-bs-toggle="collapse" role="button"
+                        aria-expanded="false" aria-controls="sidebarProducts">
+                        <i class="ri-dashboard-2-line"></i> <span data-key="t-Products">Product</span>
+                    </a>
+                    <div class="collapse menu-dropdown" id="sidebarProducts">
+                        <ul class="nav nav-sm flex-column">
+                            <li class="nav-item">
+                                <a href="{{ route('admin.papanbunga') }}" class="nav-link" data-key="t-analytics"> Papan
+                                    Bunga
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="dashboard-crm.html" class="nav-link" data-key="t-crm"> Bouquet </a>
+                            </li>
+                        </ul>
+                    </div>
+                </li> <!-- end Dashboard Menu -->
+                {{-- <li class="nav-item">
+                    <a class="nav-link menu-link" href="{{ route('product.index') }}" role="button"
+                        aria-expanded="false" aria-controls="sidebarApps">
+                        <i class="ri-apps-2-line"></i> <span data-key="t-apps">Product</span>
+                    </a>
+                </li> --}}
             </ul>
         </div>
         <!-- Sidebar -->

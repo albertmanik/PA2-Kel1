@@ -55,6 +55,19 @@ class ReviewController extends Controller
         return back()->with('success', 'Berhasil');
     }
 
+    public function storeBouquet(Request $request, $bouquet)
+    {
+        $review = new Review();
+        $review->user_id = Auth::user()->id;
+        $review->product_id = $bouquet;
+        $review->review = $request->review;
+        $review->rating = $request->rating;
+        $review->save();
+        $total_rating = Review::where('product_id', $bouquet)->avg('rating');
+        Product::where('id', $bouquet)->update(['total_rating' => $total_rating]);
+        return back()->with('success', 'Berhasil');
+    }
+
     /**
      * Display the specified resource.
      *

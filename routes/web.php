@@ -8,15 +8,18 @@ use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\ReviewController;
 use App\Http\Controllers\BouquetController;
 use App\Http\Controllers\PesananController;
-use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TestimoniController;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\BouquetController as AdminBouquetController;
 use App\Http\Controllers\PapanBungaController;
 use App\Http\Controllers\Penjual\TokoController;
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
+use App\Http\Controllers\Admin\PapanBungaController as AdminPapanBungaController;
 use App\Http\Controllers\Admin\TokoController as AdminTokoController;
+use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Penjual\PesananController as PenjualPesananController;
 
 /*
@@ -32,7 +35,17 @@ use App\Http\Controllers\Penjual\PesananController as PenjualPesananController;
 
 Route::middleware('role:admin')->prefix('admin')->group(function () {
     Route::get('/home', [AdminHomeController::class, 'index'])->name('home');
+
     Route::resource('/store', AdminTokoController::class);
+
+    Route::get('/papanbunga', [AdminPapanBungaController::class, 'index'])->name('admin.papanbunga');
+    Route::post('/papanbunga', [AdminPapanBungaController::class, 'store'])->name('admin.papanbunga.store');
+    Route::get('/papanbunga/create', [AdminPapanBungaController::class, 'create'])->name('admin.papanbunga.create');
+    Route::patch('/papanbunga/{papanbunga}', [AdminPapanBungaController::class, 'update'])->name('admin.papanbunga.update');
+    Route::delete('/papanbunga/{papanbunga}', [AdminPapanBungaController::class, 'destroy'])->name('admin.papanbunga.destroy');
+    Route::get('/papanbunga/{papanbunga}/edit', [AdminPapanBungaController::class, 'edit'])->name('admin.papanbunga.edit');
+
+    Route::get('/bouquet', [AdminBouquetController::class, 'index'])->name('admin.bouquet');
 });
 
 Route::middleware('role:penjual')->prefix('penjual')->group(function () {
@@ -92,3 +105,4 @@ Route::patch('pesan/reject/{checkout}', [PenjualPesananController::class, 'rejec
 // Route::resource('pesanan', PenjualPesananController::class);
 // Route::post('order', [CheckoutController::class, 'order'])->name('order');
 Route::post('rating/{papanbunga}', [ReviewController::class, 'store'])->name('rating.store');
+Route::post('rating/{bouquet}', [ReviewController::class, 'storeBouquet'])->name('bouquet.store');

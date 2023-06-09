@@ -1,17 +1,15 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
 use App\Models\Toko;
+use App\Models\User;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Subdistrict;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Review;
-use App\Models\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Validator;
 
 class PapanBungaController extends Controller
 {
@@ -20,68 +18,14 @@ class PapanBungaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
-        $search = $request->search;
-        // $data = Product::where('category_id', 1)
-        //     ->where(function ($query) use ($search) {
-        //         $query->where('name', 'like', '%' . $search . '%')
-        //             ->orWhere('harga', 'like', '%' . $search . '%')
-        //             ->orWhere('kota', 'like', '%' . $search . '%')
-        //             ->orWhere('deskripsi', 'like', '%' . $search . '%');
-        //     });
         $data = Product::where('category_id', 1)
             ->whereHas('toko', function ($query) {
                 $query->where('status', 'aktif');
-            })
-            ->where(function ($query) use ($search) {
-                $query->where('name', 'like', '%' . $search . '%')
-                    ->orWhere('harga', 'like', '%' . $search . '%')
-                    ->orWhere('kota', 'like', '%' . $search . '%')
-                    ->orWhere('deskripsi', 'like', '%' . $search . '%');
             });
-        if (isset($_GET['sort']) && !empty($_GET['sort'])) {
-            if ($_GET['sort'] == "LTH") {
-                $data->where('category_id', '1')->orderBy('harga', 'ASC');
-            } elseif ($_GET['sort'] == "HTL") {
-                $data->where('category_id', '1')->orderBy('harga', 'DESC');
-            }
-        } elseif (isset($_GET['sorts']) && !empty($_GET['sorts'])) {
-            if ($_GET['sorts'] == "AJB") {
-                $data->where('kota', 'Ajibata');
-            } elseif ($_GET['sorts'] == "BLG") {
-                $data->where('kota', 'Balige');
-            } elseif ($_GET['sorts'] == "BNL") {
-                $data->where('kota', 'Bonatua Lunasi');
-            } elseif ($_GET['sorts'] == "BBR") {
-                $data->where('kota', 'Borbor');
-            } elseif ($_GET['sorts'] == "HBS") {
-                $data->where('kota', 'Habinsaran');
-            } elseif ($_GET['sorts'] == "LGB") {
-                $data->where('kota', 'Laguboti');
-            } elseif ($_GET['sorts'] == "LMJ") {
-                $data->where('kota', 'Lumban Julu');
-            } elseif ($_GET['sorts'] == "NS") {
-                $data->where('kota', 'Nasau');
-            } elseif ($_GET['sorts'] == "PRM") {
-                $data->where('kota', 'Parmaksian');
-            } elseif ($_GET['sorts'] == "PPM") {
-                $data->where('kota', 'Pintu Pohan Meranti');
-            } elseif ($_GET['sorts'] == "PRS") {
-                $data->where('kota', 'Porsea');
-            } elseif ($_GET['sorts'] == "SAN") {
-                $data->where('kota', 'Siantar Narumonda');
-            } elseif ($_GET['sorts'] == "SGM") {
-                $data->where('kota', 'Sigumpar');
-            } elseif ($_GET['sorts'] == "SLN") {
-                $data->where('kota', 'Silaen');
-            } elseif ($_GET['sorts'] == "TMP") {
-                $data->where('kota', 'Tampahan');
-            }
-        }
-        $pabung = $data->paginate(8);
-        $pabung->appends($request->all());
-        return view('pages.web.papanbunga.main', compact('pabung'));
+        $papanbunga = $data->paginate(8);
+        return view('pages.admin.papanbunga.main', compact('papanbunga'));
     }
 
     /**
@@ -94,7 +38,7 @@ class PapanBungaController extends Controller
         $toko = Toko::get();
         $category = Category::get();
         $subdistricts = Subdistrict::get();
-        return view('pages.web.papanbunga.create', ['papanbunga' => new Product, 'toko' => $toko, 'category' => $category, 'subdistricts' => $subdistricts]);
+        return view('pages.admin.papanbunga.create', ['papanbunga' => new Product, 'toko' => $toko, 'category' => $category, 'subdistricts' => $subdistricts]);
     }
 
     /**
@@ -105,8 +49,6 @@ class PapanBungaController extends Controller
      */
     public function store(Request $request)
     {
-        // $validator = Validator::make($request->all(), [
-        // ]);
         $request->validate([
             'name' => 'required',
             'category_id' => 'required',
@@ -139,7 +81,7 @@ class PapanBungaController extends Controller
         // dd($request);
 
         $pabung->save();
-        return redirect()->route('papanbunga.index')->with('success', 'Product Berhasil Ditambah');
+        return redirect()->route('admin.papanbunga')->with('success', 'Product Berhasil Ditambah');
     }
 
     /**
@@ -148,12 +90,9 @@ class PapanBungaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Product $papanbunga)
+    public function show($id)
     {
-        $toko = Toko::get();
-        $category = Category::get();
-        $review = Review::get();
-        return view('pages.web.papanbunga.detail', ['papanbunga' => $papanbunga, 'toko' => $toko, 'category' => $category, 'review' => $review]);
+        //
     }
 
     /**
@@ -167,7 +106,7 @@ class PapanBungaController extends Controller
         $toko = Toko::get();
         $category = Category::get();
         $subdistricts = Subdistrict::get();
-        return view('pages.web.papanbunga.create', ['papanbunga' => $papanbunga, 'toko' => $toko, 'category' => $category, 'subdistricts' => $subdistricts]);
+        return view('pages.admin.papanbunga.create', ['papanbunga' => $papanbunga, 'toko' => $toko, 'category' => $category, 'subdistricts' => $subdistricts]);
     }
 
     /**
@@ -179,7 +118,6 @@ class PapanBungaController extends Controller
      */
     public function update(Request $request, Product $papanbunga)
     {
-        // dd($bungapapan);
         $request->validate([
             'name' => 'required',
             'harga' => 'required',
@@ -206,7 +144,7 @@ class PapanBungaController extends Controller
         // dd($papanbunga);
         $papanbunga->save();
 
-        return redirect()->route('papanbunga.index')->with('info', 'Product Berhasil Diubah');
+        return redirect()->route('admin.papanbunga')->with('info', 'Product Berhasil Diubah');
     }
 
     /**
@@ -217,10 +155,9 @@ class PapanBungaController extends Controller
      */
     public function destroy(Product $papanbunga)
     {
-        // $pabung = Product::find($id);
         $file_path = public_path('bungapapan/' . $papanbunga->gambar);
         unlink($file_path);
         $papanbunga->delete();
-        return redirect()->route('papanbunga.index')->with('success', 'Berhasil Di hapus');
+        return redirect()->route('admin.papanbunga')->with('success', 'Berhasil Di hapus');
     }
 }

@@ -19,7 +19,7 @@
 >>> TABLE OF CONTENTS:
 ===============================================================
 # Google fonts
-# Gutter Code 
+# Gutter Code
 # Normalize
 # Typography
 # Custom Class
@@ -38,7 +38,7 @@
 # Galleries
 # Unit test
 # ScrollUp
-# Owl Carousel 
+# Owl Carousel
 # Slick Slider
 # Background Overlay
 # Scrollbar
@@ -59,8 +59,19 @@ font-family: 'Montserrat', sans-serif;
 font-family: 'Poppins', sans-serif;
 */
 /* ====================================================
-    Gutter Code 
+    Gutter Code
 ==================================================== */
+/* #sorting select {
+    max-height: 2px;
+    overflow-y: auto;
+} */
+
+#sorts {
+    overflow: auto;
+    height: 120px;
+  }
+
+
 .container,
 .container-fluid {
   padding-right: 15px;
@@ -1316,7 +1327,7 @@ ul {
     color: var(--white); }
 
 /* ----------------------------------------------------
-    Owl Carousel 
+    Owl Carousel
 ---------------------------------------------------- */
 .owl-dots {
   display: block;
@@ -7592,7 +7603,7 @@ ul.wp-block-latest-posts.is-grid.alignwide {
 # Common CSS
 # Section title
 # Category Area
-# Feature Area 
+# Feature Area
 # Countdown Area
 # Blog Area
 # Blog Details
@@ -7621,12 +7632,12 @@ ul.wp-block-latest-posts.is-grid.alignwide {
 # Service Area
 # Call To Action
 # Elements Area
-# Service Form 
+# Service Form
 # Get A Quote Form
 # Car Dealer Form
 # Video Area
 # Brand Logo
-# Progress Bar 
+# Progress Bar
 # Our Journey Area
 # Google Map Locations Area
 # Team Details
@@ -7979,7 +7990,7 @@ ul.wp-block-latest-posts.is-grid.alignwide {
   color: var(--ltn__secondary-color); }
 
 /* ----------------------------------------------------
-    Feature Area 
+    Feature Area
 ---------------------------------------------------- */
 .ltn__feature-item {
   padding: 40px 25px 10px;
@@ -11280,7 +11291,7 @@ input.cart-plus-minus-box {
   margin: 0; }
 
 /* ----------------------------------------------------
-    Service Form 
+    Service Form
 ---------------------------------------------------- */
 .ltn__service-form-box {
   margin: 0;
@@ -11609,7 +11620,7 @@ input.cart-plus-minus-box {
       transform: scale(1.1); }
 
 /* ----------------------------------------------------
-    Progress Bar 
+    Progress Bar
 ---------------------------------------------------- */
 .ltn__progress-bar-wrap {
   margin-bottom: 50px; }

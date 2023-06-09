@@ -1,4 +1,4 @@
-<x-admin-layout title="Toko">
+<x-admin-layout title="Papan Bunga">
     <div class="main-content">
         <div class="page-content">
             <div class="container-fluid">
@@ -6,11 +6,11 @@
                 <div class="row">
                     <div class="col-12">
                         <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-                            <h4 class="mb-sm-0">Customers</h4>
+                            <h4 class="mb-sm-0">Papan Bunga</h4>
                             <div class="page-title-right">
                                 <ol class="breadcrumb m-0">
-                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Ecommerce</a></li>
-                                    <li class="breadcrumb-item active">Customers</li>
+                                    <li class="breadcrumb-item"><a href="javascript: void(0);">Product</a></li>
+                                    <li class="breadcrumb-item active">Papan Bunga</li>
                                 </ol>
                             </div>
                         </div>
@@ -20,7 +20,7 @@
                     <div class="col-lg-12">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title mb-0">Daftar Toko</h4>
+                                <h4 class="card-title mb-0">Papan Bunga</h4>
                             </div><!-- end card header -->
                             <div class="card-body">
                                 <div id="customerList">
@@ -43,10 +43,14 @@
                                         @endif
                                         <div class="col-sm-auto">
                                             <div>
-                                                <button type="button" class="btn btn-success add-btn"
+                                                <a href="{{ route('admin.papanbunga.create') }}"
+                                                    class="btn btn-success add-btn">
+                                                    Tambah Product
+                                                </a>
+                                                {{-- <button type="button" class="btn btn-success add-btn"
                                                     data-bs-toggle="modal" id="create-btn"
                                                     data-bs-target="#showModal"><i
-                                                        class="ri-add-line align-bottom me-1"></i> Tambah Toko</button>
+                                                        class="ri-add-line align-bottom me-1"></i> Tambah Toko</button> --}}
                                             </div>
                                         </div>
                                         <div class="col-sm">
@@ -63,43 +67,55 @@
                                         <table class="table align-middle table-nowrap" id="customerTable">
                                             <thead class="table-light">
                                                 <tr>
-                                                    <th class="sort" data-sort="customer_name">Nama Toko</th>
-                                                    <th class="sort" data-sort="email">Alamat</th>
-                                                    <th class="sort" data-sort="status">Status</th>
+                                                    <th class="sort" data-sort="customer_name">Nama Product</th>
+                                                    <th class="sort" data-sort="email">Harga</th>
+                                                    <th class="sort" data-sort="status">Kota</th>
+                                                    <th class="sort" data-sort="status">Deskripsi</th>
                                                     <th class="sort" data-sort="action">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody class="list form-check-all">
-                                                @foreach ($toko as $item)
+                                                @foreach ($papanbunga as $item)
                                                     <tr>
-                                                        <td class="customer_name">{{ $item->nama_toko }}</td>
-                                                        <td class="email">{{ $item->alamat }}</td>
-                                                        @if ($item->status == 'Aktif')
-                                                            <td class="status"><span
-                                                                    class="badge badge-soft-success text-uppercase">{{ $item->status }}</span>
-                                                            @else
-                                                            <td class="status"><span
-                                                                    class="badge badge-soft-danger text-uppercase">{{ $item->status }}</span>
-                                                        @endif
-                                                        </td>
+                                                        <td class="customer_name">{{ $item->name }}</td>
+                                                        <td class="email">{{ $item->harga }}</td>
+                                                        <td class="email">{{ $item->kota }}</td>
+                                                        <td class="email">{{ $item->deskripsi }}</td>
                                                         <td>
                                                             <div class="d-flex gap-2">
                                                                 <div class="edit">
-                                                                    <button class="btn btn-sm btn-success edit-item-btn"
+                                                                    <a href="{{ route('admin.papanbunga.edit', $item->id) }}"
+                                                                        class="btn btn-sm btn-success edit-item-btn">
+                                                                        Edit
+                                                                    </a>
+                                                                    {{-- <button class="btn btn-sm btn-success edit-item-btn"
                                                                         data-bs-toggle="modal"
-                                                                        data-bs-target="#showModal{{ $item->id }}">Edit</button>
+                                                                        data-bs-target="#showModal{{ $item->id }}">Edit</button> --}}
                                                                 </div>
                                                                 <div class="remove">
-                                                                    <button
+                                                                    {{-- <a href="{{ route('admin.papanbunga.destroy', $item->id) }}"
+                                                                        class="btn btn-sm btn-danger remove-item-btn">
+                                                                        Hapus
+                                                                    </a> --}}
+                                                                    <form
+                                                                        onsubmit="return confirm('Apakah Anda Yakin ?');"
+                                                                        action="{{ route('admin.papanbunga.destroy', $item->id) }}"
+                                                                        method="POST">
+                                                                        @csrf
+                                                                        @method('delete')
+                                                                        <button type="submit"
+                                                                            class="btn btn-sm btn-danger remove-item-btn">Hapus</button>
+                                                                    </form>
+                                                                    {{-- <button
                                                                         class="btn btn-sm btn-danger remove-item-btn"
                                                                         data-bs-toggle="modal"
-                                                                        data-bs-target="#deleteRecordModal{{ $item->id }}">Remove</button>
+                                                                        data-bs-target="#deleteRecordModal{{ $item->id }}">Remove</button> --}}
                                                                 </div>
                                                             </div>
                                                         </td>
                                                     </tr>
                                                     <!-- end row -->
-                                                    <div class="modal fade" id="showModal{{ $item->id }}"
+                                                    {{-- <div class="modal fade" id="showModal{{ $item->id }}"
                                                         tabindex="-1" aria-labelledby="exampleModalLabel"
                                                         aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered">
@@ -118,12 +134,12 @@
                                                                     <div class="modal-body">
                                                                         <div class="mb-3">
                                                                             <label for="customername-field"
-                                                                                class="form-label">Nama Toko</label>
+                                                                                class="form-label">Nama Product</label>
                                                                             <input type="text"
                                                                                 id="customername-field"
                                                                                 class="form-control"
                                                                                 placeholder="Nama Toko" name="nama_toko"
-                                                                                value="{{ $item->nama_toko }}" />
+                                                                                value="{{ $item->name }}" />
                                                                         </div>
                                                                         <div class="mb-3">
                                                                             <label for="email-field"
@@ -132,6 +148,22 @@
                                                                                 id="email-field" class="form-control"
                                                                                 placeholder="Alamat"
                                                                                 value="{{ $item->alamat }}" />
+                                                                        </div>
+                                                                        <div>
+                                                                            <label for="categroy"
+                                                                                class="form-label">Kategori</label>
+                                                                            <select
+                                                                                class="form-control @error('category_id') is-invalid @enderror mt-3"
+                                                                                name="category_id">
+                                                                                <option selected disabled>Pilih Kategori
+                                                                                    Produk</option>
+                                                                                @foreach ($category as $item)
+                                                                                    <option
+                                                                                        value="{{ $item->id }}"
+                                                                                        {{ $papanbunga->category_id == $item->id ? 'selected' : '' }}>
+                                                                                        {{ $item->name }}</option>
+                                                                                @endforeach
+                                                                            </select>
                                                                         </div>
                                                                         <div>
                                                                             <label for="status-field"
@@ -163,9 +195,9 @@
                                                                 </form>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div> --}}
 
-                                                    <div class="modal fade zoomIn"
+                                                    {{-- <div class="modal fade zoomIn"
                                                         id="deleteRecordModal{{ $item->id }}" tabindex="-1"
                                                         aria-hidden="true">
                                                         <div class="modal-dialog modal-dialog-centered">
@@ -209,7 +241,7 @@
                                                                 </form>
                                                             </div>
                                                         </div>
-                                                    </div>
+                                                    </div> --}}
                                                 @endforeach
                                             </tbody>
                                         </table>
@@ -247,8 +279,7 @@
             <!-- End Page-content -->
         </div>
 
-        <div class="modal fade" id="showModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-            aria-hidden="true">
+        <div class="modal fade" id="showModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header bg-light p-3">
@@ -256,30 +287,40 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"
                             id="close-modal"></button>
                     </div>
-                    <form action="{{ route('store.store') }}" method="POST">
-                        @csrf
+                    <form>
                         <!-- Modal -->
                         <div class="modal-body">
+                            <div class="mb-3" id="modal-id" style="display: none;">
+                                <label for="id-field" class="form-label">ID</label>
+                                <input type="text" id="id-field" class="form-control" placeholder="ID"
+                                    readonly />
+                            </div>
                             <div class="mb-3">
-                                <label for="customername-field" class="form-label">Nama Toko</label>
-                                <input type="text" name="nama_toko" id="customername-field" class="form-control"
+                                <label for="customername-field" class="form-label">Customer Name</label>
+                                <input type="text" id="customername-field" class="form-control"
                                     placeholder="Enter Name" required />
                             </div>
                             <div class="mb-3">
-                                <label for="email-field" class="form-label">Alamat</label>
-                                <input type="text" name="alamat" id="email-field" class="form-control"
+                                <label for="email-field" class="form-label">Email</label>
+                                <input type="email" id="email-field" class="form-control"
                                     placeholder="Enter Email" required />
                             </div>
                             <div class="mb-3">
+                                <label for="phone-field" class="form-label">Phone</label>
+                                <input type="text" id="phone-field" class="form-control"
+                                    placeholder="Enter Phone no." required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="date-field" class="form-label">Joining Date</label>
+                                <input type="text" id="date-field" class="form-control" placeholder="Select Date"
+                                    required />
+                            </div>
+                            <div>
                                 <label for="status-field" class="form-label">Status</label>
-                                <select class="form-control" name="status" data-trigger name="status-field"
-                                    id="status-field">
+                                <select class="form-control" data-trigger name="status-field" id="status-field">
                                     <option value="">Status</option>
-                                    <option value="Aktif" {{ $item->status == 'Aktif' ? 'selected' : '' }}>
-                                        Aktif</option>
-                                    <option value="Tidak Aktif"
-                                        {{ $item->status == 'Tidak Aktif' ? 'selected' : '' }}>
-                                        Non Aktif</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Block">Block</option>
                                 </select>
                             </div>
                         </div>
@@ -294,4 +335,5 @@
                 </div>
             </div>
         </div>
+    </div>
 </x-admin-layout>

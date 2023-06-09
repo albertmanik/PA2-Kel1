@@ -29,32 +29,32 @@
     })
 </script> --}}
 <script>
-    $(document).ready(function(e){
-        $("#sort").on('change', function(){
+    $(document).ready(function(e) {
+        $("#sort").on('change', function() {
             this.form.submit();
         });
     });
-    $(document).ready(function(e){
-        $("#sorts").on('change', function(){
+    $(document).ready(function(e) {
+        $("#sorts").on('change', function() {
             this.form.submit();
         });
     });
 </script>
 <script>
-    @if(session()->has('success'))
-    toastr.options = {
-        "progressBar": true,
-        "timeOut": 2000,
-        "closeButton": true
-    }
-    toastr.success("{{ session()->get('success') }}");
+    @if (session()->has('success'))
+        toastr.options = {
+            "progressBar": true,
+            "timeOut": 2000,
+            "closeButton": true
+        }
+        toastr.success("{{ session()->get('success') }}");
     @endif
-    @if(session()->has('info'))
-    toastr.options = {
-        "progressBar": true,
-        "timeOut": 2000,
-        "closeButton": true
-    }
-    toastr.info("{{ session()->get('info') }}");
+    @if (session()->has('info'))
+        toastr.options = {
+            "progressBar": true,
+            "timeOut": 2000,
+            "closeButton": true
+        }
+        toastr.info("{{ session()->get('info') }}");
     @endif
 </script>
