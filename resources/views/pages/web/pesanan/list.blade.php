@@ -52,8 +52,8 @@
                                                             style="width: 8rem">
                                                     </td>
                                                     <td>
-                                                        @if ($item->status == 'pending')
-                                                            <span>Pending</span>
+                                                        @if ($item->status == 'menunggu')
+                                                            <span>Menunggu</span>
                                                         @elseif ($item->status == 'terima')
                                                             <span>Diterima</span>
                                                         @elseif ($item->status == 'tolak')
@@ -61,13 +61,20 @@
                                                         @endif
                                                     </td>
                                                     <td>
-                                                        @if ($item->status == 'pending')
+                                                        @if ($item->status == 'menunggu')
                                                             {{-- <a href="javascript:;"
                                                                 onclick="handle_confirm('Yakin?','Ya','Tidak','PATCH','{{ route('pesan.accept', $item->id) }}');">Terima</a> --}}
                                                             <a href="{{ route('pesan.accept', $item->id) }}"
                                                                 onclick="event.preventDefault(); document.getElementById('accept-form-{{ $item->id }}').submit();">
                                                                 Terima
                                                             </a>
+
+                                                            <form id="accept-form-{{ $item->id }}"
+                                                                action="{{ route('pesan.accept', $item->id) }}"
+                                                                method="POST" style="display: none;">
+                                                                @csrf
+                                                                @method('PATCH')
+                                                            </form>
 
                                                             {{-- <form id="accept-form-{{ $item->id }}"
                                                                 action="{{ route('pesan.accept', $item->id) }}"

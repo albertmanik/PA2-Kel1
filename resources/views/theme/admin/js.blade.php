@@ -29,3 +29,5 @@
 
 <!-- App js -->
 <script src="{{ asset('assets/admin/js/app.js') }}"></script>
+
+@section('custom_js')

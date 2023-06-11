@@ -13,7 +13,7 @@ class CreateCheckoutsTable extends Migration
      */
     public function up()
     {
-        Schema::create('checkouts', function (Blueprint $table) {
+        Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
             $table->string('order_number');
@@ -23,7 +23,7 @@ class CreateCheckoutsTable extends Migration
             $table->string('ucapan');
             $table->string('image');
             $table->double('total');
-            $table->enum('status', ['pending', 'terima', 'tolak'])->default('pending');
+            $table->enum('status', ['menunggu', 'terima', 'tolak'])->default('menunggu');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
         });

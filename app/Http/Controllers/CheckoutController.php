@@ -93,8 +93,8 @@ class CheckoutController extends Controller
             }
             $order_detail = new OrderDetail();
             $order_detail->order_id = $checkout->id;
-            $order_detail->category_id = $product->id;
-            $order_detail->toko_id = $product->id;
+            $order_detail->category_id = $product->category_id;
+            $order_detail->toko_id = $product->toko_id;
             $order_detail->save();
         }
 

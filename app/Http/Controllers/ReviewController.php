@@ -42,7 +42,7 @@ class ReviewController extends Controller
      * @param  \App\Http\Requests\StoreReviewRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $papanbunga)
+    public function storePapanbunga(Request $request, $papanbunga)
     {
         $review = new Review();
         $review->user_id = Auth::user()->id;

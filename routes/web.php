@@ -109,5 +109,5 @@ Route::patch('pesan/accept/{checkout}', [PenjualPesananController::class, 'accep
 Route::patch('pesan/reject/{checkout}', [PenjualPesananController::class, 'reject'])->name('pesan.reject');
 // Route::resource('pesanan', PenjualPesananController::class);
 // Route::post('order', [CheckoutController::class, 'order'])->name('order');
-Route::post('rating/{papanbunga}', [ReviewController::class, 'store'])->name('rating.store');
-Route::post('rating/{bouquet}', [ReviewController::class, 'storeBouquet'])->name('bouquet.store');
+Route::post('rating/{papanbunga}', [ReviewController::class, 'storePapanbunga'])->name('papanbunga.rating');
+Route::post('rating/{bouquet}', [ReviewController::class, 'storeBouquet'])->name('bouquet.rating');

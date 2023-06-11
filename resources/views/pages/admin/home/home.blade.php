@@ -301,6 +301,8 @@
                                 <!-- end col -->
                             </div>
 
+                            <div id="chartContainer"></div>
+
                             <div class="row">
                                 <div class="col-xl-6">
                                     <div class="card">
@@ -2031,5 +2033,46 @@
             </div>
         </div>
     </div>
+
+    @yield('custom_js')
+    {{-- HighChart --}}
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script>
+        Highcharts.chart('chartContainer', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Data Orders'
+            },
+            xAxis: {
+                categories: [
+                    'Orders'
+                ]
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Orders'
+                }
+            },
+            series: [{
+                name: 'Menunggu',
+                data: [{{ $menunggu }}],
+                color: 'orange',
+            }, {
+                name: 'Terima',
+                data: [{{ $terima }}],
+                color: 'green',
+            }, {
+                name: 'Tolak',
+                data: [{{ $tolak }}],
+                color: 'red',
+            }]
+        });
+    </script>
+
 
 </x-admin-layout>

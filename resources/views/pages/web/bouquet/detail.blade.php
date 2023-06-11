@@ -252,7 +252,7 @@
                                         <div class="col-lg-5">
                                             <!-- comment-reply -->
                                             <div class="ltn__comment-reply-area ltn__form-box mb-60">
-                                                <form action="{{ route('rating.store', $bouquet->id) }}"
+                                                <form action="{{ route('bouquet.rating', $bouquet->id) }}"
                                                     method="post">
                                                     @csrf
                                                     <h4 class="title-2">Add a Review</h4>

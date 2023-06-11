@@ -156,7 +156,8 @@
                                                         <ul>
                                                             <li>
                                                                 <div class="product-price">
-                                                                    <span>Rp. {{ number_format($item->harga, 2, ',', '.') }}</span>
+                                                                    <span>Rp.
+                                                                        {{ number_format($item->harga, 2, ',', '.') }}</span>
                                                                     {{-- <del>$65.00</del> --}}
                                                                 </div>
                                                             </li>
@@ -217,10 +218,8 @@
                                                                 </div>
                                                             </li>
                                                             <li>
-                                                                <a href="#"
-                                                                    class="theme-btn-1 btn btn-effect-1 d-add-to-cart"
-                                                                    title="Add to Cart" data-bs-toggle="modal"
-                                                                    data-bs-target="#add_to_cart_modal">
+                                                                <a href="{{ route('cart.store', $item->id) }}"
+                                                                    class="theme-btn-1 btn btn-effect-1 d-add-to-cart">
                                                                     <span>ADD TO CART</span>
                                                                 </a>
                                                             </li>
@@ -303,7 +302,8 @@
                                                         <ul>
                                                             <li>
                                                                 <div class="product-price">
-                                                                    <span>Rp. {{ number_format($item->harga, 2, ',', '.') }}</span>
+                                                                    <span>Rp.
+                                                                        {{ number_format($item->harga, 2, ',', '.') }}</span>
                                                                     {{-- <del>$65.00</del> --}}
                                                                 </div>
                                                             </li>
@@ -364,10 +364,8 @@
                                                                 </div>
                                                             </li>
                                                             <li>
-                                                                <a href="#"
-                                                                    class="theme-btn-1 btn btn-effect-1 d-add-to-cart"
-                                                                    title="Add to Cart" data-bs-toggle="modal"
-                                                                    data-bs-target="#add_to_cart_modal">
+                                                                <a href="{{ route('cart.store', $item->id) }}"
+                                                                    class="theme-btn-1 btn btn-effect-1 d-add-to-cart">
                                                                     <span>ADD TO CART</span>
                                                                 </a>
                                                             </li>
@@ -490,11 +488,11 @@
                                                                     </a>
                                                                 </li>
                                                                 <li class="add-to-cart">
-                                                                    <a href="#" title="Add to Cart"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#add_to_cart_modal">
+                                                                    <a href="{{ route('cart.store', $item->id) }}"
+                                                                        title="Add to Cart">
                                                                         <span class="cart-text d-none d-xl-block">Add
-                                                                            to Cart</span>
+                                                                            to
+                                                                            Cart</span>
                                                                         <span class="d-block d-xl-none"><i
                                                                                 class="icon-handbag"></i></span>
                                                                     </a>
@@ -514,7 +512,8 @@
                                                                 href="product-details.html">{{ $item->kota }}
                                                                 {{ $item->name }}</a></h2>
                                                         <div class="product-price">
-                                                            <span>Rp. {{ number_format($item->harga, 2, ',', '.') }}</span>
+                                                            <span>Rp.
+                                                                {{ number_format($item->harga, 2, ',', '.') }}</span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -541,11 +540,11 @@
                                                                     </a>
                                                                 </li>
                                                                 <li class="add-to-cart">
-                                                                    <a href="#" title="Add to Cart"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#add_to_cart_modal">
+                                                                    <a href="{{ route('cart.store', $item->id) }}"
+                                                                        title="Add to Cart">
                                                                         <span class="cart-text d-none d-xl-block">Add
-                                                                            to Cart</span>
+                                                                            to
+                                                                            Cart</span>
                                                                         <span class="d-block d-xl-none"><i
                                                                                 class="icon-handbag"></i></span>
                                                                     </a>
@@ -565,7 +564,8 @@
                                                                 href="product-details.html">{{ $item->kota }}
                                                                 {{ $item->name }}</a></h2>
                                                         <div class="product-price">
-                                                            <span>Rp. {{ number_format($item->harga, 2, ',', '.') }}</span>
+                                                            <span>Rp.
+                                                                {{ number_format($item->harga, 2, ',', '.') }}</span>
                                                         </div>
                                                     </div>
                                                 </div>

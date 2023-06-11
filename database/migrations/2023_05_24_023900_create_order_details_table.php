@@ -19,7 +19,7 @@ class CreateOrderDetailsTable extends Migration
             $table->foreignId('category_id');
             $table->foreignId('toko_id');
             $table->timestamps();
-            $table->foreign('order_id')->references('id')->on('checkouts')->cascadeOnDelete()->cascadeOnUpdate();
+            $table->foreign('order_id')->references('id')->on('orders')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreign('category_id')->references('id')->on('categories')->cascadeOnDelete()->cascadeOnUpdate();
             $table->foreign('toko_id')->references('id')->on('tokos')->cascadeOnDelete()->cascadeOnUpdate();
         });

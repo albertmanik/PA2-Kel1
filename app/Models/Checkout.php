@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Checkout extends Model
 {
     use HasFactory;
-    protected $table = 'checkouts';
+    protected $table = 'orders';
 
     public function user()
     {
