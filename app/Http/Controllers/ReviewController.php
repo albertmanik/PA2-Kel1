@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Models\Review;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -62,6 +63,7 @@ class ReviewController extends Controller
         $review->product_id = $bouquet;
         $review->review = $request->review;
         $review->rating = $request->rating;
+        $review->created_at = Carbon::now(); // Menggunakan fungsi now() untuk mendapatkan waktu saat ini
         $review->save();
         $total_rating = Review::where('product_id', $bouquet)->avg('rating');
         Product::where('id', $bouquet)->update(['total_rating' => $total_rating]);

@@ -144,8 +144,9 @@ class BouquetController extends Controller
     {
         $toko = Toko::get();
         $category = Category::get();
-        $review = Review::get();
-        return view('pages.web.bouquet.detail', ['bouquet' => $bouquet, 'toko' => $toko, 'category' => $category, 'review' => $review]);
+        $review = Review::paginate(7);
+        $reviewCount = Review::where('product_id', $bouquet->id)->count();
+        return view('pages.web.bouquet.detail', ['bouquet' => $bouquet, 'toko' => $toko, 'category' => $category, 'review' => $review, 'reviewCount' => $reviewCount]);
     }
 
     /**

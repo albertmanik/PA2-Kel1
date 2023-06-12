@@ -47,9 +47,13 @@
                                                     <span>Rp. {{ number_format($bouquet->harga, 2, ',', '.') }}</span>
                                                 </div>
                                             </li>
+                                            @php
+                                                $rating = \App\Models\Review::where('product_id', $bouquet->id)->avg('rating');
+                                                // $reviewCount = \App\Models\Review::where('product_id', $bouquet->id)->count();
+                                            @endphp
                                             <li>
                                                 <div class="product-ratting">
-                                                    <ul>
+                                                    {{-- <ul>
                                                         <li><a href="#"><i class="icon-star"></i></a></li>
                                                         <li><a href="#"><i class="icon-star"></i></a></li>
                                                         <li><a href="#"><i class="icon-star"></i></a></li>
@@ -58,7 +62,82 @@
                                                         <li class="review-total"> <a href="#"> ( 95 Reviews
                                                                 )</a>
                                                         </li>
-                                                    </ul>
+                                                    </ul> --}}
+                                                    @if ($rating >= 0 && $rating <= 1)
+                                                        <label>
+                                                            <span class="icon-star"
+                                                                style="color: rgb(221, 221, 79) !important;">★</span>
+                                                            <span class="icon"
+                                                                style="font-size: 17px">&nbsp;&nbsp;{{ number_format($rating, 1, ',', '.') }}</span>
+                                                            <span class="review-total">({{ $reviewCount }}
+                                                                Review)</span>
+                                                        </label>
+                                                    @elseif($rating < 2)
+                                                        <label>
+                                                            <span class="icon"
+                                                                style="color: rgb(221, 221, 79) !important;">★</span>
+                                                            <span class="icon"
+                                                                style="font-size: 17px">&nbsp;&nbsp;{{ number_format($rating, 1, ',', '.') }}</span>
+                                                            <span class="review-total">({{ $reviewCount }}
+                                                                Review)</span>
+                                                        </label>
+                                                    @elseif($rating < 3)
+                                                        <label>
+                                                            <span class="icon"
+                                                                style="color: rgb(221, 221, 79) !important;">★</span>
+                                                            <span class="icon"
+                                                                style="color: rgb(221, 221, 79) !important;">★</span>
+                                                            <span class="icon"
+                                                                style="font-size: 17px">&nbsp;&nbsp;{{ number_format($rating, 1, ',', '.') }}</span>
+                                                            <span class="review-total">({{ $reviewCount }}
+                                                                Review)</span>
+                                                        </label>
+                                                    @elseif($rating < 4)
+                                                        <label>
+                                                            <span class="icon"
+                                                                style="color: rgb(221, 221, 79) !important;">★</span>
+                                                            <span class="icon"
+                                                                style="color: rgb(221, 221, 79) !important;">★</span>
+                                                            <span class="icon"
+                                                                style="color: rgb(221, 221, 79) !important;">★</span>
+                                                            <span class="icon"
+                                                                style="font-size: 17px">&nbsp;&nbsp;{{ number_format($rating, 1, ',', '.') }}</span>
+                                                            <span class="review-total">({{ $reviewCount }}
+                                                                Review)</span>
+                                                        </label>
+                                                    @elseif($rating < 5)
+                                                        <label>
+                                                            <span class="icon"
+                                                                style="color: rgb(221, 221, 79) !important;">★</span>
+                                                            <span class="icon"
+                                                                style="color: rgb(221, 221, 79) !important;">★</span>
+                                                            <span class="icon"
+                                                                style="color: rgb(221, 221, 79) !important;">★</span>
+                                                            <span class="icon"
+                                                                style="color: rgb(221, 221, 79) !important;">★</span>
+                                                            <span class="icon"
+                                                                style="font-size: 17px">&nbsp;&nbsp;{{ number_format($rating, 1, ',', '.') }}</span>
+                                                            <span class="review-total">({{ $reviewCount }}
+                                                                Review)</span>
+                                                        </label>
+                                                    @elseif($rating >= 5)
+                                                        <label>
+                                                            <span class="icon"
+                                                                style="color: rgb(221, 221, 79) !important;">★</span>
+                                                            <span class="icon"
+                                                                style="color: rgb(221, 221, 79) !important;">★</span>
+                                                            <span class="icon"
+                                                                style="color: rgb(221, 221, 79) !important;">★</span>
+                                                            <span class="icon"
+                                                                style="color: rgb(221, 221, 79) !important;">★</span>
+                                                            <span class="icon"
+                                                                style="color: rgb(221, 221, 79) !important;">★</span>
+                                                            <span class="icon"
+                                                                style="font-size: 17px">&nbsp;&nbsp;{{ number_format($rating, 1, ',', '.') }}</span>
+                                                            <span class="review-total">({{ $reviewCount }}
+                                                                Review)</span>
+                                                        </label>
+                                                    @endif
                                                 </div>
                                             </li>
                                         </ul>
@@ -151,14 +230,91 @@
                                     <div class="customer-reviews-head text-center">
                                         <h4 class="title-2">Customer Reviews</h4>
                                         <div class="product-ratting">
-                                            <ul>
-                                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                <li><a href="#"><i class="fas fa-star"></i></a></li>
-                                                <li><a href="#"><i class="fas fa-star-half-alt"></i></a></li>
-                                                <li><a href="#"><i class="far fa-star"></i></a></li>
-                                                <li class="review-total"> <a href="#"> ( 95 Reviews )</a></li>
-                                            </ul>
+                                            {{-- <ul>
+                                                <li><a href="#"><i class="icon-star"></i></a></li>
+                                                <li><a href="#"><i class="icon-star"></i></a></li>
+                                                <li><a href="#"><i class="icon-star"></i></a></li>
+                                                <li><a href="#"><i class="icon-star"></i></a></li>
+                                                <li><a href="#"><i class="icon-star"></i></a></li>
+                                                <li class="review-total"> <a href="#"> ( 95 Reviews
+                                                        )</a>
+                                                </li>
+                                            </ul> --}}
+                                            @if ($rating >= 0 && $rating <= 1)
+                                                <label>
+                                                    <span class="icon-star"
+                                                        style="color: rgb(221, 221, 79) !important;">★</span>
+                                                    <span class="icon"
+                                                        style="font-size: 17px">&nbsp;&nbsp;{{ number_format($rating, 1, ',', '.') }}</span>
+                                                    <span class="review-total">({{ $reviewCount }}
+                                                        Review)</span>
+                                                </label>
+                                            @elseif($rating < 2)
+                                                <label>
+                                                    <span class="icon"
+                                                        style="color: rgb(221, 221, 79) !important;">★</span>
+                                                    <span class="icon"
+                                                        style="font-size: 17px">&nbsp;&nbsp;{{ number_format($rating, 1, ',', '.') }}</span>
+                                                    <span class="review-total">({{ $reviewCount }}
+                                                        Review)</span>
+                                                </label>
+                                            @elseif($rating < 3)
+                                                <label>
+                                                    <span class="icon"
+                                                        style="color: rgb(221, 221, 79) !important;">★</span>
+                                                    <span class="icon"
+                                                        style="color: rgb(221, 221, 79) !important;">★</span>
+                                                    <span class="icon"
+                                                        style="font-size: 17px">&nbsp;&nbsp;{{ number_format($rating, 1, ',', '.') }}</span>
+                                                    <span class="review-total">({{ $reviewCount }}
+                                                        Review)</span>
+                                                </label>
+                                            @elseif($rating < 4)
+                                                <label>
+                                                    <span class="icon"
+                                                        style="color: rgb(221, 221, 79) !important;">★</span>
+                                                    <span class="icon"
+                                                        style="color: rgb(221, 221, 79) !important;">★</span>
+                                                    <span class="icon"
+                                                        style="color: rgb(221, 221, 79) !important;">★</span>
+                                                    <span class="icon"
+                                                        style="font-size: 17px">&nbsp;&nbsp;{{ number_format($rating, 1, ',', '.') }}</span>
+                                                    <span class="review-total">({{ $reviewCount }}
+                                                        Review)</span>
+                                                </label>
+                                            @elseif($rating < 5)
+                                                <label>
+                                                    <span class="icon"
+                                                        style="color: rgb(221, 221, 79) !important;">★</span>
+                                                    <span class="icon"
+                                                        style="color: rgb(221, 221, 79) !important;">★</span>
+                                                    <span class="icon"
+                                                        style="color: rgb(221, 221, 79) !important;">★</span>
+                                                    <span class="icon"
+                                                        style="color: rgb(221, 221, 79) !important;">★</span>
+                                                    <span class="icon"
+                                                        style="font-size: 17px">&nbsp;&nbsp;{{ number_format($rating, 1, ',', '.') }}</span>
+                                                    <span class="review-total">({{ $reviewCount }}
+                                                        Review)</span>
+                                                </label>
+                                            @elseif($rating >= 5)
+                                                <label>
+                                                    <span class="icon"
+                                                        style="color: rgb(221, 221, 79) !important;">★</span>
+                                                    <span class="icon"
+                                                        style="color: rgb(221, 221, 79) !important;">★</span>
+                                                    <span class="icon"
+                                                        style="color: rgb(221, 221, 79) !important;">★</span>
+                                                    <span class="icon"
+                                                        style="color: rgb(221, 221, 79) !important;">★</span>
+                                                    <span class="icon"
+                                                        style="color: rgb(221, 221, 79) !important;">★</span>
+                                                    <span class="icon"
+                                                        style="font-size: 17px">&nbsp;&nbsp;{{ number_format($rating, 1, ',', '.') }}</span>
+                                                    <span class="review-total">({{ $reviewCount }}
+                                                        Review)</span>
+                                                </label>
+                                            @endif
                                         </div>
                                     </div>
                                     <hr>
@@ -237,15 +393,21 @@
                                                                             </div>
                                                                             <p>{{ $item->review }}</p>
                                                                             <span
-                                                                                class="ltn__comment-reply-btn">September
-                                                                                3,
-                                                                                2020</span>
+                                                                                class="ltn__comment-reply-btn">{{ $item->created_at->format('d/m/Y H:i:s') }}</span>
                                                                         </div>
                                                                     </div>
                                                                 </li>
                                                             @endif
                                                         @endforeach
                                                     </ul>
+                                                    {{-- <div class="showing-product-number text-right">
+                                                        <span>Showing {{ $review->firstItem() }} to
+                                                            {{ $review->lastItem() }} of
+                                                            {{ $review->total() }} results</span>
+                                                    </div> --}}
+                                                    <div class="ltn__pagination-area text-center">
+                                                        {{ $review->links() }}
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

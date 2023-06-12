@@ -234,10 +234,73 @@
                                                         </ul>
                                                     </div>
                                                     <div class="ltn__social-media mb-30">
-                                                        <ul>
+                                                        {{-- <ul>
                                                             <li class="review-total"> <a href="#"> ( 95 Reviews
                                                                     )</a></li>
-                                                        </ul>
+                                                        </ul> --}}
+                                                        @if ($item->rating >= 0 && $item->rating <= 1)
+                                                            <label>
+                                                                <span class="icon"
+                                                                    style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                <span class="icon"
+                                                                    style="font-size: 17px">&nbsp;&nbsp;{{ number_format($item->rating, 1, ',', '.') }}</span>
+                                                            </label>
+                                                        @elseif($item->rating < 2)
+                                                            <label>
+                                                                <span class="icon"
+                                                                    style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                <span class="icon"
+                                                                    style="font-size: 17px">&nbsp;&nbsp;{{ number_format($item->rating, 1, ',', '.') }}</span>
+                                                            </label>
+                                                        @elseif($item->rating < 3)
+                                                            <label>
+                                                                <span class="icon"
+                                                                    style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                <span class="icon"
+                                                                    style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                <span class="icon"
+                                                                    style="font-size: 17px">&nbsp;&nbsp;{{ number_format($item->rating, 1, ',', '.') }}</span>
+                                                            </label>
+                                                        @elseif($item->rating < 4)
+                                                            <label>
+                                                                <span class="icon"
+                                                                    style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                <span class="icon"
+                                                                    style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                <span class="icon"
+                                                                    style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                <span class="icon"
+                                                                    style="font-size: 17px">&nbsp;&nbsp;{{ number_format($item->rating, 1, ',', '.') }}</span>
+                                                            </label>
+                                                        @elseif($item->rating < 5)
+                                                            <label>
+                                                                <span class="icon"
+                                                                    style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                <span class="icon"
+                                                                    style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                <span class="icon"
+                                                                    style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                <span class="icon"
+                                                                    style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                <span class="icon"
+                                                                    style="font-size: 17px">&nbsp;&nbsp;{{ number_format($item->rating, 1, ',', '.') }}</span>
+                                                            </label>
+                                                        @elseif($item->rating >= 5)
+                                                            <label>
+                                                                <span class="icon"
+                                                                    style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                <span class="icon"
+                                                                    style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                <span class="icon"
+                                                                    style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                <span class="icon"
+                                                                    style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                <span class="icon"
+                                                                    style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                <span class="icon"
+                                                                    style="font-size: 17px">&nbsp;&nbsp;{{ number_format($item->rating, 1, ',', '.') }}</span>
+                                                            </label>
+                                                        @endif
                                                     </div>
                                                     <div
                                                         class="modal-product-meta ltn__product-details-menu-1 mb-30 d-none">
@@ -380,11 +443,69 @@
                                                         </ul>
                                                     </div>
                                                     <div class="ltn__social-media mb-30">
-                                                        <ul>
-                                                            <li><a href="#"><i class="icon-star"></i></a></li>
-                                                            <li class="review-total"> <a href="#"> ( 95 Reviews
-                                                                    )</a></li>
-                                                        </ul>
+                                                        @if ($item->rating >= 0 && $item->rating <= 1)
+                                                            <label>
+                                                                <span class="icon"
+                                                                    style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                <span class="icon"
+                                                                    style="font-size: 17px">&nbsp;&nbsp;{{ number_format($item->rating, 1, ',', '.') }}</span>
+                                                            </label>
+                                                        @elseif($item->rating < 2)
+                                                            <label>
+                                                                <span class="icon"
+                                                                    style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                <span class="icon"
+                                                                    style="font-size: 17px">&nbsp;&nbsp;{{ number_format($item->rating, 1, ',', '.') }}</span>
+                                                            </label>
+                                                        @elseif($item->rating < 3)
+                                                            <label>
+                                                                <span class="icon"
+                                                                    style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                <span class="icon"
+                                                                    style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                <span class="icon"
+                                                                    style="font-size: 17px">&nbsp;&nbsp;{{ number_format($item->rating, 1, ',', '.') }}</span>
+                                                            </label>
+                                                        @elseif($item->rating < 4)
+                                                            <label>
+                                                                <span class="icon"
+                                                                    style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                <span class="icon"
+                                                                    style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                <span class="icon"
+                                                                    style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                <span class="icon"
+                                                                    style="font-size: 17px">&nbsp;&nbsp;{{ number_format($item->rating, 1, ',', '.') }}</span>
+                                                            </label>
+                                                        @elseif($item->rating < 5)
+                                                            <label>
+                                                                <span class="icon"
+                                                                    style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                <span class="icon"
+                                                                    style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                <span class="icon"
+                                                                    style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                <span class="icon"
+                                                                    style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                <span class="icon"
+                                                                    style="font-size: 17px">&nbsp;&nbsp;{{ number_format($item->rating, 1, ',', '.') }}</span>
+                                                            </label>
+                                                        @elseif($item->rating >= 5)
+                                                            <label>
+                                                                <span class="icon"
+                                                                    style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                <span class="icon"
+                                                                    style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                <span class="icon"
+                                                                    style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                <span class="icon"
+                                                                    style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                <span class="icon"
+                                                                    style="color: rgb(221, 221, 79) !important;">★</span>
+                                                                <span class="icon"
+                                                                    style="font-size: 17px">&nbsp;&nbsp;{{ number_format($item->rating, 1, ',', '.') }}</span>
+                                                            </label>
+                                                        @endif
                                                     </div>
                                                     <div
                                                         class="modal-product-meta ltn__product-details-menu-1 mb-30 d-none">

@@ -153,7 +153,8 @@ class PapanBungaController extends Controller
         $toko = Toko::get();
         $category = Category::get();
         $review = Review::get();
-        return view('pages.web.papanbunga.detail', ['papanbunga' => $papanbunga, 'toko' => $toko, 'category' => $category, 'review' => $review]);
+        $reviewCount = Review::where('product_id', $papanbunga->id)->count();
+        return view('pages.web.papanbunga.detail', ['papanbunga' => $papanbunga, 'toko' => $toko, 'category' => $category, 'review' => $review, 'reviewCount' => $reviewCount]);
     }
 
     /**

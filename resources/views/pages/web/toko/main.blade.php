@@ -44,7 +44,6 @@
                             <td>{{ $item->nama_toko }}</td>
                             <td>{{ $item->status }}</td>
                             <td>{{ $item->total_produk }}</td>
-                            {{-- <td><a href="cart.html">View</a></td> --}}
                             <td class="text-center">
                                 @if (Auth::user()->id == $item->user_id)
                                     <a href="{{ route('toko.edit', $item->id) }}">Edit</a>
@@ -52,37 +51,12 @@
                                         onclick="event.preventDefault(); if (confirm('Apakah Anda Yakin ?')) document.getElementById('delete-form-{{ $item->id }}').submit();">
                                         Hapus
                                     </a>
-
                                     <form id="delete-form-{{ $item->id }}"
                                         action="{{ route('toko.destroy', $item->id) }}" method="POST"
                                         style="display: none;">
                                         @csrf
                                         @method('DELETE')
                                     </form>
-
-
-                                    {{-- <a href="{{ route('toko.destroy', $item->id) }}"
-                                        onclick="event.preventDefault(); document.getElementById('accept-form-{{ $item->id }}').submit();">
-                                        Hapus
-                                    </a>
-
-                                    <form id="accept-form-{{ $item->id }}"
-                                        onsubmit="return confirm('Apakah Anda Yakin ?');"
-                                        action="{{ route('toko.destroy', $item->id) }}" method="POST"
-                                        style="display: none;">
-                                        @csrf
-                                        @method('delete')
-                                    </form> --}}
-
-
-                                    {{-- <div class="d-flex justify-content-center ">
-                                        <form onsubmit="return confirm('Apakah Anda Yakin ?');"
-                                            action="{{ route('toko.destroy', $item->id) }}" method="POST">
-                                            @csrf
-                                            @method('delete')
-                                            <button type="submit" class="cart-product-remove">Hapus</button>
-                                        </form>
-                                    </div> --}}
                                 @endif
                             </td>
                         </tr>
