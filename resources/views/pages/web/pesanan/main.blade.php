@@ -18,9 +18,6 @@
         </div>
     </div>
     <!-- BREADCRUMB AREA END -->
-    <div class="btn-wrapper col-10">
-        <a href="{{ route('pdf') }}" class="btn theme-btn-1 btn-effect-1 text-uppercase mb-4 mx-5">Cetak Pesanan</a>
-    </div>
 
     <!-- PRODUCT TAB AREA START -->
     <div class="ltn__product-tab-area">
@@ -64,11 +61,12 @@
                                                                 <span>Ditolak</span>
                                                             @endif
                                                         </td>
-                                                        @if ($p->status == 'menunggu')
+                                                        @if ($p->status == 'pending')
                                                             <td><a href="{{ route('checkout.edit', $p->id) }}">Edit</a>
                                                             </td>
                                                         @else
-                                                            <td></td>
+                                                            <td><a href="{{ route('pdf', $p->id) }}">Download
+                                                                    Invoice</a></td>
                                                         @endif
                                                     </tr>
                                                 @endif

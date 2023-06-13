@@ -143,7 +143,8 @@
                                     </div><!-- end card -->
                                 </div><!-- end col -->
                             </div> <!-- end row-->
-                            <div id="chartContainer"></div>
+                            {{-- <div id="chartContainer"></div> --}}
+                            <div id="orderChart"></div>
                         </div> <!-- end .h-100-->
                     </div> <!-- end col -->
                 </div>
@@ -699,6 +700,40 @@
     {{-- HighChart --}}
     <script src="https://code.highcharts.com/highcharts.js"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        var chartData = {!! json_encode($chartData) !!};
+        var statuses = {!! json_encode($statuses) !!};
+
+        var categories = Object.keys(chartData[statuses[0]]['data']);
+        var months = [];
+
+        // Mengubah nomor bulan menjadi nama bulan
+        categories.forEach(function(category) {
+            var month = parseInt(category);
+            var monthName = Highcharts.dateFormat('%B', Date.parse(month + "-01-2023"));
+            months.push(monthName);
+        });
+
+        Highcharts.chart('orderChart', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Total Order per Bulan'
+            },
+            xAxis: {
+                categories: months,
+                crosshair: true
+            },
+            yAxis: {
+                title: {
+                    text: 'Total Order'
+                }
+            },
+            series: Object.values(chartData),
+        });
+    </script>
+    {{-- <script src="https://code.highcharts.com/highcharts.js"></script>
 
     <script>
         Highcharts.chart('chartContainer', {
@@ -733,7 +768,7 @@
                 color: 'red',
             }]
         });
-    </script>
+    </script> --}}
 
 
 </x-admin-layout>

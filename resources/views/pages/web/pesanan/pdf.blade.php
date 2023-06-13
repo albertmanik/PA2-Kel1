@@ -18,27 +18,28 @@
     <table class='table table-bordered'>
         <thead>
             <tr>
-                <th>No</th>
                 <th>Kode Pemesanan</th>
                 <th>Nama Pemesan</th>
                 <th>Alamat Pemesan</th>
                 <th>Ucapan</th>
+                <th>Bukti Pembayaran</th>
                 {{-- <th>Nama Produk</th> --}}
                 <th>Total Pembayaran</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($order as $item)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $item->order_number }}</td>
-                    <td>{{ $item->user->username }}</td>
-                    <td>{{ $item->alamat }}</td>
-                    <td>{{ $item->ucapan }}</td>
-                    {{-- <td>{{ $item->toko->nama_toko }}</td> --}}
-                    <td>Rp. {{ number_format($item->total) }}</td>
-                </tr>
-            @endforeach
+            <tr>
+                <td>{{ $order->order_number }}</td>
+                <td>{{ $order->user->username }}</td>
+                <td>{{ $order->alamat }}</td>
+                <td>{{ $order->ucapan }}</td>
+                <td>
+                    <img src="data:image/jpeg;base64,{{ base64_encode(file_get_contents(public_path('payments/' . $order->image))) }}"
+                        alt="" width="130">
+                </td>
+                {{-- <td>{{ $item->toko->nama_toko }}</td> --}}
+                <td>Rp. {{ number_format($order->total) }}</td>
+            </tr>
         </tbody>
     </table>
 </body>

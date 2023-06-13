@@ -106,9 +106,9 @@ class CheckoutController extends Controller
         return redirect()->route('pesanan.index')->with('success', 'Checkout berhasil');
     }
 
-    public function pdf()
+    public function pdf($id)
     {
-        $order = Checkout::with('user')->get();
+        $order = Checkout::findOrFail($id);
         $pdf = PDF::loadView('pages.web.pesanan.pdf', compact('order'));
         return $pdf->download('booking.pdf');
     }

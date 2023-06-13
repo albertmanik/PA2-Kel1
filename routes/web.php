@@ -111,4 +111,4 @@ Route::patch('pesan/reject/{checkout}', [PenjualPesananController::class, 'rejec
 // Route::post('order', [CheckoutController::class, 'order'])->name('order');
 Route::post('rating/{papanbunga}', [ReviewController::class, 'storePapanbunga'])->name('papanbunga.rating');
 Route::post('rating/{bouquet}', [ReviewController::class, 'storeBouquet'])->name('bouquet.rating');
-Route::get('pdf', [CheckoutController::class, 'pdf'])->name('pdf');
+Route::get('pdf/{id}', [CheckoutController::class, 'pdf'])->name('pdf');
