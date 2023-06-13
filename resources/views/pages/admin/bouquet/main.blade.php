@@ -66,7 +66,7 @@
                                                     <th class="sort" data-sort="customer_name">Nama Product</th>
                                                     <th class="sort" data-sort="email">Harga</th>
                                                     <th class="sort" data-sort="status">Kota</th>
-                                                    <th class="sort" data-sort="status">Deskripsi</th>
+                                                    <th class="sort" data-sort="date">Deskripsi</th>
                                                     <th class="sort" data-sort="action">Action</th>
                                                 </tr>
                                             </thead>
@@ -75,8 +75,8 @@
                                                     <tr>
                                                         <td class="customer_name">{{ $item->name }}</td>
                                                         <td class="email">{{ $item->harga }}</td>
-                                                        <td class="email">{{ $item->kota }}</td>
-                                                        <td class="email">{{ $item->deskripsi }}</td>
+                                                        <td class="status">{{ $item->kota }}</td>
+                                                        <td class="date">{{ $item->deskripsi }}</td>
                                                         <td>
                                                             <div class="d-flex gap-2">
                                                                 <div class="edit">

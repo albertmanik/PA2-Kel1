@@ -18,6 +18,9 @@
         </div>
     </div>
     <!-- BREADCRUMB AREA END -->
+    <div class="btn-wrapper col-10">
+        <a href="{{ route('pdf') }}" class="btn theme-btn-1 btn-effect-1 text-uppercase mb-4 mx-5">Cetak Pesanan</a>
+    </div>
 
     <!-- PRODUCT TAB AREA START -->
     <div class="ltn__product-tab-area">
@@ -53,7 +56,7 @@
                                                                 style="width: 8rem">
                                                         </td>
                                                         <td>
-                                                            @if ($p->status == 'pending')
+                                                            @if ($p->status == 'menunggu')
                                                                 <span>Menunggu</span>
                                                             @elseif ($p->status == 'terima')
                                                                 <span>Diterima</span>
@@ -61,127 +64,17 @@
                                                                 <span>Ditolak</span>
                                                             @endif
                                                         </td>
-                                                        @if ($p->status == 'pending')
+                                                        @if ($p->status == 'menunggu')
                                                             <td><a href="{{ route('checkout.edit', $p->id) }}">Edit</a>
                                                             </td>
                                                         @else
-                                                            <td>fsfs</td>
+                                                            <td></td>
                                                         @endif
                                                     </tr>
                                                 @endif
                                             @endforeach
                                         </tbody>
                                     </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="liton_tab_1_3">
-                            <div class="ltn__myaccount-tab-content-inner">
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th>Product</th>
-                                                <th>Date</th>
-                                                <th>Expire</th>
-                                                <th>Download</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Carsafe - Car Service PSD Template</td>
-                                                <td>Nov 22, 2020</td>
-                                                <td>Yes</td>
-                                                <td><a href="#"><i class="far fa-arrow-to-bottom mr-1"></i>
-                                                        Download File</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Carsafe - Car Service HTML Template</td>
-                                                <td>Nov 10, 2020</td>
-                                                <td>Yes</td>
-                                                <td><a href="#"><i class="far fa-arrow-to-bottom mr-1"></i>
-                                                        Download File</a></td>
-                                            </tr>
-                                            <tr>
-                                                <td>Carsafe - Car Service WordPress Theme</td>
-                                                <td>Nov 12, 2020</td>
-                                                <td>Yes</td>
-                                                <td><a href="#"><i class="far fa-arrow-to-bottom mr-1"></i>
-                                                        Download File</a></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="liton_tab_1_4">
-                            <div class="ltn__myaccount-tab-content-inner">
-                                <p>The following addresses will be used on the checkout page by default.</p>
-                                <div class="row">
-                                    <div class="col-md-6 col-12 learts-mb-30">
-                                        <h4>Billing Address <small><a href="#">edit</a></small></h4>
-                                        <address>
-                                            <p><strong>Alex Tuntuni</strong></p>
-                                            <p>1355 Market St, Suite 900 <br>
-                                                San Francisco, CA 94103</p>
-                                            <p>Mobile: (123) 456-7890</p>
-                                        </address>
-                                    </div>
-                                    <div class="col-md-6 col-12 learts-mb-30">
-                                        <h4>Shipping Address <small><a href="#">edit</a></small></h4>
-                                        <address>
-                                            <p><strong>Alex Tuntuni</strong></p>
-                                            <p>1355 Market St, Suite 900 <br>
-                                                San Francisco, CA 94103</p>
-                                            <p>Mobile: (123) 456-7890</p>
-                                        </address>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="tab-pane fade" id="liton_tab_1_5">
-                            <div class="ltn__myaccount-tab-content-inner mb-50">
-                                <p>The following addresses will be used on the checkout page by default.</p>
-                                <div class="ltn__form-box">
-                                    <form action="#">
-                                        <div class="row mb-50">
-                                            <div class="col-md-6">
-                                                <label>First name:</label>
-                                                <input type="text" name="ltn__name">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label>Last name:</label>
-                                                <input type="text" name="ltn__lastname">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label>Display Name:</label>
-                                                <input type="text" name="ltn__lastname" placeholder="Ethan">
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label>Display Email:</label>
-                                                <input type="email" name="ltn__lastname"
-                                                    placeholder="example@example.com">
-                                            </div>
-                                        </div>
-                                        <fieldset>
-                                            <legend>Password change</legend>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <label>Current password (leave blank to leave unchanged):</label>
-                                                    <input type="password" name="ltn__name">
-                                                    <label>New password (leave blank to leave unchanged):</label>
-                                                    <input type="password" name="ltn__lastname">
-                                                    <label>Confirm new password:</label>
-                                                    <input type="password" name="ltn__lastname">
-                                                </div>
-                                            </div>
-                                        </fieldset>
-                                        <div class="btn-wrapper">
-                                            <button type="submit"
-                                                class="btn theme-btn-1 btn-effect-1 text-uppercase">Save
-                                                Changes</button>
-                                        </div>
-                                    </form>
                                 </div>
                             </div>
                         </div>

@@ -116,7 +116,8 @@
                                 </tbody>
                             </table>
                             <br>
-                            <a href="{{ route('checkout') }}" class="theme-btn-1 btn btn-effect-1">Proceed to checkout</a>
+                            <a href="{{ route('checkout') }}" class="theme-btn-1 btn btn-effect-1">Proceed to
+                                checkout</a>
                         </div>
                     </div>
                 </div>
@@ -128,7 +129,7 @@
         <script>
             function removeCart(id) {
 
-                document.getElementById('remove-form-'+id).submit();
+                document.getElementById('remove-form-' + id).submit();
             }
         </script>
     @endsection

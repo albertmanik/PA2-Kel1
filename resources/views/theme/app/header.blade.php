@@ -247,7 +247,6 @@
                                     style="display: none;">
                                     @csrf
                                 </form>
-                                <span class="mini-cart-item-delete"><i class="icon-trash"></i></span>
                             @endif
                         </div>
                         <div class="mini-cart-info">

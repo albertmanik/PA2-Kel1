@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use PDF;
 use App\Models\Product;
 use App\Models\Checkout;
 use Illuminate\Http\Request;
@@ -48,7 +49,7 @@ class CheckoutController extends Controller
         // ... Lakukan validasi, penghitungan total harga, dan operasi lain yang diperlukan sebelum checkout ...
 
         $characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789'; // set karakter yang digunakan
-        $order_number = 'QS' . substr(str_shuffle($characters), 0, 14);
+        $order_number = 'PA' . substr(str_shuffle($characters), 0, 14);
 
         $checkout = new Checkout();
         $checkout->user_id = $userId;
@@ -95,13 +96,21 @@ class CheckoutController extends Controller
             $order_detail->order_id = $checkout->id;
             $order_detail->category_id = $product->category_id;
             $order_detail->toko_id = $product->toko_id;
+            // dd($order_detail);
             $order_detail->save();
         }
 
         // Hapus data cart setelah checkout
         session()->forget('cart.' . $userId);
 
-        return back()->with('success', 'Checkout berhasil');
+        return redirect()->route('pesanan.index')->with('success', 'Checkout berhasil');
+    }
+
+    public function pdf()
+    {
+        $order = Checkout::with('user')->get();
+        $pdf = PDF::loadView('pages.web.pesanan.pdf', compact('order'));
+        return $pdf->download('booking.pdf');
     }
 
     /**

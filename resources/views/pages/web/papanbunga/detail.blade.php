@@ -51,7 +51,6 @@
                                             </li>
                                             @php
                                                 $rating = \App\Models\Review::where('product_id', $papanbunga->id)->avg('rating');
-                                                // $reviewCount = \App\Models\Review::where('product_id', $bouquet->id)->count();
                                             @endphp
                                             <li>
                                                 <div class="product-ratting">
