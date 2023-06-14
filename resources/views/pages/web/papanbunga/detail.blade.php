@@ -66,7 +66,7 @@
                                                     </ul> --}}
                                                     @if ($rating >= 0 && $rating <= 1)
                                                         <label>
-                                                            <span class="icon-star"
+                                                            <span class="icon"
                                                                 style="color: rgb(221, 221, 79) !important;">★</span>
                                                             <span class="icon"
                                                                 style="font-size: 17px">&nbsp;&nbsp;{{ number_format($rating, 1, ',', '.') }}</span>
@@ -144,20 +144,12 @@
                                         </ul>
                                     </div>
                                     <div class="modal-product-brief">
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Dignissimos
-                                            repellendus repudiandae incidunt quidem pariatur expedita, quo quis modi
-                                            tempore non.</p>
+                                        <p>{{ $papanbunga->deskripsi }}</p>
                                     </div>
                                     <div class="modal-product-meta ltn__product-details-menu-1 mb-20">
                                     </div>
                                     <div class="ltn__product-details-menu-2 product-cart-wishlist-btn mb-30">
                                         <ul>
-                                            <li>
-                                                <div class="cart-plus-minus">
-                                                    <input type="text" value="1" name="qtybutton"
-                                                        class="cart-plus-minus-box">
-                                                </div>
-                                            </li>
                                             <li>
                                                 <a href="{{ route('cart.store', $papanbunga->id) }}"
                                                     class="theme-btn-1 btn btn-effect-1 d-add-to-cart">
@@ -203,16 +195,16 @@
                     <div class="ltn__shop-details-tab-inner">
                         <div class="ltn__shop-details-tab-menu">
                             <div class="nav">
-                                <a class="active show" data-bs-toggle="tab"
-                                    href="#liton_tab_details_1_1">Description</a>
-                                <a data-bs-toggle="tab" href="#liton_tab_details_1_2" class="">Reviews</a>
+                                {{-- <a class="active show" data-bs-toggle="tab"
+                                    href="#liton_tab_details_1_1">Description</a> --}}
+                                <a class="active show" data-bs-toggle="tab" href="#liton_tab_details_1_1"
+                                    class="">Reviews</a>
                                 <!-- <a data-bs-toggle="tab" href="#liton_tab_details_1_3" class="">Comments</a> -->
-                                <a data-bs-toggle="tab" href="#liton_tab_details_1_4" class="">Shipping</a>
                                 <!-- <a data-bs-toggle="tab" href="#liton_tab_details_1_5" class="">Size Chart</a> -->
                             </div>
                         </div>
                         <div class="tab-content">
-                            <div class="tab-pane fade active show" id="liton_tab_details_1_1">
+                            {{-- <div class="tab-pane fade active show" id="liton_tab_details_1_1">
                                 <div class="ltn__shop-details-tab-content-inner text-center">
                                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor
                                         incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nost
@@ -225,8 +217,8 @@
                                         explica Nemllo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut
                                         fugit,</p>
                                 </div>
-                            </div>
-                            <div class="tab-pane fade" id="liton_tab_details_1_2">
+                            </div> --}}
+                            <div class="tab-pane fade active show" id="liton_tab_details_1_1">
                                 <div class="ltn__shop-details-tab-content-inner">
                                     <div class="customer-reviews-head text-center">
                                         <h4 class="title-2">Customer Reviews</h4>

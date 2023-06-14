@@ -9,7 +9,7 @@
                         <div class="ltn__breadcrumb-list">
                             <ul>
                                 <li><a href="{{ url('/') }}">Home</a></li>
-                                <li><a href="{{ route('papanbunga.index') }}">Pesanan</li></a>
+                                <li><a href="{{ route('list-pesanan') }}">Pesanan</li></a>
                             </ul>
                         </div>
                     </div>
@@ -19,11 +19,28 @@
     </div>
     <!-- BREADCRUMB AREA END -->
 
+
     <!-- PRODUCT TAB AREA START -->
     <div class="ltn__product-tab-area">
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 mb-5">
+                    <div class="btn-wrapper">
+                        <a href="{{ route('penjual.pdf') }}"
+                            class="btn theme-btn-1 btn-effect-1 text-uppercase mb-4">Export PDF</a>
+                    </div>
+                    <form action="{{ route('pesanan.filter') }}" method="GET">
+                        <div class="form-group">
+                            <label for="start_date">Tanggal Mulai:</label>
+                            <input type="date" id="start_date" name="start_date" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="end_date">Tanggal Akhir:</label>
+                            <input type="date" id="end_date" name="end_date" class="form-control">
+                        </div>
+                        <button type="submit" class="btn theme-btn-1 btn-effect-1 mt-2 mb-3">Filter</button>
+                        {{-- <a href="{{ route('list-pesanan') }}" class="btn btn-secondary">Reset</a> --}}
+                    </form>
                     <div class="tab-content">
                         <div class="tab-pane fade active show" id="liton_tab_1_1">
                             <div class="ltn__myaccount-tab-content-inner">
@@ -36,6 +53,7 @@
                                                 <th>Kode Pesanan</th>
                                                 <th>Total</th>
                                                 <th>Bukti Pembayaran</th>
+                                                <th>Tanggal Pesanan</th>
                                                 <th>Status</th>
                                                 <th>Action</th>
                                             </tr>
@@ -51,6 +69,7 @@
                                                         <img src="{{ asset('payments/' . $item->image) }}"
                                                             style="width: 8rem">
                                                     </td>
+                                                    <td>{{ $item->created_at }}</td>
                                                     <td>
                                                         @if ($item->status == 'menunggu')
                                                             <span>Menunggu</span>

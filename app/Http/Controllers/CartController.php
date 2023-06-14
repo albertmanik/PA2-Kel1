@@ -74,6 +74,12 @@ class CartController extends Controller
 
         session()->put('cart.' . $userId, $cart);
 
+        // Menghitung total jumlah produk dalam keranjang
+        $totalCartItems = count(array_values($cart));
+
+        // Menyimpan total jumlah produk dalam keranjang ke session
+        session()->put('totalCartItems.' . $userId, $totalCartItems);
+
         return back()->with('success', 'Product berhasil ditambahkan');
     }
 
@@ -151,9 +157,15 @@ class CartController extends Controller
             unset($cart[$id]);
             session()->put('cart.' . $userId, $cart);
 
-            return back()->with('success','Berhasil Menghapus dari Keranjang');
+            // Menghitung total jumlah produk dalam keranjang
+            $totalCartItems = count(array_values($cart));
+
+            // Menyimpan total jumlah produk dalam keranjang ke session
+            session()->put('totalCartItems.' . $userId, $totalCartItems);
+
+            return back()->with('success', 'Berhasil Menghapus dari Keranjang');
         }
 
-        return back()->with('success','berhasil');
+        return back()->with('success', 'berhasil');
     }
 }

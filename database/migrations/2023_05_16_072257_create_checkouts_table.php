@@ -16,6 +16,7 @@ class CreateCheckoutsTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id');
+            $table->foreignId('toko_id');
             $table->string('order_number');
             $table->string('name');
             $table->string('no_hp');
@@ -25,6 +26,7 @@ class CreateCheckoutsTable extends Migration
             $table->double('total');
             $table->enum('status', ['menunggu', 'terima', 'tolak'])->default('menunggu');
             $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('toko_id')->references('id')->on('tokos');
             $table->timestamps();
         });
     }

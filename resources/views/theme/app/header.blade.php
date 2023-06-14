@@ -60,7 +60,13 @@
             <div class="row">
                 <div class="col logo-column">
                     <div class="site-logo">
-                        {{-- <a href="index.html"><img src="{{ asset('assets/img/logo.png') }}" alt="Logo"></a> --}}
+                        @role('customer')
+                            <a href="{{ url('/') }}"><img style="width: 12rem" src="{{ asset('assets/img/logoo.jpg') }}"
+                                    alt="Logo"></a>
+                            @elserole('penjual')
+                            <a href="{{ url('/penjual/home') }}"><img style="width: 12rem"
+                                    src="{{ asset('assets/img/logoo.jpg') }}" alt="Logo"></a>
+                        @endrole
                     </div>
                 </div>
                 <div class="col header-menu-column">
@@ -68,8 +74,16 @@
                         <nav>
                             <div class="ltn__main-menu">
                                 <ul>
-                                    <li class="menu-icon"><a href="{{ url('/') }}">Home</a>
-                                    </li>
+                                    @role('customer')
+                                        <li class="menu-icon"><a href="{{ url('/') }}">Home</a>
+                                        </li>
+                                        @elserole('penjual')
+                                        <li class="menu-icon"><a href="{{ url('/penjual/home') }}">Home</a>
+                                        </li>
+                                    @else
+                                        <li class="menu-icon"><a href="{{ url('/penjual/home') }}">Home</a>
+                                        </li>
+                                    @endrole
                                     @role('customer')
                                         {{-- <li class="menu-icon"><a href="{{ url('checkout') }}">Checkout</a>
                                         </li> --}}
@@ -110,12 +124,10 @@
                                         </div>
                                     </div>
                                     <div class="header-search-1-form">
-                                        <form id="#234" method="get" action="#">
-                                            <input type="text" name="search" value=""
-                                                placeholder="Search here..." />
-                                            <button type="submit">
-                                                <span><i class="icon-magnifier"></i></span>
-                                            </button>
+                                        <form action="#">
+                                            <input type="text" name="search" value="{{ request()->search }}"
+                                                placeholder="Search your keyword..." autocomplete="off">
+                                            <button type="submit"><i class="icon-magnifier"></i></button>
                                         </form>
                                     </div>
                                 </div>
@@ -127,7 +139,6 @@
                                         <li>
                                             <a href="#"><i class="icon-user"></i></a>
                                             <ul>
-                                                <li><a href="account.html">My Account</a></li>
                                                 @auth
                                                     @role('customer')
                                                         <li><a href="{{ route('pesanan.index') }}">Daftar Pesanan</a></li>
@@ -161,7 +172,7 @@
                                             {{-- <a href="{{ route('cart.index') }}" class=""> --}}
                                             <span class="mini-cart-icon">
                                                 <i class="icon-handbag"></i>
-                                                <sup>2</sup>
+                                                <sup>{{ session('totalCartItems.' . Auth::id(), 0) }}</sup>
                                             </span>
                                             <h6><span>Your Cart</span></h6>
                                         </a>
@@ -267,7 +278,6 @@
                 <a href="{{ route('cart.index') }}" class="theme-btn-1 btn btn-effect-1">View Cart</a>
                 <a href="{{ route('checkout') }}" class="theme-btn-2 btn btn-effect-2">Checkout</a>
             </div>
-            <p>Free Shipping on All Orders Over $100!</p>
         </div>
 
     </div>

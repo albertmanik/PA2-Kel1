@@ -93,11 +93,12 @@
                                                     </div>
                                                 @enderror
                                                 <div class="ltn__payment-note mt-30 mb-30">
-                                                    <p>Your personal data will be used to process your order, support
-                                                        your experience
-                                                        throughout
-                                                        this website, and for other purposes described in our privacy
-                                                        policy.</p>
+                                                    @foreach ($toko as $data)
+                                                        @if (Auth::user()->id == $data->user_id)
+                                                        @endif
+                                                    @endforeach
+                                                    <p>Transfer Ke Nomor Rekening berikut {{ $data->no_rekening }}</p>
+
                                                 </div>
                                                 <button class="btn theme-btn-1 btn-effect-1 text-uppercase"
                                                     type="submit">Place

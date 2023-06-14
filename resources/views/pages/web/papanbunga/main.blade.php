@@ -121,14 +121,6 @@
                                                                     <span>ADD TO CART</span>
                                                                 </a>
                                                             </li>
-                                                            <li>
-                                                                <a href="#"
-                                                                    class="btn btn-effect-1 d-add-to-wishlist"
-                                                                    title="Add to Cart" data-bs-toggle="modal"
-                                                                    data-bs-target="#liton_wishlist_modal">
-                                                                    <i class="icon-heart"></i>
-                                                                </a>
-                                                            </li>
                                                         </ul>
                                                     </div>
                                                     <div class="ltn__social-media mb-30">
@@ -259,74 +251,125 @@
                             <div class="ltn__product-tab-content-inner ltn__product-grid-view">
                                 <div class="row">
                                     <!-- ltn__product-item -->
-                                    @foreach ($pabung as $item)
-                                        <div class="col-xl-3 col-lg-4 col-sm-6 col-12">
-                                            <div class="ltn__product-item text-center">
-                                                <div class="product-img">
-                                                    <a href="{{ route('papanbunga.show', $item->id) }}"><img
-                                                            src="{{ asset('bungapapan/' . $item->gambar) }}"
-                                                            alt="#"></a>
-                                                    <div class="product-badge">
-                                                        <ul>
-                                                            <li class="badge-1">Hot</li>
-                                                        </ul>
+                                    @role('customer')
+                                        @foreach ($pabung as $item)
+                                            <div class="col-xl-3 col-lg-4 col-sm-6 col-12">
+                                                <div class="ltn__product-item text-center">
+                                                    <div class="product-img">
+                                                        <a href="{{ route('papanbunga.show', $item->id) }}"><img
+                                                                src="{{ asset('bungapapan/' . $item->gambar) }}"
+                                                                alt="#"></a>
+                                                        <div class="product-badge">
+                                                            <ul>
+                                                                <li class="badge-1">Hot</li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="product-hover-action product-hover-action-3">
+                                                            <ul>
+                                                                <li>
+                                                                    <a href="#" title="Quick View"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#quick_view_modal{{ $item->id }}">
+                                                                        <i class="icon-magnifier"></i>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="{{ route('cart.store', $item->id) }}"
+                                                                        title="Add to Cart">
+                                                                        <i class="icon-handbag"></i>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
                                                     </div>
-                                                    <div class="product-hover-action product-hover-action-2">
-                                                        <ul>
-                                                            <li>
-                                                                <a href="#" title="Quick View"
-                                                                    data-bs-toggle="modal"
-                                                                    data-bs-target="#quick_view_modal{{ $item->id }}">
-                                                                    <i class="icon-magnifier"></i>
-                                                                </a>
-                                                            </li>
-                                                            <li class="add-to-cart">
-                                                                <a href="{{ route('cart.store', $item->id) }}"
-                                                                    title="Add to Cart">
-                                                                    <span class="cart-text d-none d-xl-block">Add to
-                                                                        Cart</span>
-                                                                    <span class="d-block d-xl-none"><i
-                                                                            class="icon-handbag"></i></span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" title="Quick View"
-                                                                    data-bs-toggle="modal"
-                                                                    data-bs-target="#quick_view_modal">
-                                                                    <i class="icon-shuffle"></i>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                </div>
-                                                <div class="product-info">
-                                                    <h2 class="product-title"><a
-                                                            href="{{ route('papanbunga.show', $item->id) }}">{{ $item->kota }}
-                                                            {{ $item->name }}</a></h2>
-                                                    <div class="product-price">
-                                                        <span>Rp. {{ number_format($item->harga, 2, ',', '.') }}</span>
-                                                        @role('penjual')
-                                                            @if (Auth::user()->id == $item->user_id)
-                                                                <div class="d-flex justify-content-center">
-                                                                    <a class="submit-button-1 mx-2"
-                                                                        href="{{ route('papanbunga.edit', $item->id) }}">Edit</a>
-                                                                    {{-- <a>Hapus</a> --}}
-                                                                    <form onsubmit="return confirm('Apakah Anda Yakin ?');"
-                                                                        action="{{ route('papanbunga.destroy', $item->id) }}"
-                                                                        method="POST">
-                                                                        @csrf
-                                                                        @method('delete')
-                                                                        <button type="submit"
-                                                                            class="submit-button-1">Hapus</button>
-                                                                    </form>
-                                                                </div>
-                                                            @endif
-                                                        @endrole
+                                                    <div class="product-info">
+                                                        <h2 class="product-title"><a
+                                                                href="{{ route('papanbunga.show', $item->id) }}">{{ $item->kota }}
+                                                                {{ $item->name }}</a></h2>
+                                                        <div class="product-price">
+                                                            <span>Rp. {{ number_format($item->harga, 2, ',', '.') }}</span>
+                                                            @role('penjual')
+                                                                @if (Auth::user()->id == $item->user_id)
+                                                                    <div class="d-flex justify-content-center">
+                                                                        <a class="submit-button-1 mx-2"
+                                                                            href="{{ route('papanbunga.edit', $item->id) }}">Edit</a>
+                                                                        {{-- <a>Hapus</a> --}}
+                                                                        <form onsubmit="return confirm('Apakah Anda Yakin ?');"
+                                                                            action="{{ route('papanbunga.destroy', $item->id) }}"
+                                                                            method="POST">
+                                                                            @csrf
+                                                                            @method('delete')
+                                                                            <button type="submit"
+                                                                                class="submit-button-1">Hapus</button>
+                                                                        </form>
+                                                                    </div>
+                                                                @endif
+                                                            @endrole
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
-                                    @endforeach
+                                        @endforeach
+                                        @elserole('penjual')
+                                        @foreach ($pabung as $item)
+                                            <div class="col-xl-3 col-lg-4 col-sm-6 col-12">
+                                                <div class="ltn__product-item text-center">
+                                                    <div class="product-img">
+                                                        <a href="{{ route('papanbunga.show', $item->id) }}"><img
+                                                                src="{{ asset('bungapapan/' . $item->gambar) }}"
+                                                                alt="#"></a>
+                                                        <div class="product-badge">
+                                                            <ul>
+                                                                <li class="badge-1">Hot</li>
+                                                            </ul>
+                                                        </div>
+                                                        <div class="product-hover-action product-hover-action-3">
+                                                            <ul>
+                                                                <li>
+                                                                    <a href="#" title="Quick View"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#quick_view_modal{{ $item->id }}">
+                                                                        <i class="icon-magnifier"></i>
+                                                                    </a>
+                                                                </li>
+                                                                <li>
+                                                                    <a href="{{ route('cart.store', $item->id) }}"
+                                                                        title="Add to Cart">
+                                                                        <i class="icon-handbag"></i>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                    <div class="product-info">
+                                                        <h2 class="product-title"><a
+                                                                href="{{ route('papanbunga.show', $item->id) }}">{{ $item->kota }}
+                                                                {{ $item->name }}</a></h2>
+                                                        <div class="product-price">
+                                                            <span>Rp. {{ number_format($item->harga, 2, ',', '.') }}</span>
+                                                            @role('penjual')
+                                                                @if (Auth::user()->id == $item->user_id)
+                                                                    <div class="d-flex justify-content-center">
+                                                                        <a class="submit-button-1 mx-2"
+                                                                            href="{{ route('papanbunga.edit', $item->id) }}">Edit</a>
+                                                                        {{-- <a>Hapus</a> --}}
+                                                                        <form onsubmit="return confirm('Apakah Anda Yakin ?');"
+                                                                            action="{{ route('papanbunga.destroy', $item->id) }}"
+                                                                            method="POST">
+                                                                            @csrf
+                                                                            @method('delete')
+                                                                            <button type="submit"
+                                                                                class="submit-button-1">Hapus</button>
+                                                                        </form>
+                                                                    </div>
+                                                                @endif
+                                                            @endrole
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        @endforeach
+                                    @endrole
                                 </div>
                             </div>
                         </div>

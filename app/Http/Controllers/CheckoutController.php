@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use PDF;
+use App\Models\Toko;
+use App\Models\User;
 use App\Models\Product;
 use App\Models\Checkout;
-use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
-use App\Models\CheckoutDetail;
 use App\Models\OrderDetail;
+use Illuminate\Http\Request;
+use App\Models\CheckoutDetail;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
 class CheckoutController extends Controller
@@ -21,7 +23,19 @@ class CheckoutController extends Controller
     public function index()
     {
         $checkout = Checkout::all();
-        return view('pages.web.checkout.main', compact('checkout'));
+        $toko = Toko::get();
+        // $user = User::find(Auth::user()->id)->load('toko');
+        // $toko = Toko::where('user_id', Auth::id())->first();
+
+        // if ($toko) {
+        //     $noRekening = $toko->no_rekening;
+        // } else {
+        //     $noRekening = 'Belum ada informasi nomor rekening';
+        // }
+        // $noRekening = Toko::where('user_id', Auth::id())
+        //     ->value('no_rekening');
+
+        return view('pages.web.checkout.main', compact('checkout', 'toko'));
     }
 
     /**
@@ -80,6 +94,7 @@ class CheckoutController extends Controller
         // Update total harga order
         // dd($request);
         $checkout->total = $totalPrice;
+        $checkout->toko_id = $product->toko_id;
         $checkout->name = $request->name;
         $checkout->no_hp = $request->no_hp;
         $checkout->alamat = $request->alamat;

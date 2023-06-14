@@ -34,6 +34,8 @@ class LoginController extends Controller
 
             if (Auth::user()->hasRole('admin')) {
                 return redirect()->intended('/admin/home')->with('success', 'Login Berhasil');
+            } elseif (Auth::user()->hasRole('penjual')) {
+                return redirect()->intended('/penjual/home')->with('success', 'Login Berhasil');
             } else {
                 return redirect()->intended('/')->with('success', 'Login Berhasil');
             }

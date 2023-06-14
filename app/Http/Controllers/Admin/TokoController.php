@@ -42,12 +42,14 @@ class TokoController extends Controller
         $request->validate([
             'nama_toko' => 'required|min:8',
             'alamat' => 'required|min:8',
+            'no_rekening' => 'required|min:8',
         ]);
 
         $toko = new Toko;
         $toko->user_id = Auth::user()->id;
         $toko->nama_toko = $request->nama_toko;
         $toko->alamat = $request->alamat;
+        $toko->no_rekening = $request->no_rekening;
         $toko->status = $request->status;
         $toko->save();
         return back()->with('success', 'Toko Berhasil Ditambahkan');
@@ -89,6 +91,7 @@ class TokoController extends Controller
         $store->nama_toko = $request->nama_toko;
         $store->alamat = $request->alamat;
         $store->status = $request->status;
+        $store->no_rekening = $request->no_rekening;
         // dd($toko);
         $store->update();
         return redirect()->route('store.index')->with('info', 'Toko Berhasil Diubah');

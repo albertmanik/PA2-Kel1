@@ -7,7 +7,7 @@
                     <div class="ltn__slide-two-active slick-slide-arrow-1 slick-slide-dots-1 arrow-white--">
                         <!-- ltn__slide-item  -->
                         <div class="ltn__slide-item ltn__slide-item-8 ltn__slide-item-9 text-color-white---- bg-image bg-overlay-theme-black-80---"
-                            data-bs-bg="{{ asset('assets/img/slider/3.jpg') }}">
+                            data-bs-bg="{{ asset('assets/img/slider/slider.png') }}">
                             <div class="ltn__slide-item-inner">
                                 <div class="container">
                                     <div class="row">
@@ -18,7 +18,7 @@
                                                         <div class="slide-item-info-inner ltn__slide-animation">
                                                             <h6
                                                                 class="slide-sub-title ltn__secondary-color slide-title-line-2 animated">
-                                                                Flower & Gift</h6>
+                                                                Blooms Florist</h6>
                                                             <h1 class="slide-title animated ">Get Up To 75%</h1>
                                                             <div class="slide-brief animated">
                                                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing
@@ -44,7 +44,7 @@
                         </div>
                         <!-- ltn__slide-item  -->
                         <div class="ltn__slide-item ltn__slide-item-8 ltn__slide-item-9 text-color-white---- bg-image bg-overlay-theme-black-80---"
-                            data-bs-bg="{{ asset('assets/img/slider/1.jpg') }}">
+                            data-bs-bg="{{ asset('assets/img/slider/slider2.png') }}">
                             <div class="ltn__slide-item-inner">
                                 <div class="container">
                                     <div class="row">
@@ -55,7 +55,7 @@
                                                         <div class="slide-item-info-inner ltn__slide-animation">
                                                             <h6
                                                                 class="slide-sub-title ltn__secondary-color slide-title-line-2 animated">
-                                                                Flower & Gift</h6>
+                                                                Blooms Florist</h6>
                                                             <h1 class="slide-title animated ">Get Up To 75%</h1>
                                                             <div class="slide-brief animated">
                                                                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing
@@ -222,26 +222,14 @@
                                                     <div
                                                         class="ltn__product-details-menu-2 product-cart-wishlist-btn mb-30">
                                                         <ul>
-                                                            <li>
-                                                                <div class="cart-plus-minus">
-                                                                    <input type="text" value="01"
-                                                                        name="qtybutton" class="cart-plus-minus-box">
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <a href="{{ route('cart.store', $item->id) }}"
-                                                                    class="theme-btn-1 btn btn-effect-1 d-add-to-cart">
-                                                                    <span>ADD TO CART</span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#"
-                                                                    class="btn btn-effect-1 d-add-to-wishlist"
-                                                                    title="Add to Cart" data-bs-toggle="modal"
-                                                                    data-bs-target="#liton_wishlist_modal">
-                                                                    <i class="icon-heart"></i>
-                                                                </a>
-                                                            </li>
+                                                            @role('customer')
+                                                                <li>
+                                                                    <a href="{{ route('cart.store', $item->id) }}"
+                                                                        class="theme-btn-1 btn btn-effect-1 d-add-to-cart">
+                                                                        <span>ADD TO CART</span>
+                                                                    </a>
+                                                                </li>
+                                                            @endrole
                                                         </ul>
                                                     </div>
                                                     <div class="ltn__social-media mb-30">
@@ -255,7 +243,7 @@
                                                         @endphp
                                                         @if ($rating >= 0 && $rating <= 1)
                                                             <label>
-                                                                <span class="icon-star"
+                                                                <span class="icon"
                                                                     style="color: rgb(221, 221, 79) !important;">★</span>
                                                                 <span class="icon"
                                                                     style="font-size: 17px">&nbsp;&nbsp;{{ number_format($rating, 1, ',', '.') }}</span>
@@ -447,26 +435,14 @@
                                                     <div
                                                         class="ltn__product-details-menu-2 product-cart-wishlist-btn mb-30">
                                                         <ul>
-                                                            <li>
-                                                                <div class="cart-plus-minus">
-                                                                    <input type="text" value="02"
-                                                                        name="qtybutton" class="cart-plus-minus-box">
-                                                                </div>
-                                                            </li>
-                                                            <li>
-                                                                <a href="{{ route('cart.store', $item->id) }}"
-                                                                    class="theme-btn-1 btn btn-effect-1 d-add-to-cart">
-                                                                    <span>ADD TO CART</span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#"
-                                                                    class="btn btn-effect-1 d-add-to-wishlist"
-                                                                    title="Add to Cart" data-bs-toggle="modal"
-                                                                    data-bs-target="#liton_wishlist_modal">
-                                                                    <i class="icon-heart"></i>
-                                                                </a>
-                                                            </li>
+                                                            @role('customer')
+                                                                <li>
+                                                                    <a href="{{ route('cart.store', $item->id) }}"
+                                                                        class="theme-btn-1 btn btn-effect-1 d-add-to-cart">
+                                                                        <span>ADD TO CART</span>
+                                                                    </a>
+                                                                </li>
+                                                            @endrole
                                                         </ul>
                                                     </div>
                                                     @php
@@ -476,7 +452,7 @@
                                                     <div class="ltn__social-media mb-30">
                                                         @if ($rating >= 0 && $rating <= 1)
                                                             <label>
-                                                                <span class="icon-star"
+                                                                <span class="icon"
                                                                     style="color: rgb(221, 221, 79) !important;">★</span>
                                                                 <span class="icon"
                                                                     style="font-size: 17px">&nbsp;&nbsp;{{ number_format($rating, 1, ',', '.') }}</span>
@@ -642,7 +618,7 @@
                                                                 <li class="badge-1">Hot</li>
                                                             </ul>
                                                         </div>
-                                                        <div class="product-hover-action product-hover-action-2">
+                                                        <div class="product-hover-action product-hover-action-3">
                                                             <ul>
                                                                 <li>
                                                                     <a href="#" title="Quick View"
@@ -651,23 +627,14 @@
                                                                         <i class="icon-magnifier"></i>
                                                                     </a>
                                                                 </li>
-                                                                <li class="add-to-cart">
-                                                                    <a href="{{ route('cart.store', $item->id) }}"
-                                                                        title="Add to Cart">
-                                                                        <span class="cart-text d-none d-xl-block">Add
-                                                                            to
-                                                                            Cart</span>
-                                                                        <span class="d-block d-xl-none"><i
-                                                                                class="icon-handbag"></i></span>
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#" title="Quick View"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#quick_view_modal">
-                                                                        <i class="icon-shuffle"></i>
-                                                                    </a>
-                                                                </li>
+                                                                @role('customer')
+                                                                    <li>
+                                                                        <a href="{{ route('cart.store', $item->id) }}"
+                                                                            title="Add to Cart">
+                                                                            <i class="icon-handbag"></i>
+                                                                        </a>
+                                                                    </li>
+                                                                @endrole
                                                             </ul>
                                                         </div>
                                                     </div>
@@ -694,7 +661,7 @@
                                                                 <li class="badge-1">Hot</li>
                                                             </ul>
                                                         </div>
-                                                        <div class="product-hover-action product-hover-action-2">
+                                                        <div class="product-hover-action product-hover-action-3">
                                                             <ul>
                                                                 <li>
                                                                     <a href="#" title="Quick View"
@@ -703,23 +670,14 @@
                                                                         <i class="icon-magnifier"></i>
                                                                     </a>
                                                                 </li>
-                                                                <li class="add-to-cart">
-                                                                    <a href="{{ route('cart.store', $item->id) }}"
-                                                                        title="Add to Cart">
-                                                                        <span class="cart-text d-none d-xl-block">Add
-                                                                            to
-                                                                            Cart</span>
-                                                                        <span class="d-block d-xl-none"><i
-                                                                                class="icon-handbag"></i></span>
-                                                                    </a>
-                                                                </li>
-                                                                <li>
-                                                                    <a href="#" title="Quick View"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#quick_view_modal">
-                                                                        <i class="icon-shuffle"></i>
-                                                                    </a>
-                                                                </li>
+                                                                @role('customer')
+                                                                    <li>
+                                                                        <a href="{{ route('cart.store', $item->id) }}"
+                                                                            title="Add to Cart">
+                                                                            <i class="icon-handbag"></i>
+                                                                        </a>
+                                                                    </li>
+                                                                @endrole
                                                             </ul>
                                                         </div>
                                                     </div>

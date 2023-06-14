@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Penjual;
 
 use App\Models\Checkout;
+use PDF;
 use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -35,6 +36,17 @@ class PesananController extends Controller
         return view('pages.web.pesanan.list', compact('list'));
     }
 
+    public function filter(Request $request)
+    {
+        $start_date = date('Y-m-d', strtotime($request->input('start_date')));
+        $end_date = date('Y-m-d', strtotime($request->input('end_date')));
+
+        $list = Checkout::whereBetween('created_at', [$start_date . ' 00:00:00', $end_date . ' 23:59:59'])->get();
+
+        return view('pages.web.pesanan.list', compact('list', 'start_date', 'end_date'));
+    }
+
+
     public function accept(Checkout $checkout)
     {
         $checkout->status = 'terima';
@@ -46,6 +58,13 @@ class PesananController extends Controller
         $checkout->status = 'tolak';
         $checkout->save();
         return back()->with('success', 'Pesanan Berhasil Ditolak');
+    }
+
+    public function pdf()
+    {
+        $checkout = Checkout::with('user')->get();
+        $pdf = PDF::loadView('pages.penjual.pdf', compact('checkout'));
+        return $pdf->download('pesanan.pdf');
     }
 
     /**

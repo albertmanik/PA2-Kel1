@@ -32,7 +32,7 @@
                     <th>No</th>
                     <th>Nama Toko</th>
                     <th>Status</th>
-                    <th>Total Produk</th>
+                    <th>No Rekening</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -43,7 +43,7 @@
                             <td>{{ $index + $toko->firstItem() }}</td>
                             <td>{{ $item->nama_toko }}</td>
                             <td>{{ $item->status }}</td>
-                            <td>{{ $item->total_produk }}</td>
+                            <td>{{ $item->no_rekening }}</td>
                             <td class="text-center">
                                 @if (Auth::user()->id == $item->user_id)
                                     <a href="{{ route('toko.edit', $item->id) }}">Edit</a>

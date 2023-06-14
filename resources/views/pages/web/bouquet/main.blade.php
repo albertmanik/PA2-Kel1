@@ -265,40 +265,43 @@
                                                             <li class="badge-1">Hot</li>
                                                         </ul>
                                                     </div>
-                                                    <div class="product-hover-action product-hover-action-2">
-                                                        <ul>
-                                                            <li>
-                                                                <a href="#" title="Quick View"
-                                                                    data-bs-toggle="modal"
-                                                                    data-bs-target="#quick_view_modal{{ $item->id }}">
-                                                                    <i class="icon-magnifier"></i>
-                                                                </a>
-                                                            </li>
-                                                            <li class="add-to-cart">
-                                                                <a href="{{ route('cart.store', $item->id) }}"
-                                                                    title="Add to Cart">
-                                                                    <span class="cart-text d-none d-xl-block">Add to
-                                                                        Cart</span>
-                                                                    <span class="d-block d-xl-none"><i
+                                                    @role('customer')
+                                                        <div class="product-hover-action product-hover-action-3">
+                                                            <ul>
+                                                                <li>
+                                                                    <a href="#" title="Quick View"
+                                                                        data-bs-toggle="modal"
+                                                                        data-bs-target="#quick_view_modal{{ $item->id }}">
+                                                                        <i class="icon-magnifier"></i>
+                                                                    </a>
+                                                                </li>
+                                                                {{-- <li class="add-to-cart">
+                                                                    <a href="{{ route('cart.store', $item->id) }}"
+                                                                        title="Add to Cart">
+                                                                        <span class="cart-text d-none d-xl-block">Add
+                                                                            to
+                                                                            Cart</span>
+                                                                        <span class="d-block d-xl-none"><i
                                                                             class="icon-handbag"></i></span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#" title="Quick View"
-                                                                    data-bs-toggle="modal"
-                                                                    data-bs-target="#quick_view_modal">
-                                                                    <i class="icon-shuffle"></i>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
+                                                                    </a>
+                                                                </li> --}}
+                                                                <li>
+                                                                    <a href="{{ route('cart.store', $item->id) }}"
+                                                                        title="Add to Cart">
+                                                                        <i class="icon-handbag"></i>
+                                                                    </a>
+                                                                </li>
+                                                            </ul>
+                                                        </div>
+                                                    @endrole
                                                 </div>
                                                 <div class="product-info">
                                                     <h2 class="product-title"><a
                                                             href="{{ route('bouquet.show', $item->id) }}">{{ $item->kota }}
                                                             {{ $item->name }}</a></h2>
                                                     <div class="product-price">
-                                                        <span>Rp. {{ number_format($item->harga, 2, ',', '.') }}</span>
+                                                        <span>Rp.
+                                                            {{ number_format($item->harga, 2, ',', '.') }}</span>
                                                         @role('penjual')
                                                             @if (Auth::user()->id == $item->user_id)
                                                                 <div class="d-flex justify-content-center">
@@ -333,10 +336,9 @@
                         {{ $bouquet->links() }}
                     </div>
                 </div>
-                <div class="col-lg-3  mb-100">
-                </div>
             </div>
         </div>
+    </div>
     </div>
     <!-- PRODUCT DETAILS AREA END -->
 </x-app-layout>

@@ -10,11 +10,19 @@ use App\Http\Controllers\Controller;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $product = Product::with('toko')->whereHas('toko', function ($query) {
+        $search = $request->search;
+        $data = Product::with('toko')->whereHas('toko', function ($query) {
             $query->where('tokos.status', '=', 'Aktif');
-        })->paginate(12);
+        })
+            ->where(function ($query) use ($search) {
+                $query->where('name', 'like', '%' . $search . '%')
+                    ->orWhere('harga', 'like', '%' . $search . '%')
+                    ->orWhere('kota', 'like', '%' . $search . '%')
+                    ->orWhere('deskripsi', 'like', '%' . $search . '%');
+            });
+        $product = $data->paginate(12);
         $product_populer = Product::with('toko')->orderBy('total_rating', 'desc')->get();
         // dd($product);
         // $product = $produk->paginate(8);

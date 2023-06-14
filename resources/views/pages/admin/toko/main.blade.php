@@ -65,6 +65,7 @@
                                                 <tr>
                                                     <th class="sort" data-sort="customer_name">Nama Toko</th>
                                                     <th class="sort" data-sort="email">Alamat</th>
+                                                    <th class="sort" data-sort="email">No Rekening</th>
                                                     <th class="sort" data-sort="status">Status</th>
                                                     <th class="sort" data-sort="action">Action</th>
                                                 </tr>
@@ -74,6 +75,7 @@
                                                     <tr>
                                                         <td class="customer_name">{{ $item->nama_toko }}</td>
                                                         <td class="email">{{ $item->alamat }}</td>
+                                                        <td class="email">{{ $item->no_rekening }}</td>
                                                         @if ($item->status == 'Aktif')
                                                             <td class="status"><span
                                                                     class="badge badge-soft-success text-uppercase">{{ $item->status }}</span>
@@ -122,7 +124,8 @@
                                                                             <input type="text"
                                                                                 id="customername-field"
                                                                                 class="form-control"
-                                                                                placeholder="Nama Toko" name="nama_toko"
+                                                                                placeholder="Nama Toko"
+                                                                                name="nama_toko"
                                                                                 value="{{ $item->nama_toko }}" />
                                                                         </div>
                                                                         <div class="mb-3">
@@ -132,6 +135,14 @@
                                                                                 id="email-field" class="form-control"
                                                                                 placeholder="Alamat"
                                                                                 value="{{ $item->alamat }}" />
+                                                                        </div>
+                                                                        <div class="mb-3">
+                                                                            <label for="email-field"
+                                                                                class="form-label">No Rekening</label>
+                                                                            <input type="text" name="no_rekening"
+                                                                                id="email-field" class="form-control"
+                                                                                placeholder="No rekening"
+                                                                                value="{{ $item->no_rekening }}" />
                                                                         </div>
                                                                         <div>
                                                                             <label for="status-field"
@@ -263,12 +274,17 @@
                             <div class="mb-3">
                                 <label for="customername-field" class="form-label">Nama Toko</label>
                                 <input type="text" name="nama_toko" id="customername-field" class="form-control"
-                                    placeholder="Enter Name" required />
+                                    placeholder="Nama Toko" required />
                             </div>
                             <div class="mb-3">
                                 <label for="email-field" class="form-label">Alamat</label>
                                 <input type="text" name="alamat" id="email-field" class="form-control"
-                                    placeholder="Enter Email" required />
+                                    placeholder="Alamat" required />
+                            </div>
+                            <div class="mb-3">
+                                <label for="email-field" class="form-label">No Rekening</label>
+                                <input type="text" name="no_rekening" id="email-field" class="form-control"
+                                    placeholder="No Rekening" required />
                             </div>
                             <div class="mb-3">
                                 <label for="status-field" class="form-label">Status</label>

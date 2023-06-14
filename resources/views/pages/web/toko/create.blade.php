@@ -47,6 +47,13 @@
                                 {{ $message }}
                             </div>
                         @enderror
+                        <input type="text" name="no_rekening" placeholder="Masukkan No Rekening Anda"
+                            value="{{ $toko->no_rekening }}" class="form-control @error('alamat') is-invalid @enderror">
+                        @error('no_rekening')
+                            <div class="invalid-feedback mb-4" style="margin-top: -4%">
+                                {{ $message }}
+                            </div>
+                        @enderror
                         <input type="text" name="alamat" placeholder="Masukkan Alamat Toko Anda"
                             value="{{ $toko->alamat }}" class="form-control @error('alamat') is-invalid @enderror">
                         @error('alamat')

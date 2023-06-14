@@ -12,15 +12,16 @@ use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\TestimoniController;
 use App\Http\Controllers\Admin\AuthController;
-use App\Http\Controllers\Admin\BouquetController as AdminBouquetController;
 use App\Http\Controllers\PapanBungaController;
 use App\Http\Controllers\Penjual\TokoController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
-use App\Http\Controllers\Admin\PapanBungaController as AdminPapanBungaController;
 use App\Http\Controllers\Admin\TokoController as AdminTokoController;
+use App\Http\Controllers\Penjual\HomeController as PenjualHomeController;
+use App\Http\Controllers\Admin\BouquetController as AdminBouquetController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Penjual\PesananController as PenjualPesananController;
+use App\Http\Controllers\Admin\PapanBungaController as AdminPapanBungaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -54,7 +55,9 @@ Route::middleware('role:admin')->prefix('admin')->group(function () {
 });
 
 Route::middleware('role:penjual')->prefix('penjual')->group(function () {
+    Route::get('/home', [PenjualHomeController::class, 'index'])->name('home');
     Route::resource('/toko', TokoController::class);
+    Route::get('pdf', [PenjualPesananController::class, 'pdf'])->name('penjual.pdf');
 });
 
 Route::resource('/papanbunga', PapanBungaController::class);
@@ -64,7 +67,7 @@ Route::resource('/bouquet', BouquetController::class);
 
 Route::get('/', [HomeController::class, 'index'])->name('web.home');
 Route::get('cart', [CartController::class, 'index'])->name('cart.index');
-Route::get('/cart/add/{pabung}', [CartController::class, 'store'])->name('cart.store');
+Route::get('/cart/add/{pabung}', [CartController::class, 'store'])->name('cart.store')->middleware('auth');
 Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 
 Route::post('login', [LoginController::class, 'login'])->name('login');
@@ -105,6 +108,7 @@ Route::get('checkout/{checkout}/edit', [CheckoutController::class, 'edit'])->nam
 Route::patch('checkout/{checkout}', [CheckoutController::class, 'update'])->name('checkout.update');
 Route::resource('pesanan', PesananController::class);
 Route::get('list', [PenjualPesananController::class, 'index'])->name('list-pesanan');
+Route::get('list/filter', [PenjualPesananController::class, 'filter'])->name('pesanan.filter');
 Route::patch('pesan/accept/{checkout}', [PenjualPesananController::class, 'accept'])->name('pesan.accept');
 Route::patch('pesan/reject/{checkout}', [PenjualPesananController::class, 'reject'])->name('pesan.reject');
 // Route::resource('pesanan', PenjualPesananController::class);

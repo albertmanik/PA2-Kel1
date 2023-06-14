@@ -18,6 +18,7 @@ class CreateTokoTable extends Migration
             $table->foreignId('user_id');
             $table->string('nama_toko');
             $table->string('alamat');
+            $table->string('no_rekening');
             $table->enum('status', ['Aktif', 'Tidak Aktif'])->default('Aktif');
             $table->integer('total_produk')->nullable();
             $table->foreign('user_id')->references('id')->on('users');

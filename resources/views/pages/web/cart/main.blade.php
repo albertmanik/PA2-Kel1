@@ -89,15 +89,6 @@
                                             @php $total+=$subtotal;@endphp
                                         @endforeach
                                     @endif
-                                    <tr class="cart-coupon-row">
-                                        <td colspan="6">
-                                            <div class="cart-coupon">
-                                                <input type="text" name="cart-coupon" placeholder="Coupon code">
-                                                <button type="submit" class="btn theme-btn-2 btn-effect-2">Apply
-                                                    Coupon</button>
-                                            </div>
-                                        </td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
