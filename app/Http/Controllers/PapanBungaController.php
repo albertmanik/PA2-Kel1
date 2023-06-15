@@ -42,9 +42,11 @@ class PapanBungaController extends Controller
             });
         if (isset($_GET['sort']) && !empty($_GET['sort'])) {
             if ($_GET['sort'] == "LTH") {
-                $data->where('category_id', '1')->orderBy('harga', 'ASC');
+                $data->where('category_id', '1')->orderByRaw("CAST(harga AS DECIMAL(10, 2)) ASC")
+                    ->get();
             } elseif ($_GET['sort'] == "HTL") {
-                $data->where('category_id', '1')->orderBy('harga', 'DESC');
+                $data->where('category_id', '1')->orderByRaw("CAST(harga AS DECIMAL(10, 2)) DESC")
+                    ->get();
             }
         } elseif (isset($_GET['sorts']) && !empty($_GET['sorts'])) {
             if ($_GET['sorts'] == "AJB") {

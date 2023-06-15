@@ -145,6 +145,7 @@
                             </div> <!-- end row-->
                             {{-- <div id="chartContainer"></div> --}}
                             <div id="orderChart"></div>
+                            <div id="penjualanTokoChart"></div>
                         </div> <!-- end .h-100-->
                     </div> <!-- end col -->
                 </div>
@@ -683,17 +684,6 @@
             </div>
 
         </div>
-        <div class="offcanvas-footer border-top p-3 text-center">
-            <div class="row">
-                <div class="col-6">
-                    <button type="button" class="btn btn-light w-100" id="reset-layout">Reset</button>
-                </div>
-                <div class="col-6">
-                    <a href="https://1.envato.market/velzon-admin" target="_blank" class="btn btn-primary w-100">Buy
-                        Now</a>
-                </div>
-            </div>
-        </div>
     </div>
 
     @yield('custom_js')
@@ -770,5 +760,26 @@
         });
     </script> --}}
 
+    <script>
+        const seriesData = {!! json_encode($seriesData) !!};
+
+        Highcharts.chart('penjualanTokoChart', {
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Grafik Order berdasarkan Toko'
+            },
+            xAxis: {
+                categories: ['Jumlah Order']
+            },
+            yAxis: {
+                title: {
+                    text: 'Jumlah Order'
+                }
+            },
+            series: seriesData
+        });
+    </script>
 
 </x-admin-layout>

@@ -97,7 +97,8 @@
                                                         @if (Auth::user()->id == $data->user_id)
                                                         @endif
                                                     @endforeach
-                                                    <p>Transfer Ke Nomor Rekening berikut {{ $data->no_rekening }}</p>
+                                                    <p>Transfer Ke Nomor Rekening berikut {{ $data->no_rekening }} dan
+                                                        Upload Bukti Pembayaran</p>
 
                                                 </div>
                                                 <button class="btn theme-btn-1 btn-effect-1 text-uppercase"

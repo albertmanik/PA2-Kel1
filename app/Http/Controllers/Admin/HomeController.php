@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Carbon\Carbon;
+use App\Models\Toko;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Checkout;
@@ -23,6 +24,26 @@ class HomeController extends Controller
         // $terima = Checkout::where('status', 'terima')->count();
         // $tolak = Checkout::where('status', 'tolak')->count();
         // return view('pages.admin.home.home', compact('customer', 'penjual', 'products', 'menunggu', 'tolak', 'terima'));
+        $data = Checkout::select('tokos.id as toko_id', DB::raw('COUNT(*) as jumlah'))
+            ->join('tokos', 'orders.toko_id', '=', 'tokos.id')
+            ->groupBy('orders.toko_id')
+            ->get();
+
+        // Mendapatkan daftar toko
+        $tokos = Toko::pluck('nama_toko', 'id')->toArray();
+
+        // Membuat data series
+        $seriesData = [];
+        foreach ($data as $item) {
+            $tokoId = $item->toko_id;
+            $jumlah = $item->jumlah;
+
+            $seriesData[] = [
+                'name' => $tokos[$tokoId],
+                'data' => [$jumlah],
+            ];
+        }
+
         $data = DB::table('orders')
             ->select(DB::raw("MONTH(created_at) as month, status, COUNT(*) as total"))
             ->groupBy('month', 'status')
@@ -49,7 +70,7 @@ class HomeController extends Controller
             ];
         }
 
-        return view('pages.admin.home.home', compact('customer', 'penjual', 'products', 'chartData', 'statuses'));
+        return view('pages.admin.home.home', compact('customer', 'penjual', 'products', 'chartData', 'statuses', 'seriesData'));
     }
 
     // public function chartData()

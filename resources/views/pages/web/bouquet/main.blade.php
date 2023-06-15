@@ -108,34 +108,14 @@
                                                                 <input type="text" value="02" name="qtybutton" class="cart-plus-minus-box">
                                                             </div>
                                                         </li> --}}
-                                                            <li>
-                                                                <a href="{{ route('cart.store', $item->id) }}"
-                                                                    class="theme-btn-1 btn btn-effect-1 d-add-to-cart">
-                                                                    <span>ADD TO CART</span>
-                                                                </a>
-                                                            </li>
-                                                            <li>
-                                                                <a href="#"
-                                                                    class="btn btn-effect-1 d-add-to-wishlist"
-                                                                    title="Add to Cart" data-bs-toggle="modal"
-                                                                    data-bs-target="#liton_wishlist_modal">
-                                                                    <i class="icon-heart"></i>
-                                                                </a>
-                                                            </li>
-                                                        </ul>
-                                                    </div>
-                                                    <div class="ltn__social-media mb-30">
-                                                        <ul>
-                                                            <li class="d-meta-title">Share:</li>
-                                                            <li><a href="#" title="Facebook"><i
-                                                                        class="icon-social-facebook"></i></a></li>
-                                                            <li><a href="#" title="Twitter"><i
-                                                                        class="icon-social-twitter"></i></a></li>
-                                                            <li><a href="#" title="Pinterest"><i
-                                                                        class="icon-social-pinterest"></i></a></li>
-                                                            <li><a href="#" title="Instagram"><i
-                                                                        class="icon-social-instagram"></i></a></li>
-
+                                                            @role('customer')
+                                                                <li>
+                                                                    <a href="{{ route('cart.store', $item->id) }}"
+                                                                        class="theme-btn-1 btn btn-effect-1 d-add-to-cart">
+                                                                        <span>ADD TO CART</span>
+                                                                    </a>
+                                                                </li>
+                                                            @endrole
                                                         </ul>
                                                     </div>
                                                     <div
@@ -265,17 +245,16 @@
                                                             <li class="badge-1">Hot</li>
                                                         </ul>
                                                     </div>
-                                                    @role('customer')
-                                                        <div class="product-hover-action product-hover-action-3">
-                                                            <ul>
-                                                                <li>
-                                                                    <a href="#" title="Quick View"
-                                                                        data-bs-toggle="modal"
-                                                                        data-bs-target="#quick_view_modal{{ $item->id }}">
-                                                                        <i class="icon-magnifier"></i>
-                                                                    </a>
-                                                                </li>
-                                                                {{-- <li class="add-to-cart">
+                                                    <div class="product-hover-action product-hover-action-3">
+                                                        <ul>
+                                                            <li>
+                                                                <a href="#" title="Quick View"
+                                                                    data-bs-toggle="modal"
+                                                                    data-bs-target="#quick_view_modal{{ $item->id }}">
+                                                                    <i class="icon-magnifier"></i>
+                                                                </a>
+                                                            </li>
+                                                            {{-- <li class="add-to-cart">
                                                                     <a href="{{ route('cart.store', $item->id) }}"
                                                                         title="Add to Cart">
                                                                         <span class="cart-text d-none d-xl-block">Add
@@ -285,15 +264,16 @@
                                                                             class="icon-handbag"></i></span>
                                                                     </a>
                                                                 </li> --}}
+                                                            @role('customert')
                                                                 <li>
                                                                     <a href="{{ route('cart.store', $item->id) }}"
                                                                         title="Add to Cart">
                                                                         <i class="icon-handbag"></i>
                                                                     </a>
                                                                 </li>
-                                                            </ul>
-                                                        </div>
-                                                    @endrole
+                                                            @endrole
+                                                        </ul>
+                                                    </div>
                                                 </div>
                                                 <div class="product-info">
                                                     <h2 class="product-title"><a

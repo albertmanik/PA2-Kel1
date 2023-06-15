@@ -22,6 +22,7 @@ use App\Http\Controllers\Admin\BouquetController as AdminBouquetController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Penjual\PesananController as PenjualPesananController;
 use App\Http\Controllers\Admin\PapanBungaController as AdminPapanBungaController;
+use App\Http\Controllers\FAQController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,7 +36,7 @@ use App\Http\Controllers\Admin\PapanBungaController as AdminPapanBungaController
 */
 
 Route::middleware('role:admin')->prefix('admin')->group(function () {
-    Route::get('/home', [AdminHomeController::class, 'index'])->name('home');
+    Route::get('/home', [AdminHomeController::class, 'index'])->name('home')->middleware('guest');
 
     Route::resource('/store', AdminTokoController::class);
 
@@ -60,12 +61,13 @@ Route::middleware('role:penjual')->prefix('penjual')->group(function () {
     Route::get('pdf', [PenjualPesananController::class, 'pdf'])->name('penjual.pdf');
 });
 
-Route::resource('/papanbunga', PapanBungaController::class);
-Route::resource('/bouquet', BouquetController::class);
+Route::resource('/papanbunga', PapanBungaController::class)->middleware('auth');
+Route::resource('/bouquet', BouquetController::class)->middleware('auth');
 // Route::resource('cart', CartController::class);
 
 
 Route::get('/', [HomeController::class, 'index'])->name('web.home');
+Route::get('/faq', [FAQController::class, 'index'])->name('web.faq');
 Route::get('cart', [CartController::class, 'index'])->name('cart.index');
 Route::get('/cart/add/{pabung}', [CartController::class, 'store'])->name('cart.store')->middleware('auth');
 Route::post('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');

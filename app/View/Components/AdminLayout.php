@@ -1,24 +1,24 @@
-<?php
+z<?php
 
-namespace App\View\Components;
+    namespace App\View\Components;
 
-use Illuminate\View\Component;
+    use Illuminate\View\Component;
 
-class AdminLayout extends Component
-{
-    public $title;
-    public function __construct($title)
+    class AdminLayout extends Component
     {
-        $this->title = $title ?? '';
-    }
+        public $title;
+        public function __construct($title)
+        {
+            $this->title = $title ?? '';
+        }
 
-    /**
-     * Get the view / contents that represent the component.
-     *
-     * @return \Illuminate\Contracts\View\View|\Closure|string
-     */
-    public function render()
-    {
-        return view('theme.admin.main');
+        /**
+         * Get the view / contents that represent the component.
+         *
+         * @return \Illuminate\Contracts\View\View|\Closure|string
+         */
+        public function render()
+        {
+            return view('theme.admin.main');
+        }
     }
-}

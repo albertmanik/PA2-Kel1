@@ -36,9 +36,11 @@ class BouquetController extends Controller
 
         if (isset($_GET['sort']) && !empty($_GET['sort'])) {
             if ($_GET['sort'] == "LTH") {
-                $data->where('category_id', '2')->orderBy('harga', 'ASC');
+                $data->where('category_id', '2')->orderByRaw("CAST(harga AS DECIMAL(10, 2)) ASC")
+                    ->get();
             } elseif ($_GET['sort'] == "HTL") {
-                $data->where('category_id', '2')->orderBy('harga', 'DESC');
+                $data->where('category_id', '2')->orderByRaw("CAST(harga AS DECIMAL(10, 2)) DESC")
+                    ->get();
             }
         } elseif (isset($_GET['sorts']) && !empty($_GET['sorts'])) {
             if ($_GET['sorts'] == "AJB") {
@@ -129,7 +131,6 @@ class BouquetController extends Controller
         $bouquet->deskripsi = $request->deskripsi;
         $bouquet->no_hp = $request->no_hp;
         $bouquet->gambar = $namaFile;
-
         $bouquet->save();
         return redirect()->route('bouquet.index')->with('success', 'Product Berhasil Ditambah');
     }
@@ -195,7 +196,7 @@ class BouquetController extends Controller
         $bouquet->kota = $request->kota;
         $bouquet->deskripsi = $request->deskripsi;
         $bouquet->no_hp = $request->no_hp;
-        dd($bouquet);
+        // dd($bouquet);
         $bouquet->save();
 
         return redirect()->route('bouquet.index')->with('info', 'Product Berhasil Diubah');

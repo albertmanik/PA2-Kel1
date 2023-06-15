@@ -158,20 +158,6 @@
                                             </li>
                                         </ul>
                                     </div>
-                                    <div class="ltn__social-media mb-30">
-                                        <ul>
-                                            <li class="d-meta-title">Share:</li>
-                                            <li><a href="#" title="Facebook"><i
-                                                        class="icon-social-facebook"></i></a></li>
-                                            <li><a href="#" title="Twitter"><i
-                                                        class="icon-social-twitter"></i></a></li>
-                                            <li><a href="#" title="Pinterest"><i
-                                                        class="icon-social-pinterest"></i></a></li>
-                                            <li><a href="#" title="Instagram"><i
-                                                        class="icon-social-instagram"></i></a></li>
-
-                                        </ul>
-                                    </div>
                                     {{-- <div class="ltn__safe-checkout d-none">
                                         <h5>Guaranteed Safe Checkout</h5>
                                         <img src="{{ asset('papanbunga/' . $bungapapan->gambar) }}"
@@ -235,7 +221,7 @@
                                             </ul> --}}
                                             @if ($rating >= 0 && $rating <= 1)
                                                 <label>
-                                                    <span class="icon-star"
+                                                    <span class="icon"
                                                         style="color: rgb(221, 221, 79) !important;">★</span>
                                                     <span class="icon"
                                                         style="font-size: 17px">&nbsp;&nbsp;{{ number_format($rating, 1, ',', '.') }}</span>
@@ -321,10 +307,10 @@
                                                             @if ($item->product_id == $papanbunga->id)
                                                                 <li>
                                                                     <div class="ltn__comment-item clearfix">
-                                                                        <div class="ltn__commenter-img">
+                                                                        {{-- <div class="ltn__commenter-img">
                                                                             <img src="img/testimonial/1.jpg"
                                                                                 alt="Image">
-                                                                        </div>
+                                                                        </div> --}}
                                                                         <div class="ltn__commenter-comment">
                                                                             <h6><a
                                                                                     href="#">{{ Auth::guard('web')->user()->username }}</a>
@@ -386,9 +372,7 @@
                                                                             </div>
                                                                             <p>{{ $item->review }}</p>
                                                                             <span
-                                                                                class="ltn__comment-reply-btn">September
-                                                                                3,
-                                                                                2020</span>
+                                                                                class="ltn__comment-reply-btn">{{ \Carbon\Carbon::parse($item->created_at)->format('Y-m-d H:i') }}</span>
                                                                         </div>
                                                                     </div>
                                                                 </li>

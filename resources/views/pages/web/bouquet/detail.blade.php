@@ -149,26 +149,14 @@
                                     </div>
                                     <div class="ltn__product-details-menu-2 product-cart-wishlist-btn mb-30">
                                         <ul>
-                                            <li>
-                                                <a href="#" class="theme-btn-1 btn btn-effect-1 d-add-to-cart">
-                                                    <span>ADD TO CART</span>
-                                                    @method('POST')
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="ltn__social-media mb-30">
-                                        <ul>
-                                            <li class="d-meta-title">Share:</li>
-                                            <li><a href="#" title="Facebook"><i
-                                                        class="icon-social-facebook"></i></a></li>
-                                            <li><a href="#" title="Twitter"><i
-                                                        class="icon-social-twitter"></i></a></li>
-                                            <li><a href="#" title="Pinterest"><i
-                                                        class="icon-social-pinterest"></i></a></li>
-                                            <li><a href="#" title="Instagram"><i
-                                                        class="icon-social-instagram"></i></a></li>
-
+                                            @role('customer')
+                                                <li>
+                                                    <a href="{{ route('cart.store', $bouquet->id) }}"
+                                                        class="theme-btn-1 btn btn-effect-1 d-add-to-cart">
+                                                        <span>ADD TO CART</span>
+                                                    </a>
+                                                </li>
+                                            @endrole
                                         </ul>
                                     </div>
                                     {{-- <div class="ltn__safe-checkout d-none">
@@ -321,10 +309,10 @@
                                                             @if ($item->product_id == $bouquet->id)
                                                                 <li>
                                                                     <div class="ltn__comment-item clearfix">
-                                                                        <div class="ltn__commenter-img">
+                                                                        {{-- <div class="ltn__commenter-img">
                                                                             <img src="img/testimonial/1.jpg"
                                                                                 alt="Image">
-                                                                        </div>
+                                                                        </div> --}}
                                                                         <div class="ltn__commenter-comment">
                                                                             <h6><a
                                                                                     href="#">{{ Auth::guard('web')->user()->username }}</a>
@@ -386,7 +374,7 @@
                                                                             </div>
                                                                             <p>{{ $item->review }}</p>
                                                                             <span
-                                                                                class="ltn__comment-reply-btn">{{ $item->created_at->format('d/m/Y H:i:s') }}</span>
+                                                                                class="ltn__comment-reply-btn">{{ \Carbon\Carbon::parse($item->created_at)->format('Y-m-d H:i') }}</span>
                                                                         </div>
                                                                     </div>
                                                                 </li>
@@ -456,208 +444,11 @@
                             <div class="tab-pane fade" id="liton_tab_details_1_3">
                                 <div class="ltn__shop-details-tab-content-inner">
                                     <!-- comment-area -->
-                                    <div class="ltn__comment-area mb-30">
-                                        <h4 class="title-2">Comments (5)</h4>
-                                        <div class="ltn__comment-inner">
-                                            <ul>
-                                                <li>
-                                                    <div class="ltn__comment-item clearfix">
-                                                        <div class="ltn__commenter-img">
-                                                            <img src="img/testimonial/1.jpg" alt="Image">
-                                                        </div>
-                                                        <div class="ltn__commenter-comment">
-                                                            <h6><a href="#">Adam Smit</a></h6>
-                                                            <span class="comment-date">20th May 2020</span>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                                Doloribus, omnis fugit corporis iste magnam ratione.</p>
-                                                            <a href="#" class="ltn__comment-reply-btn"><i
-                                                                    class="fas fa-reply"></i>Reply</a>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="ltn__comment-item clearfix">
-                                                        <div class="ltn__commenter-img">
-                                                            <img src="img/testimonial/3.jpg" alt="Image">
-                                                        </div>
-                                                        <div class="ltn__commenter-comment">
-                                                            <h6><a href="#">Adam Smit</a></h6>
-                                                            <span class="comment-date">20th May 2020</span>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                                Doloribus, omnis fugit corporis iste magnam ratione.</p>
-                                                            <a href="#" class="ltn__comment-reply-btn"><i
-                                                                    class="fas fa-reply"></i>Reply</a>
-                                                        </div>
-                                                    </div>
-                                                    <ul>
-                                                        <li>
-                                                            <div class="ltn__comment-item clearfix">
-                                                                <div class="ltn__commenter-img">
-                                                                    <img src="img/testimonial/4.jpg" alt="Image">
-                                                                </div>
-                                                                <div class="ltn__commenter-comment">
-                                                                    <h6><a href="#">Adam Smit</a></h6>
-                                                                    <span class="comment-date">20th May 2020</span>
-                                                                    <p>Lorem ipsum dolor sit amet, consectetur
-                                                                        adipisicing elit. Doloribus, omnis fugit
-                                                                        corporis iste magnam ratione.</p>
-                                                                    <a href="#"
-                                                                        class="ltn__comment-reply-btn"><i
-                                                                            class="fas fa-reply"></i>Reply</a>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="ltn__comment-item clearfix">
-                                                                <div class="ltn__commenter-img">
-                                                                    <img src="img/testimonial/1.jpg" alt="Image">
-                                                                </div>
-                                                                <div class="ltn__commenter-comment">
-                                                                    <h6><a href="#">Adam Smit</a></h6>
-                                                                    <span class="comment-date">20th May 2020</span>
-                                                                    <p>Lorem ipsum dolor sit amet, consectetur
-                                                                        adipisicing elit. Doloribus, omnis fugit
-                                                                        corporis iste magnam ratione.</p>
-                                                                    <a href="#"
-                                                                        class="ltn__comment-reply-btn"><i
-                                                                            class="fas fa-reply"></i>Reply</a>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <div class="ltn__comment-item clearfix">
-                                                        <div class="ltn__commenter-img">
-                                                            <img src="img/testimonial/2.jpg" alt="Image">
-                                                        </div>
-                                                        <div class="ltn__commenter-comment">
-                                                            <h6><a href="#">Adam Smit</a></h6>
-                                                            <span class="comment-date">20th May 2020</span>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                                Doloribus, omnis fugit corporis iste magnam ratione.</p>
-                                                            <a href="#" class="ltn__comment-reply-btn"><i
-                                                                    class="fas fa-reply"></i>Reply</a>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
                                     <!-- comment-reply -->
-                                    <div class="ltn__comment-reply-area ltn__form-box mb-60">
-                                        <form action="#">
-                                            <h4 class="title-2">Leave a Reply</h4>
-                                            <div class="input-item input-item-textarea ltn__custom-icon">
-                                                <textarea placeholder="Type your comments...."></textarea>
-                                            </div>
-                                            <div class="input-item input-item-name ltn__custom-icon">
-                                                <input type="text" placeholder="Type your name....">
-                                            </div>
-                                            <div class="input-item input-item-email ltn__custom-icon">
-                                                <input type="email" placeholder="Type your email....">
-                                            </div>
-                                            <div class="input-item input-item-website ltn__custom-icon">
-                                                <input type="text" name="website"
-                                                    placeholder="Type your website....">
-                                            </div>
-                                            <label class="mb-0"><input type="checkbox" name="agree"> Save my
-                                                name, email, and website in this browser for the next time I
-                                                comment.</label>
-                                            <div class="btn-wrapper">
-                                                <button class="btn theme-btn-1 btn-effect-1 text-uppercase"
-                                                    type="submit"><i class="far fa-comments"></i> Post
-                                                    Comment</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="liton_tab_details_1_4">
-                                <div class="ltn__shop-details-tab-content-inner">
-                                    <h4 class="title-2">Shipping policy for our store</h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam voluptates rerum
-                                        neque ea libero numquam officiis ipsum, consectetur ducimus dicta in earum
-                                        repellat sunt ab odit laboriosam cupiditate ipsam, doloremque.</p>
-                                    <ul>
-                                        <li>1-2 business days (Typically by end of day)</li>
-                                        <li><a href="#">30 days money back guaranty</a></li>
-                                        <li>24/7 live support</li>
-                                        <li>odio dignissim qui blandit praesent</li>
-                                        <li>luptatum zzril delenit augue duis dolore</li>
-                                        <li>te feugait nulla facilisi.</li>
-                                    </ul>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, quia vel
-                                        eligendi ipsam. Ea, quasi quam ducimus recusandae unde ipsa nam rem a minus
-                                        tenetur quae sint voluptatem voluptate inventore.</p>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="liton_tab_details_1_5">
                                 <div class="ltn__shop-details-tab-content-inner">
-
-                                    <div class="table-1 mb-20">
-                                        <table class="">
-                                            <tbody>
-                                                <tr>
-                                                    <th>SIZE</th>
-                                                    <th>XS</th>
-                                                    <th>S</th>
-                                                    <th>S/M</th>
-                                                    <th>M</th>
-                                                    <th>M/L</th>
-                                                    <th>L</th>
-                                                    <th>XL</th>
-                                                </tr>
-                                                <tr data-bs-region="uk">
-                                                    <th>UK</th>
-                                                    <td>4</td>
-                                                    <td>6 - 8</td>
-                                                    <td>6 - 10</td>
-                                                    <td>10 - 12</td>
-                                                    <td>12 - 16</td>
-                                                    <td>14 - 16</td>
-                                                    <td>18</td>
-                                                </tr>
-                                                <tr data-bs-region="eur">
-                                                    <th>
-                                                        <span class="mobile-show">EUR</span><span
-                                                            class="mobile-none">EUROPE</span>
-                                                    </th>
-                                                    <td>32</td>
-                                                    <td>34 - 36</td>
-                                                    <td>34 - 38</td>
-                                                    <td>38 - 40</td>
-                                                    <td>40 - 44</td>
-                                                    <td>42 - 44</td>
-                                                    <td>46</td>
-                                                </tr>
-                                                <tr data-bs-region="usa">
-                                                    <th>
-                                                        <span>USA/</span><span class="mobile-none">CANADA</span><span
-                                                            class="mobile-show"> CA</span>
-                                                    </th>
-                                                    <td>0</td>
-                                                    <td>2 - 4</td>
-                                                    <td>2 - 6</td>
-                                                    <td>6 - 8</td>
-                                                    <td>8 - 12</td>
-                                                    <td>10 - 12</td>
-                                                    <td>14</td>
-                                                </tr>
-                                                <tr data-bs-region="aus">
-                                                    <th>AUS / NZ</th>
-                                                    <td>4</td>
-                                                    <td>6 - 8</td>
-                                                    <td>6 - 10</td>
-                                                    <td>10 - 12</td>
-                                                    <td>12 - 16</td>
-                                                    <td>14 - 16</td>
-                                                    <td>18</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-
                                 </div>
                             </div>
                         </div>

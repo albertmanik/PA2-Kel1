@@ -84,63 +84,62 @@
                         <input type="text" name="toko_id"
                             @foreach ($toko as $data)
                                     @if (Auth::user()->id == $data->user_id)
+                                        value="{{ $data->nama_toko }} ">
                                     @endif @endforeach
-                            value="{{ $data->nama_toko }} ">
-                        <div>
-                            <div id="select" class="input-item">
-                                <select id="select" class="form-control @error('kota') is-invalid @enderror"
-                                    name="kota">
-                                    <option id="select" selected disabled>Pilih Kecamatan Anda</option>
-                                    @foreach ($subdistricts as $subdistrict)
-                                        <option value="{{ $subdistrict->name }}"
-                                            {{ $papanbunga->kota == $subdistrict->id ? 'selected' : '' }}>
-                                            {{ $subdistrict->name }}</option>
-                                    @endforeach
-                                </select>
-                                @error('kota')
-                                    <div class="invalid-feedback mb-4" style="margin-top: -4%">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
-                            </div>
+                            <div>
+                        <div id="select" class="input-item">
+                            <select id="select" class="form-control @error('kota') is-invalid @enderror"
+                                name="kota">
+                                <option id="select" selected disabled>Pilih Kecamatan Anda</option>
+                                @foreach ($subdistricts as $subdistrict)
+                                    <option value="{{ $subdistrict->name }}"
+                                        {{ $papanbunga->kota == $subdistrict->id ? 'selected' : '' }}>
+                                        {{ $subdistrict->name }}</option>
+                                @endforeach
+                            </select>
+                            @error('kota')
+                                <div class="invalid-feedback mb-4" style="margin-top: -4%">
+                                    {{ $message }}
+                                </div>
+                            @enderror
                         </div>
-                        <input class="form-control @error('harga') is-invalid @enderror" type="text" name="harga"
-                            placeholder="Masukkan Harga Produk Anda" value="{{ $papanbunga->harga }}">
-                        @error('harga')
-                            <div class="invalid-feedback mb-4" style="margin-top: -4%">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                        <input class="form-control @error('deskripsi') is-invalid @enderror" type="text"
-                            name="deskripsi" placeholder="Masukkan Deskripsi Produk Anda"
-                            value="{{ $papanbunga->deskripsi }}">
-                        @error('deskripsi')
-                            <div class="invalid-feedback mb-4" style="margin-top: -4%">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                        <input class="form-control @error('no_hp') is-invalid @enderror" type="text" name="no_hp"
-                            placeholder="Masukkan No Hp Anda" value="{{ Auth::guard('web')->user()->no_telp }}">
-                        @error('no_hp')
-                            <div class="invalid-feedback mb-4" style="margin-top: -4%">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                        <input type="file" name="gambar" class="form-control @error('gambar') is-invalid @enderror"
-                            placeholder="Masukkan Gambar Produk Anda">{{ $papanbunga->gambar }}
-                        <br>
-                        @error('gambar')
-                            <div class="invalid-feedback mb-4" style="margin-top: -4%">
-                                {{ $message }}
-                            </div>
-                        @enderror
-                        <div class="btn-wrapper">
-                            <button class="theme-btn-1 btn reverse-color btn-block" type="submit">Save</button>
-                        </div>
-                        </form>
                     </div>
+                    <input class="form-control @error('harga') is-invalid @enderror" type="text" name="harga"
+                        placeholder="Masukkan Harga Produk Anda" value="{{ $papanbunga->harga }}">
+                    @error('harga')
+                        <div class="invalid-feedback mb-4" style="margin-top: -4%">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                    <input class="form-control @error('deskripsi') is-invalid @enderror" type="text" name="deskripsi"
+                        placeholder="Masukkan Deskripsi Produk Anda" value="{{ $papanbunga->deskripsi }}">
+                    @error('deskripsi')
+                        <div class="invalid-feedback mb-4" style="margin-top: -4%">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                    <input class="form-control @error('no_hp') is-invalid @enderror" type="text" name="no_hp"
+                        placeholder="Masukkan No Hp Anda" value="{{ Auth::guard('web')->user()->no_telp }}">
+                    @error('no_hp')
+                        <div class="invalid-feedback mb-4" style="margin-top: -4%">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                    <input type="file" name="gambar" class="form-control @error('gambar') is-invalid @enderror"
+                        placeholder="Masukkan Gambar Produk Anda">{{ $papanbunga->gambar }}
+                    <br>
+                    @error('gambar')
+                        <div class="invalid-feedback mb-4" style="margin-top: -4%">
+                            {{ $message }}
+                        </div>
+                    @enderror
+                    <div class="btn-wrapper">
+                        <button class="theme-btn-1 btn reverse-color btn-block" type="submit">Save</button>
+                    </div>
+                    </form>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 </x-app-layout>

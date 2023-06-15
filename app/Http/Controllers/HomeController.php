@@ -23,7 +23,7 @@ class HomeController extends Controller
                     ->orWhere('deskripsi', 'like', '%' . $search . '%');
             });
         $product = $data->paginate(12);
-        $product_populer = Product::with('toko')->orderBy('total_rating', 'desc')->get();
+        $product_populer = Product::with('toko')->orderBy('total_rating', 'desc')->paginate(4);
         // dd($product);
         // $product = $produk->paginate(8);
         // $reviewCount = Review::where('product_id', $product->id)->count();

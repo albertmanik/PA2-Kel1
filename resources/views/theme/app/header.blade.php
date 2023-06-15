@@ -97,6 +97,8 @@
                                             <li><a href="{{ route('bouquet.index') }}">Bouquet</a></li>
                                         </ul>
                                     </li>
+                                    <li><a href="{{ route('web.faq') }}">FAQ</a>
+                                    </li>
                                     {{-- <li class="menu-icon"><a href="#">Shop</a>
                                         <ul>
                                             <li><a href="{{ url('/papanbunga') }}">Papan Bunga</a></li>

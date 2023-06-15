@@ -19,15 +19,12 @@
                                                             <h6
                                                                 class="slide-sub-title ltn__secondary-color slide-title-line-2 animated">
                                                                 Blooms Florist</h6>
-                                                            <h1 class="slide-title animated ">Get Up To 75%</h1>
+                                                            <h1 class="slide-title animated ">Selamat Datang</h1>
                                                             <div class="slide-brief animated">
-                                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing
-                                                                    elit, sed do eiusmod tempor incididunt ut labore.
-                                                                </p>
                                                             </div>
                                                             <div class="btn-wrapper animated">
                                                                 <a href="{{ route('papanbunga.index') }}"
-                                                                    class="theme-btn-1 btn btn-round">Shop Now</a>
+                                                                    class="theme-btn-1 btn btn-round">Tambah Produk</a>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -56,15 +53,12 @@
                                                             <h6
                                                                 class="slide-sub-title ltn__secondary-color slide-title-line-2 animated">
                                                                 Blooms Florist</h6>
-                                                            <h1 class="slide-title animated ">Get Up To 75%</h1>
+                                                            <h1 class="slide-title animated ">Selamat Datang</h1>
                                                             <div class="slide-brief animated">
-                                                                <p>Lorem ipsum dolor sit amet, consectetur adipisicing
-                                                                    elit, sed do eiusmod tempor incididunt ut labore.
-                                                                </p>
                                                             </div>
                                                             <div class="btn-wrapper animated">
                                                                 <a href="service.html"
-                                                                    class="theme-btn-1 btn btn-round">Shop Now</a>
+                                                                    class="theme-btn-1 btn btn-round">Tambah Produk</a>
                                                             </div>
                                                         </div>
                                                     </div>
