@@ -116,6 +116,7 @@ class CheckoutController extends Controller
         $checkout->name = $request->name;
         $checkout->no_hp = $request->no_hp;
         $checkout->kota = $request->kota;
+        $checkout->pembayaran = $request->pembayaran;
         $checkout->alamat = $request->alamat;
         $checkout->ucapan = $request->ucapan;
         // dd($checkout);

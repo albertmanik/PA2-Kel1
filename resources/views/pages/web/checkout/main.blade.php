@@ -99,11 +99,11 @@
                                                 <div id="checkout_accordion_1">
                                                     <!-- card -->
                                                     <div class="card">
-                                                        <div class="collapsed ltn__card-title" data-bs-toggle="collapse"
-                                                            data-bs-target="#faq-item-2-1" aria-expanded="false">
+                                                        <div data-bs-toggle="collapse" data-bs-target="#faq-item-2-1"
+                                                            aria-expanded="true">
+                                                            <input id="shippingMethod01" name="pembayaran"
+                                                                type="radio" value="DP" class="form-check-input">
                                                             Bayar Setengah
-                                                            <input id="shippingMethod01" name="payment" type="radio"
-                                                                value="Cash" class="form-check-input" checked>
                                                         </div>
                                                         @php
                                                             $userId = Auth::id();
@@ -119,7 +119,7 @@
                                                                 @php $total+=$subtotal;@endphp
                                                             @endforeach
                                                         @endif
-                                                        <div id="faq-item-2-1" class="collapse"
+                                                        <div id="faq-item-2-1" class="collapse show"
                                                             data-bs-parent="#checkout_accordion_1">
                                                             <div class="card-body">
                                                                 <p>Silahkan Bayar DP Sebesar Rp.
@@ -130,11 +130,13 @@
                                                     </div>
                                                     <!-- card -->
                                                     <div class="card">
-                                                        <h5 class="ltn__card-title" data-bs-toggle="collapse"
-                                                            data-bs-target="#faq-item-2-2" aria-expanded="true">
+                                                        <div data-bs-toggle="collapse" data-bs-target="#faq-item-2-2"
+                                                            aria-expanded="false">
+                                                            <input id="shippingMethod01" name="pembayaran"
+                                                                type="radio" value="Full" class="form-check-input">
                                                             Bayar Full
-                                                        </h5>
-                                                        <div id="faq-item-2-2" class="collapse show"
+                                                        </div>
+                                                        <div id="faq-item-2-2" class="collapse"
                                                             data-bs-parent="#checkout_accordion_1">
                                                             <div class="card-body">
                                                                 <p>Silahkan bayar sesuai dengan total harga</p>
@@ -172,9 +174,14 @@
                                                         <strong>Estimasi Pengiriman 3 Hari</strong>
                                                     </h6>
                                                 </div>
-                                                <button class="btn theme-btn-1 btn-effect-1 text-uppercase"
+                                                <button onclick="payment()"
+                                                    class="btn theme-btn-1 btn-effect-1 text-uppercase"
                                                     type="submit">Place
                                                     order</button>
+                                                {{-- <a href="javascript:;" onclick="payment()"
+                                                    class="btn theme-btn-1 btn-effect-1 text-uppercase"
+                                                    data-nexttab="pills-payment-tab">Complete
+                                                    Order</a> --}}
                                 </form>
                             </div>
                         </div>
@@ -218,4 +225,12 @@
     </div>
     </div>
     <!-- WISHLIST AREA START -->
+    @section('custom_js')
+        <script>
+            function payment() {
+                var payment = $('input[name="pembayaran"]:checked').val();
+                console.log(payment);
+            }
+        </script>
+    @endsection
 </x-app-layout>
