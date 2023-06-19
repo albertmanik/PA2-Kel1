@@ -50,4 +50,13 @@ class User extends Authenticatable
     {
         return $this->hasOne(Toko::class);
     }
+    public function reviews()
+    {
+        // return $this->hasManyThrough(Review::class, Product::class);
+        return $this->hasMany(Review::class);
+    }
+    public function orders()
+    {
+        return $this->hasMany(Checkout::class);
+    }
 }

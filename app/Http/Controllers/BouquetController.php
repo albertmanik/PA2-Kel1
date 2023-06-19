@@ -213,6 +213,10 @@ class BouquetController extends Controller
         $file_path = public_path('bouquets/' . $bouquet->gambar);
         unlink($file_path);
         $bouquet->delete();
-        return redirect()->route('bouquet.index')->with('success', 'Berhasil Di hapus');
+        // return redirect()->route('bouquet.index')->with('success', 'Berhasil Di hapus');
+        return response()->json([
+            'alert' => 'reload',
+            'message' => 'Berhasil menghapus Produk',
+        ]);
     }
 }

@@ -335,15 +335,11 @@
                                                                     <div class="d-flex justify-content-center">
                                                                         <a class="submit-button-1 mx-2"
                                                                             href="{{ route('papanbunga.edit', $item->id) }}">Edit</a>
-                                                                        {{-- <a>Hapus</a> --}}
-                                                                        <form onsubmit="return confirm('Apakah Anda Yakin ?');"
-                                                                            action="{{ route('papanbunga.destroy', $item->id) }}"
-                                                                            method="POST">
-                                                                            @csrf
-                                                                            @method('delete')
-                                                                            <button type="submit"
-                                                                                class="submit-button-1">Hapus</button>
-                                                                        </form>
+                                                                        <a href="javascript:;"
+                                                                            onclick="confirmDelete('{{ route('papanbunga.destroy', $item->id) }}');"
+                                                                            class="text-danger d-inline-block remove-item-btn">
+                                                                            <button class="submit-button-1">Hapus</button>
+                                                                        </a>
                                                                     </div>
                                                                 @endif
                                                             @endrole
@@ -369,6 +365,49 @@
         </div>
     </div>
     <!-- PRODUCT DETAILS AREA END -->
+    <script>
+        function confirmDelete(route) {
+            handle_confirm('Apakah Anda Yakin?', 'Yakin', 'Tidak', 'DELETE', route);
+        }
+
+        function handle_confirm(title, confirm_title, deny_title, method, route) {
+            var csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+            Swal.fire({
+                title: title,
+                showDenyButton: true,
+                showCancelButton: false,
+                confirmButtonText: confirm_title,
+                denyButtonText: deny_title,
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajaxSetup({
+                        headers: {
+                            'X-CSRF-Token': csrfToken
+                        }
+                    });
+                    $.ajax({
+                        type: 'POST',
+                        url: route,
+                        data: {
+                            _method: 'DELETE',
+                        },
+                        dataType: 'json',
+                        success: function(response) {
+                            if (response.alert === 'reload') {
+                                Swal.fire(response.message, '', response.alert).then(() => {
+                                    location.reload();
+                                });
+                            } else {
+                                Swal.fire(response.message, '', response.alert);
+                            }
+                        }
+                    });
+                } else if (result.isDenied) {
+                    Swal.fire('Konfirmasi dibatalkan', '', 'info');
+                }
+            });
+        }
+    </script>
     <script>
         function tambah() {
             var value = parseInt($('.product-quantity').val());

@@ -147,7 +147,7 @@
             series: data,
         });
     </script> --}}
-    <script>
+    {{-- <script>
         // Menggunakan data yang diperoleh dari PHP
         const data = {!! json_encode($seriesData) !!};
         const tokos = {!! json_encode($tokos) !!};
@@ -188,8 +188,54 @@
         } else {
             document.getElementById('container').innerHTML = '';
         }
-    </script>
+    </script> --}}
+    @if ($orderCounts !== null)
+        <script>
+            const orderCounts = {!! json_encode($orderCounts) !!};
 
+            const months = Object.keys(orderCounts);
+            const status = Object.keys(orderCounts[months[0]]);
 
+            const seriesData = status.map((statusKey) => ({
+                name: statusKey,
+                data: months.map((monthKey) => orderCounts[monthKey][statusKey] || 0)
+            }));
 
+            const monthNames = {
+                1: 'Januari',
+                2: 'Februari',
+                3: 'Maret',
+                4: 'April',
+                5: 'Mei',
+                6: 'Juni',
+                7: 'Juli',
+                8: 'Agustus',
+                9: 'September',
+                10: 'Oktober',
+                11: 'November',
+                12: 'Desember'
+            };
+
+            Highcharts.chart('container', {
+                chart: {
+                    type: 'column'
+                },
+                title: {
+                    text: 'Grafik Total Order Berdasarkan Bulan'
+                },
+                xAxis: {
+                    categories: months.map(month => monthNames[parseInt(month)]),
+                    crosshair: true
+                },
+                yAxis: {
+                    title: {
+                        text: 'Total Order'
+                    }
+                },
+                series: seriesData
+            });
+        </script>
+    @else
+        <p>Anda tidak memiliki toko.</p>
+    @endif
 </x-app-layout>

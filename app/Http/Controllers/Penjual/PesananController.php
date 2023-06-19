@@ -38,14 +38,13 @@ class PesananController extends Controller
 
     public function filter(Request $request)
     {
-        $start_date = date('Y-m-d', strtotime($request->input('start_date')));
-        $end_date = date('Y-m-d', strtotime($request->input('end_date')));
+        $start_date = $request->input('start_date');
+        $end_date = $request->input('end_date');
 
-        $list = Checkout::whereBetween('created_at', [$start_date . ' 00:00:00', $end_date . ' 23:59:59'])->get();
+        $list = Checkout::whereBetween('created_at', [$start_date, $end_date])->get();
 
         return view('pages.web.pesanan.list', compact('list', 'start_date', 'end_date'));
     }
-
 
     public function accept(Checkout $checkout)
     {

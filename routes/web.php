@@ -36,7 +36,7 @@ use App\Http\Controllers\FAQController;
 */
 
 Route::middleware('role:admin')->prefix('admin')->group(function () {
-    Route::get('/home', [AdminHomeController::class, 'index'])->name('home')->middleware('guest');
+    Route::get('/home', [AdminHomeController::class, 'index'])->name('home');
 
     Route::resource('/store', AdminTokoController::class);
 

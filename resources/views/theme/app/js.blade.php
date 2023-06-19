@@ -12,9 +12,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script src="{{ asset('js/sweetalert.js') }}"></script>
 <script src="{{ asset('js/FormControls.js') }}"></script>
-@section('customs_js')
-    @yield('custom_js')
-    {{-- <script>
+<script src="{{ asset('assets/admin/js/method-admin.js') }}"></script>
+@yield('custom_js')
+{{-- <script>
     $(document).ready(function(e){
         $('#sort_by').on('change', function(){
             this.form.submit();
@@ -29,33 +29,41 @@
         });
     })
 </script> --}}
-    <script>
-        $(document).ready(function(e) {
-            $("#sort").on('change', function() {
-                this.form.submit();
-            });
+<script>
+    $(document).ready(function(e) {
+        $("#sort").on('change', function() {
+            this.form.submit();
         });
-        $(document).ready(function(e) {
-            $("#sorts").on('change', function() {
-                this.form.submit();
-            });
+    });
+    $(document).ready(function(e) {
+        $("#sorts").on('change', function() {
+            this.form.submit();
         });
-    </script>
-    <script>
-        @if (session()->has('success'))
-            toastr.options = {
-                "progressBar": true,
-                "timeOut": 2000,
-                "closeButton": true
-            }
-            toastr.success("{{ session()->get('success') }}");
-        @endif
-        @if (session()->has('info'))
-            toastr.options = {
-                "progressBar": true,
-                "timeOut": 2000,
-                "closeButton": true
-            }
-            toastr.info("{{ session()->get('info') }}");
-        @endif
-    </script>
+    });
+</script>
+<script>
+    @if (session()->has('success'))
+        toastr.options = {
+            "progressBar": true,
+            "timeOut": 2000,
+            "closeButton": true
+        }
+        toastr.success("{{ session()->get('success') }}");
+    @endif
+    @if (session()->has('info'))
+        toastr.options = {
+            "progressBar": true,
+            "timeOut": 2000,
+            "closeButton": true
+        }
+        toastr.info("{{ session()->get('info') }}");
+    @endif
+    @if (session()->has('error'))
+        toastr.options = {
+            "progressBar": true,
+            "timeOut": 2000,
+            "closeButton": true
+        }
+        toastr.error("{{ session()->get('error') }}");
+    @endif
+</script>

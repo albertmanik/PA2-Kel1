@@ -7,6 +7,7 @@ use App\Models\Toko;
 use App\Models\User;
 use App\Models\Product;
 use App\Models\Checkout;
+use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
@@ -24,25 +25,25 @@ class HomeController extends Controller
         // $terima = Checkout::where('status', 'terima')->count();
         // $tolak = Checkout::where('status', 'tolak')->count();
         // return view('pages.admin.home.home', compact('customer', 'penjual', 'products', 'menunggu', 'tolak', 'terima'));
-        $data = Checkout::select('tokos.id as toko_id', DB::raw('COUNT(*) as jumlah'))
-            ->join('tokos', 'orders.toko_id', '=', 'tokos.id')
-            ->groupBy('orders.toko_id')
-            ->get();
+        // $data = Checkout::select('tokos.id as toko_id', DB::raw('COUNT(*) as jumlah'))
+        //     ->join('tokos', 'orders.toko_id', '=', 'tokos.id')
+        //     ->groupBy('orders.toko_id')
+        //     ->get();
 
-        // Mendapatkan daftar toko
-        $tokos = Toko::pluck('nama_toko', 'id')->toArray();
+        // // Mendapatkan daftar toko
+        // $tokos = Toko::pluck('nama_toko', 'id')->toArray();
 
-        // Membuat data series
-        $seriesData = [];
-        foreach ($data as $item) {
-            $tokoId = $item->toko_id;
-            $jumlah = $item->jumlah;
+        // // Membuat data series
+        // $seriesData = [];
+        // foreach ($data as $item) {
+        //     $tokoId = $item->toko_id;
+        //     $jumlah = $item->jumlah;
 
-            $seriesData[] = [
-                'name' => $tokos[$tokoId],
-                'data' => [$jumlah],
-            ];
-        }
+        //     $seriesData[] = [
+        //         'name' => $tokos[$tokoId],
+        //         'data' => [$jumlah],
+        //     ];
+        // }
 
         $data = DB::table('orders')
             ->select(DB::raw("MONTH(created_at) as month, status, COUNT(*) as total"))
@@ -50,27 +51,34 @@ class HomeController extends Controller
             ->get();
 
         $chartData = [];
-        $statuses = ['menunggu', 'terima', 'tolak'];
+        $months = [];
 
         foreach ($data as $item) {
             $month = Carbon::createFromFormat('m', $item->month)->monthName;
             $status = $item->status;
             $total = $item->total;
 
-            if (!isset($chartData[$status])) {
-                $chartData[$status] = [
-                    'name' => $status,
+            if (!isset($chartData[$month])) {
+                $chartData[$month] = [
+                    'name' => $month,
                     'data' => []
                 ];
+                $months[] = $month;
             }
 
-            $chartData[$status]['data'][] = [
-                'name' => $month,
+            $chartData[$month]['data'][] = [
+                'name' => $status,
                 'y' => $total
             ];
         }
 
-        return view('pages.admin.home.home', compact('customer', 'penjual', 'products', 'chartData', 'statuses', 'seriesData'));
+
+        $data = Checkout::select(DB::raw("DATE_FORMAT(created_at, '%Y-%m') as month"), DB::raw('SUM(total) as total'))
+            ->groupBy('month')
+            ->get()
+            ->pluck('total', 'month');
+
+        return view('pages.admin.home.home', compact('customer', 'penjual', 'products', 'chartData', 'months', 'data'));
     }
 
     // public function chartData()

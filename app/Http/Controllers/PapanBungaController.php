@@ -224,6 +224,10 @@ class PapanBungaController extends Controller
         $file_path = public_path('bungapapan/' . $papanbunga->gambar);
         unlink($file_path);
         $papanbunga->delete();
-        return redirect()->route('papanbunga.index')->with('success', 'Berhasil Di hapus');
+        // return redirect()->route('papanbunga.index')->with('success', 'Berhasil Di hapus');
+        return response()->json([
+            'alert' => 'reload',
+            'message' => 'Berhasil menghapus Produk',
+        ]);
     }
 }

@@ -17,9 +17,12 @@ class CreateCheckoutsTable extends Migration
             $table->id();
             $table->foreignId('user_id');
             $table->foreignId('toko_id');
+            $table->foreignId('product_id');
             $table->string('order_number');
             $table->string('name');
             $table->string('no_hp');
+            $table->string('kota');
+            $table->string('pembayaran');
             $table->string('alamat');
             $table->string('ucapan');
             $table->string('image');
@@ -27,6 +30,7 @@ class CreateCheckoutsTable extends Migration
             $table->enum('status', ['menunggu', 'terima', 'tolak'])->default('menunggu');
             $table->foreign('user_id')->references('id')->on('users');
             $table->foreign('toko_id')->references('id')->on('tokos');
+            $table->foreign('product_id')->references('id')->on('products');
             $table->timestamps();
         });
     }

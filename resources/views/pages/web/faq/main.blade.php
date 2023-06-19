@@ -182,13 +182,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="need-support text-center mt-100">
-                            <h4>Still need help? Reach out to support 24/7:</h4>
-                            <div class="btn-wrapper mb-30">
-                                <a href="contact.html" class="theme-btn-1 btn">Contact Us</a>
-                            </div>
-                            <h4><i class="fas fa-phone"></i> +0123-456-789</h4>
-                        </div>
                     </div>
                 </div>
             </div>

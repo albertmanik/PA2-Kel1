@@ -26,7 +26,7 @@
                 <div class="col-lg-12">
                     <div class="ltn__checkout-inner">
                         <div class="ltn__checkout-single-content mt-50">
-                            <h4 class="title-2">Billing Details</h4>
+                            <h4 class="title-2">Detail Pembayaran</h4>
                             <div class="ltn__checkout-single-content-info">
                                 <h6>Personal Information</h6>
                                 <form action="{{ route('checkout.create') }}" method="POST"
@@ -57,6 +57,21 @@
                                                 @enderror
                                             </div>
                                         </div>
+                                        <div id="select" class="col-md-12 input-item">
+                                            <select id="select"
+                                                class="form-control @error('kota') is-invalid @enderror" name="kota">
+                                                <option id="select" selected disabled>Pilih Kecamatan Anda</option>
+                                                @foreach ($subdistricts as $subdistrict)
+                                                    <option value="{{ $subdistrict->name }}">
+                                                        {{ $subdistrict->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('kota')
+                                                <div class="invalid-feedback mb-4" style="margin-top: -2%">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
                                         <div class="col-md-12">
                                             <div class="input-item input-item-website ltn__custom-icon">
                                                 <input type="text" name="alamat"
@@ -80,6 +95,59 @@
                                         @enderror
                                         <div class="col-lg-6">
                                             <div class="ltn__checkout-payment-method mt-50">
+                                                <h4 class="title-2">Metode Pembayaran</h4>
+                                                <div id="checkout_accordion_1">
+                                                    <!-- card -->
+                                                    <div class="card">
+                                                        <div class="collapsed ltn__card-title" data-bs-toggle="collapse"
+                                                            data-bs-target="#faq-item-2-1" aria-expanded="false">
+                                                            Bayar Setengah
+                                                            <input id="shippingMethod01" name="payment" type="radio"
+                                                                value="Cash" class="form-check-input" checked>
+                                                        </div>
+                                                        @php
+                                                            $userId = Auth::id();
+                                                            $cart = session()->get('cart.' . $userId, []);
+                                                            $total = 0;
+                                                        @endphp
+                                                        @if (!empty(session('cart')))
+                                                            @foreach ($cart as $productId => $item)
+                                                                @php
+                                                                    $subtotal = $item['harga'] * $item['quantity'];
+                                                                    $hargaBaru = $subtotal * 0.1; // Menghitung harga baru (90% dari harga asli)
+                                                                @endphp
+                                                                @php $total+=$subtotal;@endphp
+                                                            @endforeach
+                                                        @endif
+                                                        <div id="faq-item-2-1" class="collapse"
+                                                            data-bs-parent="#checkout_accordion_1">
+                                                            <div class="card-body">
+                                                                <p>Silahkan Bayar DP Sebesar Rp.
+                                                                    {{ number_format($hargaBaru, 2, ',', '.') }}
+                                                                </p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- card -->
+                                                    <div class="card">
+                                                        <h5 class="ltn__card-title" data-bs-toggle="collapse"
+                                                            data-bs-target="#faq-item-2-2" aria-expanded="true">
+                                                            Bayar Full
+                                                        </h5>
+                                                        <div id="faq-item-2-2" class="collapse show"
+                                                            data-bs-parent="#checkout_accordion_1">
+                                                            <div class="card-body">
+                                                                <p>Silahkan bayar sesuai dengan total harga</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- card -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+                                        <div class="col-lg-6">
+                                            <div class="ltn__checkout-payment-method mt-50">
                                                 <h4 class="title-2">Bukti Pembayaran</h4>
                                                 {{-- <form action="{{ route('checkout.create') }}" method="POST" enctype="multipart/form-data"
                                                     class="ltn__form-box contact-form-box">
@@ -97,9 +165,12 @@
                                                         @if (Auth::user()->id == $data->user_id)
                                                         @endif
                                                     @endforeach
-                                                    <p>Transfer Ke Nomor Rekening berikut {{ $data->no_rekening }} dan
+                                                    <p>Transfer Ke Nomor Rekening berikut
+                                                        {{ $data->no_rekening }} dan
                                                         Upload Bukti Pembayaran</p>
-
+                                                    <h6>
+                                                        <strong>Estimasi Pengiriman 3 Hari</strong>
+                                                    </h6>
                                                 </div>
                                                 <button class="btn theme-btn-1 btn-effect-1 text-uppercase"
                                                     type="submit">Place
@@ -121,7 +192,10 @@
                                 @endphp
                                 @if (!empty(session('cart')))
                                     @foreach ($cart as $productId => $item)
-                                        @php $subtotal = $item['harga'] * $item['quantity'];@endphp
+                                        @php
+                                            $subtotal = $item['harga'] * $item['quantity'];
+                                            $hargaBaru = $subtotal * 0.1; // Menghitung harga baru (90% dari harga asli)
+                                        @endphp
                                         <tr>
                                             <td>{{ $item['name'] }} <strong>× {{ $item['quantity'] }}</strong></td>
                                             <td>Rp. {{ number_format($subtotal, 2, ',', '.') }}</td>

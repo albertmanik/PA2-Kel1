@@ -288,14 +288,11 @@
                                                                     <a class="submit-button-1 mx-2"
                                                                         href="{{ route('bouquet.edit', $item->id) }}">Edit</a>
                                                                     {{-- <a>Hapus</a> --}}
-                                                                    <form onsubmit="return confirm('Apakah Anda Yakin ?');"
-                                                                        action="{{ route('bouquet.destroy', $item->id) }}"
-                                                                        method="POST">
-                                                                        @csrf
-                                                                        @method('delete')
-                                                                        <button type="submit"
-                                                                            class="submit-button-1">Hapus</button>
-                                                                    </form>
+                                                                    <a href="javascript:;"
+                                                                        onclick="confirmDelete('{{ route('bouquet.destroy', $item->id) }}');"
+                                                                        class="text-danger d-inline-block remove-item-btn">
+                                                                        <button class="submit-button-1">Hapus</button>
+                                                                    </a>
                                                                 </div>
                                                             @endif
                                                         @endrole

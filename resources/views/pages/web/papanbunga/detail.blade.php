@@ -150,12 +150,14 @@
                                     </div>
                                     <div class="ltn__product-details-menu-2 product-cart-wishlist-btn mb-30">
                                         <ul>
-                                            <li>
-                                                <a href="{{ route('cart.store', $papanbunga->id) }}"
-                                                    class="theme-btn-1 btn btn-effect-1 d-add-to-cart">
-                                                    <span>ADD TO CART</span>
-                                                </a>
-                                            </li>
+                                            @role('customer')
+                                                <li>
+                                                    <a href="{{ route('cart.store', $papanbunga->id) }}"
+                                                        class="theme-btn-1 btn btn-effect-1 d-add-to-cart">
+                                                        <span>ADD TO CART</span>
+                                                    </a>
+                                                </li>
+                                            @endrole
                                         </ul>
                                     </div>
                                     {{-- <div class="ltn__safe-checkout d-none">
@@ -385,47 +387,59 @@
                                         <div class="col-lg-5">
                                             <!-- comment-reply -->
                                             <div class="ltn__comment-reply-area ltn__form-box mb-60">
-                                                <form action="{{ route('papanbunga.rating', $papanbunga->id) }}"
-                                                    method="post">
-                                                    @csrf
-                                                    <h4 class="title-2">Add a Review</h4>
-                                                    <div class="mb-30">
-                                                        <div class="add-a-review">
-                                                            <h6>Your Ratings:</h6>
-                                                            <div class="product-ratting">
-                                                                <div class="rate">
-                                                                    <input type="radio" id="star5"
-                                                                        name="rating" value="5" />
-                                                                    <label for="star5" title="text">5
-                                                                        stars</label>
-                                                                    <input type="radio" id="star4"
-                                                                        name="rating" value="4" />
-                                                                    <label for="star4" title="text">4
-                                                                        stars</label>
-                                                                    <input type="radio" id="star3"
-                                                                        name="rating" value="3" />
-                                                                    <label for="star3" title="text">3
-                                                                        stars</label>
-                                                                    <input type="radio" id="star2"
-                                                                        name="rating" value="2" />
-                                                                    <label for="star2" title="text">2
-                                                                        stars</label>
-                                                                    <input type="radio" id="star1"
-                                                                        name="rating" value="1" />
-                                                                    <label for="star1" title="text">1
-                                                                        star</label>
+                                                @auth
+                                                    <!-- check if user already review this homestay -->
+                                                    @if (auth()->user()->reviews->contains('product_id', $papanbunga->id))
+                                                        <div class="box_style_4">
+                                                            <h4 class="title-2">Add a Review</h4>
+                                                            <p>
+                                                                Anda sudah memberikan ulasan untuk Produk ini
+                                                            </p>
+                                                        </div>
+                                                    @else
+                                                        <form action="{{ route('papanbunga.rating', $papanbunga->id) }}"
+                                                            method="post">
+                                                            @csrf
+                                                            <h4 class="title-2">Add a Review</h4>
+                                                            <div class="mb-30">
+                                                                <div class="add-a-review">
+                                                                    <h6>Your Ratings:</h6>
+                                                                    <div class="product-ratting">
+                                                                        <div class="rate">
+                                                                            <input type="radio" id="star5"
+                                                                                name="rating" value="5" />
+                                                                            <label for="star5" title="text">5
+                                                                                stars</label>
+                                                                            <input type="radio" id="star4"
+                                                                                name="rating" value="4" />
+                                                                            <label for="star4" title="text">4
+                                                                                stars</label>
+                                                                            <input type="radio" id="star3"
+                                                                                name="rating" value="3" />
+                                                                            <label for="star3" title="text">3
+                                                                                stars</label>
+                                                                            <input type="radio" id="star2"
+                                                                                name="rating" value="2" />
+                                                                            <label for="star2" title="text">2
+                                                                                stars</label>
+                                                                            <input type="radio" id="star1"
+                                                                                name="rating" value="1" />
+                                                                            <label for="star1" title="text">1
+                                                                                star</label>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="input-item input-item-textarea ltn__custom-icon">
-                                                        <textarea name="review" placeholder="Masukkan Review Anda...."></textarea>
-                                                    </div>
-                                                    <div class="btn-wrapper">
-                                                        <button class="btn theme-btn-1 btn-effect-1 text-uppercase"
-                                                            type="submit">Submit</button>
-                                                    </div>
-                                                </form>
+                                                            <div class="input-item input-item-textarea ltn__custom-icon">
+                                                                <textarea name="review" placeholder="Masukkan Review Anda...."></textarea>
+                                                            </div>
+                                                            <div class="btn-wrapper">
+                                                                <button class="btn theme-btn-1 btn-effect-1 text-uppercase"
+                                                                    type="submit">Submit</button>
+                                                            </div>
+                                                        </form>
+                                                    @endif
+                                                @endauth
                                             </div>
                                         </div>
                                     </div>
@@ -434,145 +448,11 @@
                             <div class="tab-pane fade" id="liton_tab_details_1_3">
                                 <div class="ltn__shop-details-tab-content-inner">
                                     <!-- comment-area -->
-                                    <div class="ltn__comment-area mb-30">
-                                        <h4 class="title-2">Comments (5)</h4>
-                                        <div class="ltn__comment-inner">
-                                            <ul>
-                                                <li>
-                                                    <div class="ltn__comment-item clearfix">
-                                                        <div class="ltn__commenter-img">
-                                                            <img src="img/testimonial/1.jpg" alt="Image">
-                                                        </div>
-                                                        <div class="ltn__commenter-comment">
-                                                            <h6><a href="#">Adam Smit</a></h6>
-                                                            <span class="comment-date">20th May 2020</span>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                                Doloribus, omnis fugit corporis iste magnam ratione.</p>
-                                                            <a href="#" class="ltn__comment-reply-btn"><i
-                                                                    class="fas fa-reply"></i>Reply</a>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                                <li>
-                                                    <div class="ltn__comment-item clearfix">
-                                                        <div class="ltn__commenter-img">
-                                                            <img src="img/testimonial/3.jpg" alt="Image">
-                                                        </div>
-                                                        <div class="ltn__commenter-comment">
-                                                            <h6><a href="#">Adam Smit</a></h6>
-                                                            <span class="comment-date">20th May 2020</span>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                                Doloribus, omnis fugit corporis iste magnam ratione.</p>
-                                                            <a href="#" class="ltn__comment-reply-btn"><i
-                                                                    class="fas fa-reply"></i>Reply</a>
-                                                        </div>
-                                                    </div>
-                                                    <ul>
-                                                        <li>
-                                                            <div class="ltn__comment-item clearfix">
-                                                                <div class="ltn__commenter-img">
-                                                                    <img src="img/testimonial/4.jpg" alt="Image">
-                                                                </div>
-                                                                <div class="ltn__commenter-comment">
-                                                                    <h6><a href="#">Adam Smit</a></h6>
-                                                                    <span class="comment-date">20th May 2020</span>
-                                                                    <p>Lorem ipsum dolor sit amet, consectetur
-                                                                        adipisicing elit. Doloribus, omnis fugit
-                                                                        corporis iste magnam ratione.</p>
-                                                                    <a href="#"
-                                                                        class="ltn__comment-reply-btn"><i
-                                                                            class="fas fa-reply"></i>Reply</a>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                        <li>
-                                                            <div class="ltn__comment-item clearfix">
-                                                                <div class="ltn__commenter-img">
-                                                                    <img src="img/testimonial/1.jpg" alt="Image">
-                                                                </div>
-                                                                <div class="ltn__commenter-comment">
-                                                                    <h6><a href="#">Adam Smit</a></h6>
-                                                                    <span class="comment-date">20th May 2020</span>
-                                                                    <p>Lorem ipsum dolor sit amet, consectetur
-                                                                        adipisicing elit. Doloribus, omnis fugit
-                                                                        corporis iste magnam ratione.</p>
-                                                                    <a href="#"
-                                                                        class="ltn__comment-reply-btn"><i
-                                                                            class="fas fa-reply"></i>Reply</a>
-                                                                </div>
-                                                            </div>
-                                                        </li>
-                                                    </ul>
-                                                </li>
-                                                <li>
-                                                    <div class="ltn__comment-item clearfix">
-                                                        <div class="ltn__commenter-img">
-                                                            <img src="img/testimonial/2.jpg" alt="Image">
-                                                        </div>
-                                                        <div class="ltn__commenter-comment">
-                                                            <h6><a href="#">Adam Smit</a></h6>
-                                                            <span class="comment-date">20th May 2020</span>
-                                                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                                                                Doloribus, omnis fugit corporis iste magnam ratione.</p>
-                                                            <a href="#" class="ltn__comment-reply-btn"><i
-                                                                    class="fas fa-reply"></i>Reply</a>
-                                                        </div>
-                                                    </div>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </div>
                                     <!-- comment-reply -->
-                                    <div class="ltn__comment-reply-area ltn__form-box mb-60">
-                                        <form action="#">
-                                            <h4 class="title-2">Leave a Reply</h4>
-                                            <div class="input-item input-item-textarea ltn__custom-icon">
-                                                <textarea placeholder="Type your comments...."></textarea>
-                                            </div>
-                                            <div class="input-item input-item-name ltn__custom-icon">
-                                                <input type="text" placeholder="Type your name....">
-                                            </div>
-                                            <div class="input-item input-item-email ltn__custom-icon">
-                                                <input type="email" placeholder="Type your email....">
-                                            </div>
-                                            <div class="input-item input-item-website ltn__custom-icon">
-                                                <input type="text" name="website"
-                                                    placeholder="Type your website....">
-                                            </div>
-                                            <label class="mb-0"><input type="checkbox" name="agree"> Save my
-                                                name, email, and website in this browser for the next time I
-                                                comment.</label>
-                                            <div class="btn-wrapper">
-                                                <button class="btn theme-btn-1 btn-effect-1 text-uppercase"
-                                                    type="submit"><i class="far fa-comments"></i> Post
-                                                    Comment</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="tab-pane fade" id="liton_tab_details_1_4">
-                                <div class="ltn__shop-details-tab-content-inner">
-                                    <h4 class="title-2">Shipping policy for our store</h4>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam voluptates rerum
-                                        neque ea libero numquam officiis ipsum, consectetur ducimus dicta in earum
-                                        repellat sunt ab odit laboriosam cupiditate ipsam, doloremque.</p>
-                                    <ul>
-                                        <li>1-2 business days (Typically by end of day)</li>
-                                        <li><a href="#">30 days money back guaranty</a></li>
-                                        <li>24/7 live support</li>
-                                        <li>odio dignissim qui blandit praesent</li>
-                                        <li>luptatum zzril delenit augue duis dolore</li>
-                                        <li>te feugait nulla facilisi.</li>
-                                    </ul>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis, quia vel
-                                        eligendi ipsam. Ea, quasi quam ducimus recusandae unde ipsa nam rem a minus
-                                        tenetur quae sint voluptatem voluptate inventore.</p>
                                 </div>
                             </div>
                             <div class="tab-pane fade" id="liton_tab_details_1_5">
                                 <div class="ltn__shop-details-tab-content-inner">
-
                                     <div class="table-1 mb-20">
                                         <table class="">
                                             <tbody>

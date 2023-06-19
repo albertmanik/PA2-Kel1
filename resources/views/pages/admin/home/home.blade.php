@@ -692,17 +692,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
         var chartData = {!! json_encode($chartData) !!};
-        var statuses = {!! json_encode($statuses) !!};
-
-        var categories = Object.keys(chartData[statuses[0]]['data']);
-        var months = [];
-
-        // Mengubah nomor bulan menjadi nama bulan
-        categories.forEach(function(category) {
-            var month = parseInt(category);
-            var monthName = Highcharts.dateFormat('%B', Date.parse(month + "-01-2023"));
-            months.push(monthName);
-        });
+        var months = {!! json_encode($months) !!};
 
         Highcharts.chart('orderChart', {
             chart: {
@@ -723,7 +713,8 @@
             series: Object.values(chartData),
         });
     </script>
-    {{-- <script src="https://code.highcharts.com/highcharts.js"></script>
+
+    {{--
 
     <script>
         Highcharts.chart('chartContainer', {
@@ -760,7 +751,7 @@
         });
     </script> --}}
 
-    <script>
+    {{-- <script>
         const seriesData = {!! json_encode($seriesData) !!};
 
         Highcharts.chart('penjualanTokoChart', {
@@ -779,6 +770,30 @@
                 }
             },
             series: seriesData
+        });
+    </script> --}}
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var data = @json($data);
+
+            Highcharts.chart('penjualanTokoChart', {
+                title: {
+                    text: 'Total per Bulan'
+                },
+                xAxis: {
+                    categories: Object.keys(data)
+                },
+                yAxis: {
+                    title: {
+                        text: 'Total'
+                    }
+                },
+                series: [{
+                    name: 'Total',
+                    data: Object.values(data)
+                }]
+            });
         });
     </script>
 

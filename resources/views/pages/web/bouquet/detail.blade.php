@@ -386,56 +386,68 @@
                                                             {{ $review->lastItem() }} of
                                                             {{ $review->total() }} results</span>
                                                     </div> --}}
-                                                    <div class="ltn__pagination-area text-center">
+                                                    {{-- <div class="ltn__pagination-area text-center">
                                                         {{ $review->links() }}
-                                                    </div>
+                                                    </div> --}}
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-5">
                                             <!-- comment-reply -->
                                             <div class="ltn__comment-reply-area ltn__form-box mb-60">
-                                                <form action="{{ route('bouquet.rating', $bouquet->id) }}"
-                                                    method="post">
-                                                    @csrf
-                                                    <h4 class="title-2">Add a Review</h4>
-                                                    <div class="mb-30">
-                                                        <div class="add-a-review">
-                                                            <h6>Your Ratings:</h6>
-                                                            <div class="product-ratting">
-                                                                <div class="rate">
-                                                                    <input type="radio" id="star5"
-                                                                        name="rating" value="5" />
-                                                                    <label for="star5" title="text">5
-                                                                        stars</label>
-                                                                    <input type="radio" id="star4"
-                                                                        name="rating" value="4" />
-                                                                    <label for="star4" title="text">4
-                                                                        stars</label>
-                                                                    <input type="radio" id="star3"
-                                                                        name="rating" value="3" />
-                                                                    <label for="star3" title="text">3
-                                                                        stars</label>
-                                                                    <input type="radio" id="star2"
-                                                                        name="rating" value="2" />
-                                                                    <label for="star2" title="text">2
-                                                                        stars</label>
-                                                                    <input type="radio" id="star1"
-                                                                        name="rating" value="1" />
-                                                                    <label for="star1" title="text">1
-                                                                        star</label>
+                                                @auth
+                                                    <!-- check if user already review this homestay -->
+                                                    @if (auth()->user()->reviews->contains('product_id', $bouquet->id))
+                                                        <div class="box_style_4">
+                                                            <h4 class="title-2">Add a Review</h4>
+                                                            <p>
+                                                                Anda sudah memberikan ulasan untuk Produk ini
+                                                            </p>
+                                                        </div>
+                                                    @else
+                                                        <form action="{{ route('bouquet.rating', $bouquet->id) }}"
+                                                            method="post">
+                                                            @csrf
+                                                            <h4 class="title-2">Add a Review</h4>
+                                                            <div class="mb-30">
+                                                                <div class="add-a-review">
+                                                                    <h6>Your Ratings:</h6>
+                                                                    <div class="product-ratting">
+                                                                        <div class="rate">
+                                                                            <input type="radio" id="star5"
+                                                                                name="rating" value="5" />
+                                                                            <label for="star5" title="text">5
+                                                                                stars</label>
+                                                                            <input type="radio" id="star4"
+                                                                                name="rating" value="4" />
+                                                                            <label for="star4" title="text">4
+                                                                                stars</label>
+                                                                            <input type="radio" id="star3"
+                                                                                name="rating" value="3" />
+                                                                            <label for="star3" title="text">3
+                                                                                stars</label>
+                                                                            <input type="radio" id="star2"
+                                                                                name="rating" value="2" />
+                                                                            <label for="star2" title="text">2
+                                                                                stars</label>
+                                                                            <input type="radio" id="star1"
+                                                                                name="rating" value="1" />
+                                                                            <label for="star1" title="text">1
+                                                                                star</label>
+                                                                        </div>
+                                                                    </div>
                                                                 </div>
                                                             </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="input-item input-item-textarea ltn__custom-icon">
-                                                        <textarea name="review" placeholder="Masukkan Review Anda...."></textarea>
-                                                    </div>
-                                                    <div class="btn-wrapper">
-                                                        <button class="btn theme-btn-1 btn-effect-1 text-uppercase"
-                                                            type="submit">Submit</button>
-                                                    </div>
-                                                </form>
+                                                            <div class="input-item input-item-textarea ltn__custom-icon">
+                                                                <textarea name="review" placeholder="Masukkan Review Anda...."></textarea>
+                                                            </div>
+                                                            <div class="btn-wrapper">
+                                                                <button class="btn theme-btn-1 btn-effect-1 text-uppercase"
+                                                                    type="submit">Submit</button>
+                                                            </div>
+                                                        </form>
+                                                    @endif
+                                                @endauth
                                             </div>
                                         </div>
                                     </div>

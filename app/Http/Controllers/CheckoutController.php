@@ -11,10 +11,25 @@ use App\Models\OrderDetail;
 use Illuminate\Http\Request;
 use App\Models\CheckoutDetail;
 use App\Http\Controllers\Controller;
+use App\Models\Subdistrict;
 use Illuminate\Support\Facades\Auth;
 
 class CheckoutController extends Controller
 {
+    private $message;
+    public function __construct()
+    {
+        $this->message = [
+            'image.required' => 'Gambar tidak boleh kosong',
+            'name.required' => 'Nama tidak boleh kosong',
+            'alamat.required' => 'Alamat tidak boleh kosong',
+            'kota.required' => 'Kota tidak boleh kosong',
+            'no_hp.required' => 'Nomor telepon tidak boleh kosong',
+            'no_hp.numeric' => 'Nomor telepon harus berupa angka',
+            'no_hp.digits_between' => 'Nomor telepon harus berupa angka dan minimal 10 digit',
+            'ucapan.required' => 'Ucapan tidak boleh kosong',
+        ];
+    }
     /**
      * Display a listing of the resource.
      *
@@ -24,6 +39,7 @@ class CheckoutController extends Controller
     {
         $checkout = Checkout::all();
         $toko = Toko::get();
+        $subdistricts = Subdistrict::get();
         // $user = User::find(Auth::user()->id)->load('toko');
         // $toko = Toko::where('user_id', Auth::id())->first();
 
@@ -35,7 +51,7 @@ class CheckoutController extends Controller
         // $noRekening = Toko::where('user_id', Auth::id())
         //     ->value('no_rekening');
 
-        return view('pages.web.checkout.main', compact('checkout', 'toko'));
+        return view('pages.web.checkout.main', compact('checkout', 'toko', 'subdistricts'));
     }
 
     /**
@@ -54,9 +70,10 @@ class CheckoutController extends Controller
             'image' => 'required',
             'name' => 'required',
             'alamat' => 'required',
-            'no_hp' => 'required',
+            'kota' => 'required',
+            'no_hp' => 'required|numeric|digits_between:10,15',
             'ucapan' => 'required'
-        ]);
+        ], $this->message);
 
         $userId = Auth::id();
         $cart = session()->get('cart.' . $userId);
@@ -95,10 +112,13 @@ class CheckoutController extends Controller
         // dd($request);
         $checkout->total = $totalPrice;
         $checkout->toko_id = $product->toko_id;
+        $checkout->product_id = $product->id;
         $checkout->name = $request->name;
         $checkout->no_hp = $request->no_hp;
+        $checkout->kota = $request->kota;
         $checkout->alamat = $request->alamat;
         $checkout->ucapan = $request->ucapan;
+        // dd($checkout);
         $checkout->save();
 
         foreach ($cart as $item) {
@@ -125,7 +145,7 @@ class CheckoutController extends Controller
     {
         $order = Checkout::findOrFail($id);
         $pdf = PDF::loadView('pages.web.pesanan.pdf', compact('order'));
-        return $pdf->download('booking.pdf');
+        return $pdf->download('order.pdf');
     }
 
     /**

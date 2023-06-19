@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Review;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -45,29 +46,67 @@ class ReviewController extends Controller
      */
     public function storePapanbunga(Request $request, $papanbunga)
     {
-        $review = new Review();
-        $review->user_id = Auth::user()->id;
-        $review->product_id = $papanbunga;
-        $review->review = $request->review;
-        $review->rating = $request->rating;
-        $review->save();
-        $total_rating = Review::where('product_id', $papanbunga)->avg('rating');
-        Product::where('id', $papanbunga)->update(['total_rating' => $total_rating]);
-        return back()->with('success', 'Berhasil');
+        $product = Product::findOrFail($papanbunga);
+        $user = User::findOrFail(auth()->user()->id);
+        if (!$user->orders()->where('product_id', $papanbunga)->exists()) {
+            return back()->with('error', 'Anda belum pernah memesan produk ini.');
+        }
+        // check if already reviewed
+        if ($user->reviews()->where('product_id', $user->orders()->where('product_id', $product->id)->first()->id)->exists()) {
+            return back()->with('error', 'Anda sudah pernah melakukan review');
+        } else {
+            $user->reviews()->create([
+                'rating' => $request->rating,
+                'review' => $request->review,
+                'product_id' => $user->orders()->where('product_id', $product->id)->first()->id,
+                'user_id' => auth()->user()->id
+            ]);
+            $total_rating = Review::where('product_id', $papanbunga)->avg('rating');
+            Product::where('id', $papanbunga)->update(['total_rating' => $total_rating]);
+            return back()->with('success', 'berhasil');
+        }
+        // $review = new Review();
+        // $review->user_id = Auth::user()->id;
+        // $review->product_id = $papanbunga;
+        // $review->review = $request->review;
+        // $review->rating = $request->rating;
+        // $review->save();
+        // $total_rating = Review::where('product_id', $papanbunga)->avg('rating');
+        // Product::where('id', $papanbunga)->update(['total_rating' => $total_rating]);
+        // return back()->with('success', 'Berhasil');
     }
 
     public function storeBouquet(Request $request, $bouquet)
     {
-        $review = new Review();
-        $review->user_id = Auth::user()->id;
-        $review->product_id = $bouquet;
-        $review->review = $request->review;
-        $review->rating = $request->rating;
-        $review->created_at = Carbon::now(); // Menggunakan fungsi now() untuk mendapatkan waktu saat ini
-        $review->save();
-        $total_rating = Review::where('product_id', $bouquet)->avg('rating');
-        Product::where('id', $bouquet)->update(['total_rating' => $total_rating]);
-        return back()->with('success', 'Berhasil');
+        $product = Product::findOrFail($bouquet);
+        $user = User::findOrFail(auth()->user()->id);
+        if (!$user->orders()->where('product_id', $bouquet)->exists()) {
+            return back()->with('error', 'Anda belum pernah memesan produk ini.');
+        }
+        // check if already reviewed
+        if ($user->reviews()->where('product_id', $user->orders()->where('product_id', $product->id)->first()->id)->exists()) {
+            return back()->with('error', 'Anda sudah pernah melakukan review');
+        } else {
+            $user->reviews()->create([
+                'rating' => $request->rating,
+                'review' => $request->review,
+                'product_id' => $user->orders()->where('product_id', $product->id)->first()->id,
+                'user_id' => auth()->user()->id
+            ]);
+            $total_rating = Review::where('product_id', $bouquet)->avg('rating');
+            Product::where('id', $bouquet)->update(['total_rating' => $total_rating]);
+            return back()->with('success', 'berhasil');
+        }
+        // $review = new Review();
+        // $review->user_id = Auth::user()->id;
+        // $review->product_id = $bouquet;
+        // $review->review = $request->review;
+        // $review->rating = $request->rating;
+        // $review->created_at = Carbon::now(); // Menggunakan fungsi now() untuk mendapatkan waktu saat ini
+        // $review->save();
+        // $total_rating = Review::where('product_id', $bouquet)->avg('rating');
+        // Product::where('id', $bouquet)->update(['total_rating' => $total_rating]);
+        // return back()->with('success', 'Berhasil');
     }
 
     /**

@@ -9,7 +9,13 @@ class Product extends Model
 {
     use HasFactory;
 
-    public function toko(){
+    public function toko()
+    {
         return $this->belongsTo(Toko::class);
+    }
+
+    public function reviews()
+    {
+        return $this->hasManyThrough(Review::class, User::class);
     }
 }

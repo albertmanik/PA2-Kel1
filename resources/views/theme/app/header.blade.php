@@ -291,15 +291,9 @@
     <div class="ltn__utilize-menu-inner ltn__scrollbar">
         <div class="ltn__utilize-menu-head">
             <div class="site-logo">
-                <a href="index.html"><img src="img/logo.png" alt="Logo"></a>
+                <a href="index.html"><img src="{{ asset('assets/img/logoo.jpg') }}" alt="Logo"></a>
             </div>
             <button class="ltn__utilize-close">×</button>
-        </div>
-        <div class="ltn__utilize-menu-search-form">
-            <form action="#">
-                <input type="text" placeholder="Search...">
-                <button><i class="icon-magnifier"></i></button>
-            </form>
         </div>
         <div class="ltn__utilize-menu">
             <ul>
@@ -319,14 +313,12 @@
         </div>
         <div class="ltn__utilize-buttons ltn__utilize-buttons-2">
             <ul>
-                <li>
-                    <a href="account.html" title="My Account">
-                        <span class="utilize-btn-icon">
-                            <i class="icon-user"></i>
-                        </span>
-                        My Account
-                    </a>
-                </li>
+                @auth
+                    <li><a href="{{ url('logout') }}">Logout</a></li>
+                @else
+                    <li><a href="{{ route('index.login') }}">Sign in</a></li>
+                    <li><a href="{{ route('index.register') }}">Register</a></li>
+                @endauth
             </ul>
         </div>
     </div>
