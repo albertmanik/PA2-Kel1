@@ -55,16 +55,24 @@
                                                         <td>
                                                             @if ($p->status == 'menunggu')
                                                                 <span>Menunggu</span>
-                                                            @elseif ($p->status == 'terima')
+                                                            @elseif ($p->status == 'terima' && $p->pembayaran == 'DP')
+                                                                <span>Diterima, silahkan lunasi pembayaran</span>
+                                                            @elseif ($p->status == 'terima' && $p->pembayaran == 'Full')
                                                                 <span>Diterima</span>
                                                             @elseif ($p->status == 'tolak')
                                                                 <span>Ditolak</span>
                                                             @endif
                                                         </td>
-                                                        @if ($p->status == 'pending')
+                                                        @if ($p->status == 'menunggu' && $p->pembayaran == 'Full')
                                                             <td><a href="{{ route('checkout.edit', $p->id) }}">Edit</a>
                                                             </td>
-                                                        @else
+                                                        @elseif ($p->status == 'menunggu' && $p->pembayaran == 'DP')
+                                                            <td><a href="{{ route('checkout.edit', $p->id) }}">Edit</a>
+                                                            </td>
+                                                        @elseif ($p->status == 'terima' && $p->pembayaran == 'DP')
+                                                            <td><a href="{{ route('checkout.edit', $p->id) }}">Edit</a>
+                                                            </td>
+                                                        @elseif ($p->status == 'terima' && $p->pembayaran == 'Full')
                                                             <td><a href="{{ route('pdf', $p->id) }}">Download
                                                                     Invoice</a></td>
                                                         @endif

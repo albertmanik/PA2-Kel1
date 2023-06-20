@@ -116,14 +116,14 @@
                                                                     $subtotal = $item['harga'] * $item['quantity'];
                                                                     $hargaBaru = $subtotal * 0.1; // Menghitung harga baru (90% dari harga asli)
                                                                 @endphp
-                                                                @php $total+=$subtotal;@endphp
+                                                                @php $total+=$hargaBaru;@endphp
                                                             @endforeach
                                                         @endif
                                                         <div id="faq-item-2-1" class="collapse show"
                                                             data-bs-parent="#checkout_accordion_1">
                                                             <div class="card-body">
                                                                 <p>Silahkan Bayar DP Sebesar Rp.
-                                                                    {{ number_format($hargaBaru, 2, ',', '.') }}
+                                                                    {{ number_format($total, 2, ',', '.') }}
                                                                 </p>
                                                             </div>
                                                         </div>

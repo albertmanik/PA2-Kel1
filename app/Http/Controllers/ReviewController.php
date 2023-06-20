@@ -59,11 +59,12 @@ class ReviewController extends Controller
                 'rating' => $request->rating,
                 'review' => $request->review,
                 'product_id' => $user->orders()->where('product_id', $product->id)->first()->id,
-                'user_id' => auth()->user()->id
+                'user_id' => auth()->user()->id,
+                // dd($user),
             ]);
             $total_rating = Review::where('product_id', $papanbunga)->avg('rating');
             Product::where('id', $papanbunga)->update(['total_rating' => $total_rating]);
-            return back()->with('success', 'berhasil');
+            return back()->with('success', 'Berhasil memberi review');
         }
         // $review = new Review();
         // $review->user_id = Auth::user()->id;
@@ -95,7 +96,7 @@ class ReviewController extends Controller
             ]);
             $total_rating = Review::where('product_id', $bouquet)->avg('rating');
             Product::where('id', $bouquet)->update(['total_rating' => $total_rating]);
-            return back()->with('success', 'berhasil');
+            return back()->with('success', 'Berhasil memberi review');
         }
         // $review = new Review();
         // $review->user_id = Auth::user()->id;
