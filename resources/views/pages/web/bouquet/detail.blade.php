@@ -145,6 +145,15 @@
                                     <div class="modal-product-brief">
                                         <p>{{ $bouquet->deskripsi }}</p>
                                     </div>
+                                    <div class="modal-product-meta ltn__product-details-menu-1 mb-30">
+                                        <ul>
+                                            <li>
+                                                <strong>Nama Toko:</strong>
+                                                <a href="{{ route('toko.detail', $bouquet->toko->id) }}"><span>{{ $bouquet->toko->nama_toko }}</span>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                     <div class="modal-product-meta ltn__product-details-menu-1 mb-20">
                                     </div>
                                     <div class="ltn__product-details-menu-2 product-cart-wishlist-btn mb-30">

@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Review;
 use App\Models\User;
+use Intervention\Image\ImageManagerStatic as Image;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -23,13 +24,6 @@ class PapanBungaController extends Controller
     public function index(Request $request)
     {
         $search = $request->search;
-        // $data = Product::where('category_id', 1)
-        //     ->where(function ($query) use ($search) {
-        //         $query->where('name', 'like', '%' . $search . '%')
-        //             ->orWhere('harga', 'like', '%' . $search . '%')
-        //             ->orWhere('kota', 'like', '%' . $search . '%')
-        //             ->orWhere('deskripsi', 'like', '%' . $search . '%');
-        //     });
         $data = Product::where('category_id', 1)
             ->whereHas('toko', function ($query) {
                 $query->where('status', 'aktif');
@@ -126,6 +120,15 @@ class PapanBungaController extends Controller
         $file->move($tujuanFile, $namaFile);
 
 
+        // Resize the image
+        $gambarPath = $tujuanFile . '/' . $namaFile;
+        $lebarBaru = 1512; // Lebar baru yang diinginkan
+        $tinggiBaru = 1512; // Tinggi baru yang diinginkan
+
+        Image::make($gambarPath)
+            ->resize($lebarBaru, $tinggiBaru)
+            ->save($gambarPath);
+
         $pabung = new Product;
         $pabung->user_id = Auth::user()->id;
         $pabung->category_id = $request->category_id;
@@ -152,11 +155,11 @@ class PapanBungaController extends Controller
      */
     public function show(Product $papanbunga)
     {
-        $toko = Toko::get();
         $category = Category::get();
         $review = Review::get();
+        $papanbunga->load('toko');
         $reviewCount = Review::where('product_id', $papanbunga->id)->count();
-        return view('pages.web.papanbunga.detail', ['papanbunga' => $papanbunga, 'toko' => $toko, 'category' => $category, 'review' => $review, 'reviewCount' => $reviewCount]);
+        return view('pages.web.papanbunga.detail', ['product' => $papanbunga, 'category' => $category, 'review' => $review, 'reviewCount' => $reviewCount]);
     }
 
     /**

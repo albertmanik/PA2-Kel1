@@ -118,3 +118,4 @@ Route::patch('pesan/reject/{checkout}', [PenjualPesananController::class, 'rejec
 Route::post('rating/{papanbunga}', [ReviewController::class, 'storePapanbunga'])->name('papanbunga.rating');
 Route::post('rating/{bouquet}', [ReviewController::class, 'storeBouquet'])->name('bouquet.rating');
 Route::get('pdf/{id}', [CheckoutController::class, 'pdf'])->name('pdf');
+Route::get('/toko/detail/{toko}', [TokoController::class, 'show'])->name('toko.detail');
