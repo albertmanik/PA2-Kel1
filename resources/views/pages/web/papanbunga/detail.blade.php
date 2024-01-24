@@ -29,10 +29,9 @@
                                 <div class="ltn__shop-details-img-gallery ltn__shop-details-img-gallery-2">
                                     <div class="ltn__shop-details-large-img">
                                         <div class="single-large-img">
-                                            <a href="{{ asset('bungapapan/' . $papanbunga->gambar) }}"
+                                            <a href="{{ asset('bungapapan/' . $product->gambar) }}"
                                                 data-rel="lightcase:myCollection">
-                                                <img src="{{ asset('bungapapan/' . $papanbunga->gambar) }}"
-                                                    alt="Image">
+                                                <img src="{{ asset('bungapapan/' . $product->gambar) }}" alt="Image">
                                             </a>
                                         </div>
                                     </div>
@@ -40,17 +39,17 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="modal-product-info shop-details-info pl-0">
-                                    <h3>{{ $papanbunga->name }}</h3>
+                                    <h3>{{ $product->name }}</h3>
                                     <div class="product-price-ratting mb-20">
                                         <ul>
                                             <li>
                                                 <div class="product-price">
                                                     <span>Rp.
-                                                        {{ number_format($papanbunga->harga, 0, ',', '.') }}</span>
+                                                        {{ number_format($product->harga, 0, ',', '.') }}</span>
                                                 </div>
                                             </li>
                                             @php
-                                                $rating = \App\Models\Review::where('product_id', $papanbunga->id)->avg('rating');
+                                                $rating = \App\Models\Review::where('product_id', $product->id)->avg('rating');
                                             @endphp
                                             <li>
                                                 <div class="product-ratting">
@@ -144,7 +143,16 @@
                                         </ul>
                                     </div>
                                     <div class="modal-product-brief">
-                                        <p>{{ $papanbunga->deskripsi }}</p>
+                                        <p>{{ $product->deskripsi }}</p>
+                                    </div>
+                                    <div class="modal-product-meta ltn__product-details-menu-1 mb-30">
+                                        <ul>
+                                            <li>
+                                                <strong>Nama Toko:</strong>
+                                                <a href="{{ route('toko.detail', $product->toko->id) }}"><span>{{ $product->toko->nama_toko }}</span>
+                                                </a>
+                                            </li>
+                                        </ul>
                                     </div>
                                     <div class="modal-product-meta ltn__product-details-menu-1 mb-20">
                                     </div>
@@ -152,7 +160,7 @@
                                         <ul>
                                             @role('customer')
                                                 <li>
-                                                    <a href="{{ route('cart.store', $papanbunga->id) }}"
+                                                    <a href="{{ route('cart.store', $product->id) }}"
                                                         class="theme-btn-1 btn btn-effect-1 d-add-to-cart">
                                                         <span>ADD TO CART</span>
                                                     </a>
@@ -306,7 +314,7 @@
                                                 <div class="ltn__comment-inner">
                                                     <ul>
                                                         @foreach ($review as $item)
-                                                            @if ($item->product_id == $papanbunga->id)
+                                                            @if ($item->product_id == $product->id)
                                                                 <li>
                                                                     <div class="ltn__comment-item clearfix">
                                                                         {{-- <div class="ltn__commenter-img">
@@ -389,7 +397,7 @@
                                             <div class="ltn__comment-reply-area ltn__form-box mb-60">
                                                 @auth
                                                     <!-- check if user already review this homestay -->
-                                                    @if (auth()->user()->reviews->contains('product_id', $papanbunga->id))
+                                                    @if (auth()->user()->reviews->contains('product_id', $product->id))
                                                         <div class="box_style_4">
                                                             <h4 class="title-2">Add a Review</h4>
                                                             <p>
@@ -397,7 +405,7 @@
                                                             </p>
                                                         </div>
                                                     @else
-                                                        <form action="{{ route('papanbunga.rating', $papanbunga->id) }}"
+                                                        <form action="{{ route('papanbunga.rating', $product->id) }}"
                                                             method="post">
                                                             @csrf
                                                             <h4 class="title-2">Add a Review</h4>

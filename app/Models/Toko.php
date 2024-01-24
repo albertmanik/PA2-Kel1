@@ -13,4 +13,9 @@ class Toko extends Model
     {
         return $this->hasMany(OrderDetail::class);
     }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class);
+    }
 }

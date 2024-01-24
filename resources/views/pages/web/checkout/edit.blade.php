@@ -58,6 +58,21 @@
                                                 @enderror
                                             </div>
                                         </div>
+                                        <div id="select" class="col-md-12 input-item">
+                                            <select id="select"
+                                                class="form-control @error('kota') is-invalid @enderror" name="kota">
+                                                <option id="select" selected disabled>Pilih Kecamatan Anda</option>
+                                                @foreach ($subdistricts as $subdistrict)
+                                                    <option value="{{ $subdistrict->name }}">
+                                                        {{ $subdistrict->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('kota')
+                                                <div class="invalid-feedback mb-4" style="margin-top: -2%">
+                                                    {{ $message }}
+                                                </div>
+                                            @enderror
+                                        </div>
                                         <div class="col-md-12">
                                             <div class="input-item input-item-website ltn__custom-icon">
                                                 <input type="text" name="alamat"

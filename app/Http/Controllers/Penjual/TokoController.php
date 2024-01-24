@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Penjual;
 use App\Models\Toko;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -92,9 +93,11 @@ class TokoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Toko $toko)
     {
-        //
+        $toko->load('products');
+        // dd($toko);
+        return view('pages.web.toko.detail', ['toko' => $toko]);
     }
 
     /**

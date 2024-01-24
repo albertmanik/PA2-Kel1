@@ -139,6 +139,11 @@ class CheckoutController extends Controller
         // Hapus data cart setelah checkout
         session()->forget('cart.' . $userId);
 
+        // Menghitung total jumlah produk dalam keranjang
+        $totalCartItems = count(array_values($cart));
+        // Menyimpan total jumlah produk dalam keranjang ke session
+        session()->put('totalCartItems.' . $userId, $totalCartItems);
+
         return redirect()->route('pesanan.index')->with('success', 'Checkout berhasil');
     }
 
@@ -179,7 +184,8 @@ class CheckoutController extends Controller
      */
     public function edit(Checkout $checkout)
     {
-        return view('pages.web.checkout.edit', compact('checkout'));
+        $subdistricts = Subdistrict::get();
+        return view('pages.web.checkout.edit', compact('checkout', 'subdistricts'));
     }
 
     /**
@@ -209,9 +215,11 @@ class CheckoutController extends Controller
         // Update total harga order
         // dd($request);
         $checkout->name = $request->name;
+        $checkout->pembayaran = 'Full';
         $checkout->no_hp = $request->no_hp;
         $checkout->alamat = $request->alamat;
         $checkout->ucapan = $request->ucapan;
+        // dd($checkout);
         $checkout->save();
         return redirect()->route('pesanan.index')->with('info', 'Product Berhasil Diubah');
     }

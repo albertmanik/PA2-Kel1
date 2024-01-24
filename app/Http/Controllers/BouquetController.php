@@ -9,6 +9,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Subdistrict;
 use Illuminate\Http\Request;
+use Intervention\Image\ImageManagerStatic as Image;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -119,6 +120,17 @@ class BouquetController extends Controller
         $tujuanFile = public_path('/bouquets');
         $file->move($tujuanFile, $namaFile);
 
+        // Resize the image
+        $gambarPath = $tujuanFile . '/' . $namaFile;
+        $lebarBaru = 1512; // Lebar baru yang diinginkan
+        $tinggiBaru = 1512; // Tinggi baru yang diinginkan
+
+        Image::make($gambarPath)
+            ->resize($lebarBaru, $tinggiBaru)
+            ->save($gambarPath);
+        // dd($lebarBaru, $tinggiBaru);
+
+
         $bouquet = new Product;
         $bouquet->user_id = Auth::user()->id;
         $bouquet->category_id = $request->category_id;
@@ -146,6 +158,7 @@ class BouquetController extends Controller
         $toko = Toko::get();
         $category = Category::get();
         $review = Review::paginate(7);
+        $bouquet->load('toko');
         $reviewCount = Review::where('product_id', $bouquet->id)->count();
         return view('pages.web.bouquet.detail', ['bouquet' => $bouquet, 'toko' => $toko, 'category' => $category, 'review' => $review, 'reviewCount' => $reviewCount]);
     }
